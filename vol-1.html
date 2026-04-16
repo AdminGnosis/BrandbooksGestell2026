@@ -1,0 +1,2765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTELL — Brand Operating System · Volumen I</title>
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           GESTELL · BRAND OPERATING SYSTEM · 2026
+           MASTER DATA GOLDEN COPY — VOLUMEN I
+           Mesa: Ogilvy · Pentagram · Noomo · Cieden · Studio Dumbar
+           ═══════════════════════════════════════════════════════════ */
+
+        :root {
+            /* ─── PRIMITIVOS (graficos, bordes, fills) ─── */
+            --gstl-black: #030303;
+            --gstl-white: #FAFAF8;
+            --gstl-border: #1A1A1A;
+            --gstl-bg-2: #050505;
+            --gstl-bg-3: #0A0A0A;
+            --gnosis: #00D4FF;
+            --telos: #A4133C;
+            --umwelt: #FF0066;
+            --dasein: #7B3FA0;
+
+            /* ─── AAA TEXT TOKENS (7:1+ sobre #030303) ─── */
+            --text-1: #FAFAF8;
+            --text-2: #CCCCCC;
+            --text-3: #AAAAAA;
+            --gnosis-text: #00D4FF;
+            --telos-text: #F26B8A;
+            --umwelt-text: #FF80AA;
+            --dasein-text: #B99BD6;
+
+            /* ─── TIPOGRAFIA CANONICA ─── */
+            --font-d: 'Akzidenz-Grotesk', 'Helvetica Neue', 'Arial', sans-serif;
+            --font-b: 'Helvetica Neue LT Pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            --font-mono: 'Courier New', 'Courier', monospace;
+
+            /* ─── TYPE SCALE (10 niveles funcionales + 3 display) ─── */
+            --ts-micro: 7px; /* clasificación, version, footnotes */
+            --ts-caption: 8px; /* labels, footer, captions */
+            --ts-small: 9px; /* mono labels, sub-text, descriptions */
+            --ts-body: 10px; /* body small, descriptions */
+            --ts-body-lg: 11px; /* body principal, contenido */
+            --ts-sub-head: 12px; /* card titles, secondary headings */
+            --ts-emphasis: 14px; /* blockquotes, callouts */
+            --ts-head-sm: 16px; /* index title */
+            --ts-head-md: 18px; /* portadilla code */
+            --ts-head-lg: 24px; /* decomp display */
+            --ts-display-sm: 36px; /* portadilla title */
+            --ts-display-md: 42px; /* vol cover title */
+            --ts-display-lg: 72px; /* gestell word */
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--gstl-black);
+            color: var(--text-1);
+            font-family: var(--font-b);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+        /* ── Arquitectura A4 — UNIFORME ── */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            padding: 20mm;
+            position: relative;
+            background: var(--gstl-black);
+            page-break-after: always;
+            border-bottom: 1px solid var(--gstl-border);
+        }
+
+        @media screen {
+            .page { box-shadow: 0 4px 60px rgba(0,0,0,0.8); }
+        }
+
+        @media print {
+            body { background: var(--gstl-black); }
+            .page { margin: 0; border: none; box-shadow: none; }
+        }
+
+
+        /* ══════════════════════════════════════════════════════════
+           HEADER & FOOTER — Semanticos
+           ══════════════════════════════════════════════════════════ */
+
+        .ph {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--gstl-border);
+            margin-bottom: 40px;
+        }
+
+        .ph-l { display: flex; align-items: center; gap: 10px; }
+        .ph-l .isotipo { width: 30px; height: 36px; flex-shrink: 0; }
+        .ph-l span { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-small); letter-spacing: 6px; text-transform: uppercase; }
+        .ph-r { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; color: var(--text-3); text-transform: uppercase; }
+
+        .pf {
+            position: absolute;
+            bottom: 20mm;
+            left: 20mm;
+            right: 20mm;
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-b);
+            font-size: var(--ts-micro);
+            letter-spacing: 3px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            border-top: 1px solid var(--gstl-border);
+            padding-top: 10px;
+        }
+
+        /* Vol-cover stacking context (grid pseudo-element) */
+        .vol-cover .ph,
+        .vol-cover .pf { position: relative; z-index: 1; }
+        .vol-cover .pf { position: absolute; z-index: 1; }
+
+
+        /* ══════════════════════════════════════════════════════════
+           PORTADA MAESTRA
+           ══════════════════════════════════════════════════════════ */
+
+        .master-cover {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mc__isotipo-area { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; }
+        .mc__isotipo-area svg { width: 220px; height: auto; display: block; }
+        .mc__title-block { text-align: center; padding-bottom: 8mm; }
+        .mc__divider { width: 56px; height: 1px; background: var(--gstl-border); margin: 0 auto 28px; }
+
+        .mc__subtitle {
+            font-family: var(--font-d);
+            font-weight: 700;
+            font-size: var(--ts-small);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            text-indent: 6px;
+            margin-bottom: 6px;
+        }
+
+        .mc__year { font-family: var(--font-mono); font-size: var(--ts-small); letter-spacing: 4px; color: var(--text-3); }
+
+        .mc__footer {
+            position: absolute;
+            bottom: 20mm;
+            left: 20mm;
+            right: 20mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .mc__classification {
+            font-family: var(--font-mono);
+            font-size: var(--ts-micro);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            border: 1px solid var(--gstl-border);
+            padding: 3px 8px;
+        }
+
+        .mc__version { font-family: var(--font-mono); font-size: var(--ts-micro); letter-spacing: 2px; color: var(--text-3); }
+
+
+        /* ══════════════════════════════════════════════════════════
+           PORTADA VOLUMEN
+           ══════════════════════════════════════════════════════════ */
+
+        .vol-cover { display: flex; flex-direction: column; }
+
+        .vol-cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(250,250,248,0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(250,250,248,0.018) 1px, transparent 1px);
+            background-size: 8mm 8mm;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .vc__center { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
+        .vc__vol-label { font-family: var(--font-mono); font-size: var(--ts-small); letter-spacing: 5px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 20px; }
+
+        .vc__title {
+            font-family: var(--font-d);
+            font-weight: 700;
+            font-size: var(--ts-display-md);
+            letter-spacing: 16px;
+            text-transform: uppercase;
+            color: var(--text-1);
+            line-height: 1.2;
+            text-indent: 16px;
+        }
+
+        .vc__accent-line { width: 48px; height: 2px; background: var(--gnosis); margin: 36px 0; }
+        .vc__description { font-family: var(--font-b); font-size: var(--ts-body); line-height: 1.85; color: var(--text-2); max-width: 400px; letter-spacing: 0.2px; }
+
+
+        /* ══════════════════════════════════════════════════════════
+           ÍNDICE
+           ══════════════════════════════════════════════════════════ */
+
+        .page--flex { display: flex; flex-direction: column; padding-bottom: calc(20mm + 32px); }
+
+        .idx__title-area { margin-bottom: 8mm; }
+        .idx__vol-label { font-family: var(--font-mono); font-size: var(--ts-caption); letter-spacing: 5px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 10px; }
+        .idx__title { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-head-sm); letter-spacing: 8px; text-transform: uppercase; color: var(--text-1); text-indent: 8px; }
+
+        .idx__list { display: flex; flex-direction: column; justify-content: space-between; flex: 1; }
+        .idx__item { display: flex; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--gstl-border); }
+        .idx__item:first-child { padding-top: 0; }
+        .idx__item:last-child { border-bottom: none; }
+        .idx__code { font-family: var(--font-mono); font-size: var(--ts-small); letter-spacing: 2px; color: var(--gnosis-text); min-width: 48px; flex-shrink: 0; }
+        .idx__name { font-family: var(--font-b); font-size: var(--ts-body-lg); letter-spacing: 0.4px; color: var(--text-1); }
+        .idx__dots { flex: 1; margin: 0 12px; border-bottom: 1px dotted rgba(250,250,248,0.08); min-width: 20px; position: relative; top: -3px; }
+        .idx__page-ref { font-family: var(--font-mono); font-size: var(--ts-caption); letter-spacing: 2px; color: var(--text-3); flex-shrink: 0; min-width: 24px; text-align: right; }
+
+
+        /* ══════════════════════════════════════════════════════════
+           PORTADILLA DE SECCIÓN
+           ══════════════════════════════════════════════════════════ */
+
+        .section-title-page { display: flex; flex-direction: column; }
+        .section-title-page .ph { margin-bottom: 0; }
+
+        .stp__center { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 4mm; }
+
+        .stp__code {
+            font-family: var(--font-mono);
+            font-size: var(--ts-head-md);
+            letter-spacing: 4px;
+            color: var(--gnosis-text);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .stp__title {
+            font-family: var(--font-d);
+            font-weight: 700;
+            font-size: var(--ts-display-sm);
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            color: var(--text-1);
+            line-height: 1.3;
+            text-indent: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stp__accent { width: 48px; height: 2px; background: var(--gnosis); margin-bottom: 24px; }
+
+        .stp__subtitle {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.1 — ORIGEN & NARRATIVA FUNDACIONAL
+           ══════════════════════════════════════════════════════════ */
+
+        .etym-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+
+        .gw { font-family: var(--font-d); font-size: var(--ts-display-lg); font-weight: 700; letter-spacing: -1px; line-height: 1; margin-bottom: 4px; }
+        .gw .pfx { color: var(--gnosis-text); }
+
+        .gph { font-family: var(--font-d); font-size: var(--ts-sub-head); font-style: italic; font-weight: 300; color: var(--text-3); letter-spacing: 2px; margin-bottom: 24px; }
+
+        .el { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 8px; font-weight: 700; }
+
+        .eb { font-family: var(--font-b); font-size: var(--ts-body-lg); line-height: 1.7; color: var(--text-2); text-align: justify; }
+        .eb strong { color: var(--text-1); }
+
+        .mt-section { margin-top: 24px; }
+
+        .etym-side { padding-left: 24px; border-left: 1px solid var(--gstl-border); }
+
+        .ec { padding: 16px 0; border-bottom: 1px solid var(--gstl-border); }
+        .ec:last-child { border-bottom: none; }
+        .ec-l { font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+        .ec-v { font-family: var(--font-d); font-size: var(--ts-sub-head); font-weight: 700; letter-spacing: 1px; line-height: 1.5; }
+        .ec-v--accent { color: var(--gnosis-text); }
+        .ec-d { font-family: var(--font-b); font-size: var(--ts-small); color: var(--text-3); line-height: 1.6; margin-top: 4px; }
+
+        .decomp { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin: 32px 0; }
+        .decomp-i { background: var(--gstl-bg-3); padding: 18px 16px; text-align: center; }
+        .decomp-p { font-family: var(--font-d); font-size: var(--ts-head-lg); font-weight: 700; margin-bottom: 4px; }
+        .decomp-p.cy { color: var(--gnosis-text); }
+        .decomp-m { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+        .decomp-d { font-family: var(--font-b); font-size: var(--ts-small); color: var(--text-3); line-height: 1.5; }
+
+        .pq { background: var(--gstl-bg-2); border-left: 2px solid var(--gnosis); padding: 24px 28px; margin: 40px 0; }
+        .pq blockquote { font-family: var(--font-d); font-size: var(--ts-emphasis); font-weight: 300; font-style: italic; line-height: 1.7; margin-bottom: 12px; }
+        .pq .qs { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); }
+        .pq .qt { font-family: var(--font-b); margin-top: 12px; font-size: var(--ts-body); line-height: 1.7; color: var(--text-3); }
+        .pq .qt strong { color: var(--text-1); }
+
+        .nar-layout { display: grid; grid-template-columns: 58% 38%; gap: 4%; }
+        .nar-main h3 { font-family: var(--font-d); font-size: var(--ts-body-lg); font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 14px; margin-top: 32px; }
+        .nar-main h3:first-child { margin-top: 0; }
+        .nar-main p { font-family: var(--font-b); font-size: var(--ts-body-lg); line-height: 1.7; color: var(--text-2); text-align: justify; margin-bottom: 12px; }
+        .nar-main p strong { color: var(--text-1); }
+
+        .nar-side { padding-left: 20px; border-left: 1px solid var(--gstl-border); }
+        .nar-side-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+
+        .cn { padding: 14px 16px; background: var(--gstl-bg-3); border: 1px solid var(--gstl-border); margin-bottom: 8px; position: relative; }
+        .cn::before { content: ''; position: absolute; left: -21px; top: 50%; width: 20px; height: 1px; background: var(--gstl-border); }
+        .cn.hi { border-color: var(--gnosis); background: rgba(0,212,255,0.03); }
+        .cn-l { font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
+        .cn-t { font-family: var(--font-d); font-size: var(--ts-body-lg); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+        .cn-t--featured { font-size: var(--ts-emphasis); }
+        .cn.hi .cn-t { color: var(--gnosis-text); }
+        .cn-d { font-family: var(--font-b); font-size: var(--ts-small); color: var(--text-3); line-height: 1.5; }
+
+        .cline { width: 1px; height: 12px; background: var(--gstl-border); margin: 0 auto; }
+
+        .sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+        .sg-c { background: var(--gstl-bg-3); padding: 14px 16px; }
+        .sg-n { font-family: var(--font-d); font-size: var(--ts-body); font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 2px; }
+        .sg-n.c1 { color: var(--gnosis-text); }
+        .sg-n.c2 { color: var(--telos-text); }
+        .sg-n.c3 { color: var(--umwelt-text); }
+        .sg-n.c4 { color: var(--dasein-text); }
+        .sg-o { font-family: var(--font-b); font-size: var(--ts-caption); font-style: italic; color: var(--text-3); margin-bottom: 4px; }
+        .sg-d { font-family: var(--font-b); font-size: var(--ts-caption); color: var(--text-3); line-height: 1.5; }
+
+        .ib { margin-top: 16px; padding: 12px 14px; background: var(--gstl-bg-3); border: 1px solid var(--gstl-border); }
+        .ib-l { font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+        .ib-l.cy { color: var(--gnosis-text); }
+        .ib-t { font-family: var(--font-b); font-size: var(--ts-small); color: var(--text-3); line-height: 1.6; }
+        .ib-t strong { color: var(--text-1); }
+        .ib-f { font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 2px; color: var(--text-3); margin-top: 8px; }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.2 — ESENCIA DE MARCA
+           ══════════════════════════════════════════════════════════ */
+
+        .esencia-layout { display: grid; grid-template-columns: 56% 40%; gap: 4%; flex: 1; }
+
+        .esencia-main .lang-label { font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; margin-top: 16px; }
+        .esencia-main .lang-label:first-child { margin-top: 0; }
+
+        .essence-word { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-head-md); letter-spacing: 6px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 8px; }
+
+        .esencia-main p { font-family: var(--font-b); font-size: var(--ts-body-lg); line-height: 1.7; color: var(--text-2); text-align: justify; margin-bottom: 6px; }
+        .esencia-main p strong { color: var(--text-1); }
+
+        .esencia-divider { height: 1px; background: var(--gstl-border); margin: 14px 0; }
+
+        .condensed { margin-top: 14px; }
+        .condensed-block { background: var(--gstl-bg-3); padding: 8px 14px; margin-bottom: 2px; }
+        .condensed-label { font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 2px; }
+        .condensed-value { font-family: var(--font-d); font-size: var(--ts-body); font-weight: 700; color: var(--text-1); letter-spacing: 1px; }
+        .condensed-value.cyan { color: var(--gnosis-text); }
+
+        .esencia-side { padding-left: 20px; border-left: 1px solid var(--gstl-border); display: flex; flex-direction: column; }
+        .esencia-side-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+
+        .hier-core { background: rgba(0,212,255,0.05); border: 1px solid var(--gnosis); padding: 10px 12px; text-align: center; }
+        .hier-core-text { font-family: var(--font-d); font-size: var(--ts-small); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gnosis-text); }
+        .hier-line { width: 1px; height: 8px; background: var(--gstl-border); margin: 0 auto; }
+        .hier-level { background: var(--gstl-bg-3); border: 1px solid var(--gstl-border); padding: 8px 12px; }
+        .hier-level-label { font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 3px; }
+        .hier-level-items { font-family: var(--font-b); font-size: var(--ts-caption); color: var(--text-2); line-height: 1.5; }
+        .hier-level-items .hl-gnosis { color: var(--gnosis-text); font-weight: 700; }
+        .hier-level-items .hl-telos { color: var(--telos-text); font-weight: 700; }
+        .hier-level-items .hl-umwelt { color: var(--umwelt-text); font-weight: 700; }
+        .hier-level-items .hl-dasein { color: var(--dasein-text); font-weight: 700; }
+
+        .esencia-side .ib:first-of-type { margin-top: 10px; }
+        .esencia-side-spacer { flex-grow: 1; }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.3 — PROPÓSITO (Heaven/Hell layout)
+           ══════════════════════════════════════════════════════════ */
+
+        .page--proposito {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page--proposito .ph {
+            flex-shrink: 0;
+        }
+
+        /* Zone 1: Heaven */
+        .heaven {
+            flex: 55;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .frase-es {
+            font-family: var(--font-d);
+            font-size: var(--ts-display-sm);
+            font-weight: 700;
+            line-height: 1.55;
+            color: var(--text-1);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .frase-en {
+            font-family: var(--font-d);
+            font-size: var(--ts-sub-head);
+            font-weight: 400;
+            color: var(--text-3);
+            text-align: center;
+            letter-spacing: 1px;
+            margin-top: 24px;
+            line-height: 1.6;
+        }
+
+        /* Scanline */
+        .scanline {
+            width: calc(100% + 40mm);
+            margin-left: -20mm;
+            height: 1px;
+            flex-shrink: 0;
+            background: linear-gradient(90deg, var(--gstl-border) 0%, var(--gnosis) 50%, var(--gstl-border) 100%);
+        }
+
+        /* Zone 2: Hell */
+        .hell {
+            flex: 45;
+            background: var(--gstl-bg-2);
+            margin: 0 -20mm;
+            padding: 24px 20mm 56px 20mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hell-label-open {
+            font-family: var(--font-b);
+            font-size: var(--ts-caption);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 14px;
+        }
+
+        .hell-stream {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            line-height: 1.7;
+            color: var(--text-3);
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .hell-stream strong {
+            color: var(--text-1);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .hell-stream .sep {
+            padding: 0 6px;
+            font-weight: 700;
+        }
+
+        .hell-stream .sep-telos { color: var(--telos-text); }
+        .hell-stream .sep-umwelt { color: var(--umwelt-text); }
+        .hell-stream .sep-dasein { color: var(--dasein-text); }
+
+        .hell-label-close {
+            font-family: var(--font-b);
+            font-size: var(--ts-caption);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-top: 14px;
+        }
+
+        .singulo-end {
+            position: absolute;
+            bottom: 60px;
+            right: 20mm;
+            width: 4px;
+            height: 4px;
+            background: var(--gnosis);
+            border-radius: 50%;
+        }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.4 — VISIÓN & MISIÓN (Heaven/Hell variant)
+           ══════════════════════════════════════════════════════════ */
+
+        .page--vision {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .page--vision .ph { flex-shrink: 0; }
+
+        /* Heaven — Visión (38%) */
+        .heaven--vision {
+            flex: 38;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .zone-label {
+            font-family: var(--font-b);
+            font-size: var(--ts-caption);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 20px;
+        }
+
+        .frase-main {
+            font-family: var(--font-d);
+            font-size: var(--ts-head-lg);
+            font-weight: 700;
+            line-height: 1.55;
+            color: var(--text-1);
+            text-align: center;
+            letter-spacing: 0.5px;
+            max-width: 90%;
+        }
+
+        .frase-en--sm {
+            font-family: var(--font-d);
+            font-size: var(--ts-sub-head);
+            font-weight: 400;
+            color: var(--text-3);
+            text-align: center;
+            letter-spacing: 0.5px;
+            margin-top: 16px;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        .word-count {
+            font-family: var(--font-b);
+            font-size: var(--ts-caption);
+            letter-spacing: 3px;
+            color: var(--text-3);
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Hell — Misión (62%) */
+        .hell--vision {
+            flex: 62;
+            background: var(--gstl-bg-2);
+            margin: 0 -20mm;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .hell--vision-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 20mm 0 20mm;
+        }
+
+        .hell-principles {
+            padding: 12px 20mm 56px 20mm;
+            border-top: 1px solid var(--gstl-border);
+            flex-shrink: 0;
+        }
+
+        .principles-label {
+            font-family: var(--font-b);
+            font-size: var(--ts-caption);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 10px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+        }
+
+        .principle-card {
+            background: var(--gstl-bg-3);
+            padding: 10px 12px;
+        }
+
+        .principle-title {
+            font-family: var(--font-d);
+            font-size: var(--ts-caption);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-1);
+            margin-bottom: 4px;
+        }
+
+        .principle-title.cy { color: var(--gnosis-text); }
+
+        .principle-desc {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            color: var(--text-3);
+            line-height: 1.5;
+        }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.5 — VALORES FUNDACIONALES
+           ══════════════════════════════════════════════════════════ */
+
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .value-card {
+            padding-left: 16px;
+            border-left: 2px solid var(--gstl-border);
+        }
+
+        .value-card.c-gnosis { border-left-color: var(--gnosis); }
+        .value-card.c-telos { border-left-color: var(--telos); }
+        .value-card.c-umwelt { border-left-color: var(--umwelt); }
+        .value-card.c-dasein { border-left-color: var(--dasein); }
+
+        .value-name {
+            font-family: var(--font-d);
+            font-size: var(--ts-head-md);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .value-name.c-gnosis { color: var(--gnosis-text); }
+        .value-name.c-telos { color: var(--telos-text); }
+        .value-name.c-umwelt { color: var(--umwelt-text); }
+        .value-name.c-dasein { color: var(--dasein-text); }
+
+        .value-def {
+            font-family: var(--font-b);
+            font-size: var(--ts-body-lg);
+            line-height: 1.7;
+            color: var(--text-2);
+            margin-bottom: 16px;
+        }
+
+        .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .do-col, .dont-col { padding-left: 12px; }
+        .dont-col { border-left: 2px solid var(--text-3); }
+
+        .c-gnosis .do-col { border-left: 2px solid var(--gnosis); }
+        .c-telos .do-col { border-left: 2px solid var(--telos); }
+        .c-umwelt .do-col { border-left: 2px solid var(--umwelt); }
+        .c-dasein .do-col { border-left: 2px solid var(--dasein); }
+
+        .col-label {
+            font-family: var(--font-d);
+            font-size: var(--ts-caption);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .c-gnosis .do-col .col-label { color: var(--gnosis-text); }
+        .c-telos .do-col .col-label { color: var(--telos-text); }
+        .c-umwelt .do-col .col-label { color: var(--umwelt-text); }
+        .c-dasein .do-col .col-label { color: var(--dasein-text); }
+        .dont-col .col-label { color: var(--text-3); }
+
+        .col-item {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            line-height: 1.6;
+            color: var(--text-3);
+            margin-bottom: 8px;
+        }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.6 — PERSONALIDAD DE MARCA
+           ══════════════════════════════════════════════════════════ */
+
+        .trait-card {
+            padding-left: 16px;
+            border-left: 2px solid var(--gnosis);
+        }
+
+        .trait-name {
+            font-family: var(--font-d);
+            font-size: var(--ts-head-md);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            color: var(--gnosis-text);
+        }
+
+        .trait-def {
+            font-family: var(--font-b);
+            font-size: var(--ts-body-lg);
+            line-height: 1.7;
+            color: var(--text-2);
+            margin-bottom: 14px;
+        }
+
+        .somos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .somos-col, .no-somos-col { padding-left: 12px; }
+        .somos-col { border-left: 2px solid var(--gnosis); }
+        .no-somos-col { border-left: 2px solid var(--text-3); }
+
+        .somos-col .col-label { color: var(--gnosis-text); }
+        .no-somos-col .col-label { color: var(--text-3); }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.7 — PRINCIPIO ORGANIZADOR
+           ══════════════════════════════════════════════════════════ */
+
+        .monumental {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .principio-es {
+            font-family: var(--font-d);
+            font-size: var(--ts-head-md);
+            font-weight: 700;
+            line-height: 1.65;
+            color: var(--text-1);
+            text-align: center;
+            max-width: 92%;
+            margin-bottom: 20px;
+        }
+
+        .mono-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gnosis);
+            margin: 0 auto 20px;
+        }
+
+        .principio-en {
+            font-family: var(--font-d);
+            font-size: var(--ts-sub-head);
+            font-weight: 400;
+            color: var(--text-3);
+            text-align: center;
+            letter-spacing: 0.5px;
+            line-height: 1.7;
+            max-width: 88%;
+            margin-bottom: 20px;
+        }
+
+        .condensed-row {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            align-items: baseline;
+            padding: 12px 20px;
+            background: var(--gstl-bg-3);
+            border: 1px solid var(--gstl-border);
+        }
+
+        .condensed-row .condensed-label {
+            font-family: var(--font-b);
+            font-size: var(--ts-caption);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+        .condensed-row .condensed-value {
+            font-family: var(--font-d);
+            font-size: var(--ts-body-lg);
+            font-weight: 700;
+            color: var(--gnosis-text);
+        }
+
+        .condensed-divider {
+            width: 1px;
+            height: 24px;
+            background: var(--gstl-border);
+        }
+
+        /* Test & Rule zone */
+        .bottom-zone {
+            flex-shrink: 0;
+            padding-top: 20px;
+            padding-bottom: 8px;
+            border-top: 1px solid var(--gstl-border);
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 16px;
+        }
+
+        .test-card {
+            background: var(--gstl-bg-3);
+            padding: 10px 12px;
+        }
+
+        .test-q {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            font-weight: 700;
+            color: var(--text-1);
+            line-height: 1.5;
+            margin-bottom: 4px;
+        }
+
+        .test-a {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            color: var(--text-3);
+            line-height: 1.5;
+        }
+
+        .rule-block {
+            background: var(--gstl-bg-3);
+            border: 1px solid var(--gstl-border);
+            padding: 10px 14px;
+        }
+
+        .rule-label {
+            font-family: var(--font-b);
+            font-size: var(--ts-caption);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gnosis-text);
+            margin-bottom: 4px;
+        }
+
+        .rule-text {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            color: var(--text-3);
+            line-height: 1.6;
+        }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.8 — POSICIONAMIENTO COMPETITIVO
+           ══════════════════════════════════════════════════════════ */
+
+        .chart-container { flex-shrink: 0; padding: 8px 0; }
+        .chart-svg { width: 100%; height: auto; display: block; }
+
+        .legends { flex-shrink: 0; display: flex; gap: 16px; padding: 10px 0; border-top: 1px solid var(--gstl-border); }
+        .legend-block { flex: 1; }
+        .legend-title { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .legend-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+        .legend-dot--gnosis { background: var(--gnosis); }
+        .legend-dot--telos { background: var(--telos); }
+        .legend-dot--umwelt { background: var(--umwelt); }
+        .legend-dot--dasein { background: var(--dasein); }
+        .legend-text { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.4; }
+        .legend-text .lt-gnosis { color: var(--gnosis-text); font-weight: 700; }
+        .legend-text .lt-telos { color: var(--telos-text); font-weight: 700; }
+        .legend-text .lt-umwelt { color: var(--umwelt-text); font-weight: 700; }
+        .legend-text .lt-dasein { color: var(--dasein-text); font-weight: 700; }
+        .legend-reading { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.6; }
+
+        .desc-zone { flex: 1; padding-top: 10px; border-top: 1px solid var(--gstl-border); display: flex; flex-direction: column; }
+        .desc-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+        .desc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+        .desc-card { background: var(--gstl-bg-3); padding: 8px 10px; }
+        .desc-card.highlight { border-left: 2px solid var(--gnosis); }
+        .desc-name { font-family: var(--font-d); font-size: var(--ts-body); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+        .desc-name.cy { color: var(--gnosis-text); }
+        .desc-name.gray { color: var(--text-3); }
+        .desc-text { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.5; }
+        .desc-card.highlight .desc-text { color: var(--text-2); }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.9 — PERFILES DE AUDIENCIA OBJETIVO
+           ══════════════════════════════════════════════════════════ */
+
+        .graph-zone { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .graph-svg { width: 100%; max-width: 580px; height: auto; }
+
+        .reading-bar { flex-shrink: 0; padding: 10px 0 0; }
+        .reading-text { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.6; text-align: center; max-width: 88%; margin: 0 auto; }
+
+        .icp-card { padding-left: 16px; border-left: 2px solid var(--gstl-border); }
+        .icp-card.c-telos { border-left-color: var(--telos); }
+        .icp-card.c-gnosis { border-left-color: var(--gnosis); }
+        .icp-card.c-umwelt { border-left-color: var(--umwelt); }
+        .icp-card.c-dasein { border-left-color: var(--dasein); }
+
+        .icp-solution { font-family: var(--font-d); font-size: var(--ts-caption); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; }
+        .icp-solution.c-telos { color: var(--telos-text); }
+        .icp-solution.c-gnosis { color: var(--gnosis-text); }
+        .icp-solution.c-umwelt { color: var(--umwelt-text); }
+        .icp-solution.c-dasein { color: var(--dasein-text); }
+
+        .icp-title { font-family: var(--font-d); font-size: var(--ts-head-sm); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+        .icp-title.c-telos { color: var(--telos-text); }
+        .icp-title.c-gnosis { color: var(--gnosis-text); }
+        .icp-title.c-umwelt { color: var(--umwelt-text); }
+        .icp-title.c-dasein { color: var(--dasein-text); }
+
+        .icp-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .icp-field.full { grid-column: 1 / -1; }
+        .field-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
+        .field-value { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-2); line-height: 1.6; }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.10 — PROMESA DE MARCA & PROOF POINTS
+           ══════════════════════════════════════════════════════════ */
+
+        .promise-zone {
+            flex-shrink: 0;
+            padding: 28px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--gstl-border);
+        }
+
+        .promise-es {
+            font-family: var(--font-d);
+            font-size: var(--ts-head-md);
+            font-weight: 700;
+            line-height: 1.6;
+            color: var(--text-1);
+            max-width: 90%;
+            margin: 0 auto 16px;
+        }
+
+        .promise-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gnosis);
+            margin: 0 auto 16px;
+        }
+
+        .promise-en {
+            font-family: var(--font-d);
+            font-size: var(--ts-sub-head);
+            font-weight: 400;
+            color: var(--text-3);
+            line-height: 1.7;
+            max-width: 88%;
+            margin: 0 auto;
+        }
+
+        .proof-zone {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding-top: 16px;
+        }
+
+        .proof-label {
+            font-family: var(--font-b);
+            font-size: var(--ts-caption);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 12px;
+        }
+
+        .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+
+        .proof-card {
+            background: var(--gstl-bg-3);
+            padding: 10px 12px;
+            border-left: 2px solid var(--gnosis);
+        }
+
+        .proof-card.wide { grid-column: 1 / -1; }
+
+        .proof-keyword {
+            font-family: var(--font-d);
+            font-size: var(--ts-body);
+            font-weight: 700;
+            color: var(--gnosis-text);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .proof-desc {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            color: var(--text-3);
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .proof-evidence {
+            font-family: var(--font-b);
+            font-size: var(--ts-body);
+            color: var(--text-2);
+            line-height: 1.6;
+        }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.11 — MARCO DE MENSAJES
+           ══════════════════════════════════════════════════════════ */
+
+        .cascade { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; padding-top: 16px; }
+
+        .cascade-tagline { text-align: center; padding: 20px 0; border-bottom: 1px solid var(--gstl-border); }
+        .cascade-tagline-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+        .cascade-tagline-es { font-family: var(--font-d); font-size: var(--ts-head-lg); font-weight: 700; color: var(--text-1); letter-spacing: 2px; margin-bottom: 6px; }
+        .cascade-tagline-en { font-family: var(--font-d); font-size: var(--ts-emphasis); font-weight: 400; color: var(--text-3); letter-spacing: 1px; }
+
+        .cascade-positioning { padding: 16px 0; border-bottom: 1px solid var(--gstl-border); }
+        .cascade-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 8px; }
+        .cascade-text-es { font-family: var(--font-b); font-size: var(--ts-body-lg); color: var(--text-2); line-height: 1.7; margin-bottom: 8px; }
+        .cascade-text-en { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.7; }
+
+        .cascade-elevator { padding: 16px 0; border-bottom: 1px solid var(--gstl-border); }
+        .cascade-elevator-text { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-2); line-height: 1.7; }
+
+        .cascade-2min { padding: 14px 0; }
+        .cascade-2min-formula { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.7; background: var(--gstl-bg-3); padding: 10px 14px; border: 1px solid var(--gstl-border); }
+
+        .msg-card { padding-left: 16px; border-left: 2px solid var(--gstl-border); }
+        .msg-card.c-gnosis { border-left-color: var(--gnosis); }
+        .msg-card.c-telos { border-left-color: var(--telos); }
+        .msg-card.c-umwelt { border-left-color: var(--umwelt); }
+        .msg-card.c-dasein { border-left-color: var(--dasein); }
+
+        .msg-solution { font-family: var(--font-d); font-size: var(--ts-caption); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; }
+        .msg-solution.c-gnosis { color: var(--gnosis-text); }
+        .msg-solution.c-telos { color: var(--telos-text); }
+        .msg-solution.c-umwelt { color: var(--umwelt-text); }
+        .msg-solution.c-dasein { color: var(--dasein-text); }
+
+        .msg-icp { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 2px; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+        .msg-text { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-2); line-height: 1.6; }
+
+        .tone-zone { flex-shrink: 0; padding-top: 14px; border-top: 1px solid var(--gstl-border); }
+        .tone-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+        .tone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 12px; }
+        .tone-header { font-family: var(--font-d); font-size: var(--ts-caption); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 10px; }
+        .tone-header.no { color: var(--text-3); background: var(--gstl-bg-3); border-bottom: 1px solid var(--gstl-border); }
+        .tone-header.si { color: var(--gnosis-text); background: var(--gstl-bg-3); border-bottom: 1px solid var(--gstl-border); border-left: 2px solid var(--gnosis); }
+        .tone-cell { font-family: var(--font-b); font-size: var(--ts-body); padding: 6px 10px; line-height: 1.5; }
+        .tone-cell.no { color: var(--text-3); background: var(--gstl-bg-2); text-decoration: line-through; text-decoration-color: var(--text-3); }
+        .tone-cell.si { color: var(--text-2); background: var(--gstl-bg-3); border-left: 2px solid var(--gnosis); }
+
+        .tone-rule { background: var(--gstl-bg-3); border: 1px solid var(--gstl-border); padding: 10px 14px; }
+        .tone-rule-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 4px; }
+        .tone-rule-text { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.6; }
+
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 1.12 — PRINCIPIOS DE IA RESPONSABLE
+           ══════════════════════════════════════════════════════════ */
+
+        .hex-container { flex-shrink: 0; padding: 8px 0; display: flex; justify-content: center; }
+        .hex-svg { width: 100%; max-width: 520px; height: auto; }
+
+        .principles-zone { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--gstl-border); }
+        .principles-zone .principles-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+        .principles-zone .principles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+        .principles-zone .principle-card { background: var(--gstl-bg-3); padding: 8px 10px; border-left: 2px solid var(--gnosis); }
+        .principle-num { font-family: var(--font-mono); font-size: var(--ts-body); font-weight: 700; color: var(--gnosis-text); margin-bottom: 2px; }
+        .principle-name-ia { font-family: var(--font-d); font-size: var(--ts-body); font-weight: 700; color: var(--text-1); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+        .principle-desc-ia { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.5; }
+
+        .commitment { flex-shrink: 0; text-align: center; padding: 14px 0; border-top: 1px solid var(--gstl-border); }
+        .commitment-text { font-family: var(--font-d); font-size: var(--ts-body-lg); font-weight: 700; color: var(--text-2); line-height: 1.7; max-width: 88%; margin: 0 auto; }
+    </style>
+
+<meta name="gbos-vol-slug" content="vol-1"><meta name="gbos-vol-roman" content="I"><meta name="gbos-vol-title" content="ADN Estratégico"><meta name="gbos-vol-color" content="#00D4FF">
+<link rel="stylesheet" href="assets/chrome.css">
+<script>window.__GBOS__={vol:"vol-1",roman:"I",title:"ADN Estratégico",color:"#00D4FF",sections:[{"id": "sec-0", "code": "1.1", "title": "Origen y Narrativa Fundacional", "subtitle": "Etimología · Marco Filosófico · Contexto Conceptual"}, {"id": "sec-1", "code": "1.2", "title": "Esencia de Marca", "subtitle": "La Declaración Irreducible — Lo Que GESTELL Es En Su Núcleo"}, {"id": "sec-2", "code": "1.3", "title": "Propósito", "subtitle": "Declaración Operativa · Descomposición Semántica"}, {"id": "sec-3", "code": "1.4", "title": "Visión y Misión", "subtitle": "El Horizonte · La Operación · Principios de Construcción"}, {"id": "sec-4", "code": "1.5", "title": "Valores Fundacionales", "subtitle": "La Axiología de GESTELL — Lo Que Hacemos y Lo Que No Hacemos"}, {"id": "sec-5", "code": "1.6", "title": "Personalidad de Marca", "subtitle": "Cómo Se Comporta GESTELL En El Mundo — Tres Rasgos Que Gobiernan Toda Expresión"}, {"id": "sec-6", "code": "1.7", "title": "Principio Organizador", "subtitle": "La Plataforma Estratégica Que Gobierna Toda Decisión de Marca"}, {"id": "sec-7", "code": "1.8", "title": "Posicionamiento Competitivo", "subtitle": "Dónde Se Ubica GESTELL En El Mapa de La Industria — Y Por Qué Ese Espacio Es Solo Nuestro"}, {"id": "sec-8", "code": "1.9", "title": "Perfiles de Audiencia Objetivo", "subtitle": "Los 4 Perfiles de Cliente Ideal — Uno Por Cada Solución del Ecosistema GESTELL"}, {"id": "sec-9", "code": "1.10", "title": "Promesa de Marca & Proof Points", "subtitle": "Lo Que GESTELL Garantiza — Y La Evidencia Que Lo Respalda"}, {"id": "sec-10", "code": "1.11", "title": "Marco de Mensajes", "subtitle": "La Arquitectura Verbal de GESTELL — Qué Decimos, A Quién y Cómo"}, {"id": "sec-11", "code": "1.12", "title": "Principios de IA Responsable", "subtitle": "El Marco Ético Que Gobierna Toda Operación de Inteligencia Artificial En GESTELL"}]};</script>
+<script defer src="assets/chrome.js"></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="gbos-mount"></div>
+
+
+<!-- ═══════════ SHARED SVG DEFINITIONS ═══════════ -->
+<svg class="svg-defs" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="gstl-matrix">
+            <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160"/>
+        </clipPath>
+        <radialGradient id="ai-core-energy" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#00D4FF"/>
+            <stop offset="15%" stop-color="#7B3FA0"/>
+            <stop offset="35%" stop-color="#FF0066"/>
+            <stop offset="65%" stop-color="#FAFAF8"/>
+            <stop offset="100%" stop-color="#FAFAF8"/>
+        </radialGradient>
+        <!-- Isotipo reutilizable para headers -->
+        <symbol id="isotipo-header" viewBox="60 50 380 360">
+            <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                <path d="M250 230 A180 180 0 0 1 450 230"/><path d="M250 230 A180 180 0 0 1 391.4 371.4"/>
+                <path d="M250 230 A180 180 0 0 1 250 430"/><path d="M250 230 A180 180 0 0 1 108.6 371.4"/>
+                <path d="M250 230 A180 180 0 0 1 50 230"/><path d="M250 230 A180 180 0 0 1 108.6 88.6"/>
+                <path d="M250 230 A180 180 0 0 1 250 30"/><path d="M250 230 A180 180 0 0 1 391.4 88.6"/>
+            </g>
+            <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160" fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+            <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+        </symbol>
+    </defs>
+</svg>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADA MAESTRA DEL BRANDBOOK
+     ══════════════════════════════════════════════════════════ -->
+<section id="cover" class="page master-cover">
+    <div class="mc__isotipo-area">
+        <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                <path d="M 250 230 A 180 180 0 0 1 450 230"/>
+                <path d="M 250 230 A 180 180 0 0 1 391.4 371.4"/>
+                <path d="M 250 230 A 180 180 0 0 1 250 430"/>
+                <path d="M 250 230 A 180 180 0 0 1 108.6 371.4"/>
+                <path d="M 250 230 A 180 180 0 0 1 50 230"/>
+                <path d="M 250 230 A 180 180 0 0 1 108.6 88.6"/>
+                <path d="M 250 230 A 180 180 0 0 1 250 30"/>
+                <path d="M 250 230 A 180 180 0 0 1 391.4 88.6"/>
+            </g>
+            <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160"
+                fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+            <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+            <g transform="translate(250, 480)">
+                <text x="12" y="0" text-anchor="middle"
+                    font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif"
+                    font-weight="700" font-size="52" letter-spacing="24"
+                    fill="#FAFAF8">GESTELL</text>
+            </g>
+        </svg>
+    </div>
+    <div class="mc__title-block">
+        <div class="mc__divider"></div>
+        <div class="mc__subtitle">Brand Operating System</div>
+        <div class="mc__year">2026</div>
+    </div>
+    <footer class="mc__footer">
+        <div class="mc__classification">CONFIDENCIAL · USO INTERNO</div>
+        <div class="mc__version">v2.0.0</div>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADA VOLUMEN I · ADN ESTRATÉGICO — 001
+     ══════════════════════════════════════════════════════════ -->
+<section class="page vol-cover">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Volumen I</div>
+    </header>
+
+    <div class="vc__center">
+        <div class="vc__vol-label">VOLUMEN I · 12 SECCIONES</div>
+        <h1 class="vc__title">ADN<br>ESTRATÉGICO</h1>
+        <div class="vc__accent-line"></div>
+        <p class="vc__description">
+            El fundamento filosófico y estratégico de GESTELL como sistema de Inteligencia Sintética.
+            Etimología heideggeriana, esencia de marca, propósito, valores, personalidad,
+            posicionamiento y el marco cultural que ancla cada decisión de la organización.
+        </p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>001</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     ÍNDICE DEL VOLUMEN I — 002
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · Índice</div>
+    </header>
+
+    <div class="idx__title-area">
+        <div class="idx__vol-label">VOLUMEN I · CONTENIDO</div>
+        <h2 class="idx__title">ÍNDICE DE SECCIONES</h2>
+    </div>
+
+    <nav class="idx__list" aria-label="Índice del Volumen I">
+        <div class="idx__item"><span class="idx__code">1.1</span><span class="idx__name">Origen y Narrativa Fundacional</span><span class="idx__dots"></span><span class="idx__page-ref">003</span></div>
+        <div class="idx__item"><span class="idx__code">1.2</span><span class="idx__name">Esencia de Marca</span><span class="idx__dots"></span><span class="idx__page-ref">006</span></div>
+        <div class="idx__item"><span class="idx__code">1.3</span><span class="idx__name">Propósito</span><span class="idx__dots"></span><span class="idx__page-ref">008</span></div>
+        <div class="idx__item"><span class="idx__code">1.4</span><span class="idx__name">Visión y Misión</span><span class="idx__dots"></span><span class="idx__page-ref">010</span></div>
+        <div class="idx__item"><span class="idx__code">1.5</span><span class="idx__name">Valores Fundacionales</span><span class="idx__dots"></span><span class="idx__page-ref">012</span></div>
+        <div class="idx__item"><span class="idx__code">1.6</span><span class="idx__name">Personalidad de Marca</span><span class="idx__dots"></span><span class="idx__page-ref">015</span></div>
+        <div class="idx__item"><span class="idx__code">1.7</span><span class="idx__name">Principio Organizador</span><span class="idx__dots"></span><span class="idx__page-ref">017</span></div>
+        <div class="idx__item"><span class="idx__code">1.8</span><span class="idx__name">Posicionamiento Competitivo</span><span class="idx__dots"></span><span class="idx__page-ref">019</span></div>
+        <div class="idx__item"><span class="idx__code">1.9</span><span class="idx__name">Perfiles de Audiencia Objetivo</span><span class="idx__dots"></span><span class="idx__page-ref">021</span></div>
+        <div class="idx__item"><span class="idx__code">1.10</span><span class="idx__name">Promesa de Marca & Proof Points</span><span class="idx__dots"></span><span class="idx__page-ref">025</span></div>
+        <div class="idx__item"><span class="idx__code">1.11</span><span class="idx__name">Marco de Mensajes</span><span class="idx__dots"></span><span class="idx__page-ref">027</span></div>
+        <div class="idx__item"><span class="idx__code">1.12</span><span class="idx__name">Principios de IA Responsable</span><span class="idx__dots"></span><span class="idx__page-ref">030</span></div>
+    </nav>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>002</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.1 — ORIGEN Y NARRATIVA FUNDACIONAL — 003
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-0" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.1</div>
+        <h1 class="stp__title">Origen y Narrativa<br>Fundacional</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Etimología · Marco Filosófico · Contexto Conceptual</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>003</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.1 CONTENIDO — PAGINA 1 DE 2 · ETIMOLOGIA — 004
+     ══════════════════════════════════════════════════════════ -->
+<section class="page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.1 · Página 1 de 2</div>
+    </header>
+
+    <div class="etym-grid">
+        <div>
+            <div class="gw"><span class="pfx">Ge</span>stell</div>
+            <div class="gph">/ɡəˈʃtɛl/ — sustantivo neutro, alemán</div>
+            <h2 class="el">Raíz etimológica</h2>
+            <div class="eb"><strong>Ge·stell</strong> es un sustantivo compuesto del alemán. El prefijo <strong>Ge-</strong> denota un colectivo, una reunión de elementos en una estructura unitaria. La raíz <strong>-stell</strong> proviene del verbo <strong>stellen</strong>: poner, colocar, disponer, emplazar. En su uso cotidiano, <em>Gestell</em> significa estante, armazón, bastidor — una estructura que sostiene y organiza.</div>
+            <div class="mt-section">
+                <h2 class="el">Resignificación filosófica</h2>
+                <div class="eb">Martin Heidegger transformó este término ordinario en un concepto filosófico central en su conferencia de 1953 <strong>«Die Frage nach der Technik»</strong> (La pregunta por la técnica). Para Heidegger, <em>Gestell</em> designa la esencia misma de la tecnología moderna: no un aparato ni una herramienta, sino el modo fundamental en que la era tecnológica revela, ordena y dispone la realidad.</div>
+            </div>
+        </div>
+        <div class="etym-side">
+            <div class="ec"><div class="ec-l">Traducción literal</div><div class="ec-v">Armazón · Bastidor · Marco</div><div class="ec-d">La estructura que sostiene sin ser vista. El andamiaje invisible que da forma al todo.</div></div>
+            <div class="ec"><div class="ec-l">Traducción filosófica (Heidegger)</div><div class="ec-v">En-framing · Dis-posición</div><div class="ec-d">El modo en que la tecnología encuadra y estructura nuestra relación con la realidad. No es un objeto — es una condición.</div></div>
+            <div class="ec"><div class="ec-l">Obra de referencia</div><div class="ec-v">Die Frage nach der Technik</div><div class="ec-d">Conferencia pronunciada en la Academia Bávara de Bellas Artes, Múnich, 18 de noviembre de 1953. Publicada en <em>Vorträge und Aufsätze</em> (1954).</div></div>
+            <div class="ec"><div class="ec-l">Implicación para la marca</div><div class="ec-v ec-v--accent">La IA como estructura<br>que revela, no que reemplaza</div><div class="ec-d">GESTELL no nombra una herramienta. Nombra el marco que hace visible lo que antes era opaco, que ordena la complejidad sin eliminarla.</div></div>
+        </div>
+    </div>
+
+    <div class="decomp">
+        <div class="decomp-i"><div class="decomp-p cy">Ge–</div><div class="decomp-m">Prefijo colectivo</div><div class="decomp-d">Reúne multiples acciones en una unidad. Indica totalidad, sistema, ecosistema.</div></div>
+        <div class="decomp-i"><div class="decomp-p">–stell–</div><div class="decomp-m">Raíz verbal (stellen)</div><div class="decomp-d">Colocar, disponer, emplazar. La acción de dar estructura y posición a las cosas.</div></div>
+        <div class="decomp-i"><div class="decomp-p">→</div><div class="decomp-m">Síntesis operativa</div><div class="decomp-d">El sistema total que emplaza, ordena y revela. La infraestructura cognitiva de la realidad.</div></div>
+    </div>
+
+    <div class="pq">
+        <blockquote>«Ge-stell heißt das Versammelnde jenes Stellens, das den Menschen stellt, d.h. herausfordert, das Wirkliche in der Weise des Bestellens als Bestand zu entbergen.»</blockquote>
+        <div class="qs">Martin Heidegger · Die Frage nach der Technik · 1953</div>
+        <div class="qt">«Ge-stell significa lo reuniente de aquel emplazar que emplaza al hombre, es decir, lo provoca a hacer salir de lo oculto lo real y efectivo en el modo del encargar como existencias.» — La tecnología no es un instrumento; es el modo en que el mundo se nos presenta como recurso disponible, como sistema ordenable. GESTELL adopta esta premisa y la transforma: la inteligencia sintética no instrumentaliza — <strong>estructura, revela, encuadra.</strong></div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>004</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.1 CONTENIDO — PAGINA 2 DE 2 · NARRATIVA — 005
+     ══════════════════════════════════════════════════════════ -->
+<section class="page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.1 · Página 2 de 2</div>
+    </header>
+
+    <div class="nar-layout">
+        <div class="nar-main">
+            <h3>¿Por qué GESTELL?</h3>
+            <p>La industria de la Inteligencia Artificial (IA) compite por nombrar capacidades—modelos y asistentes — nuestra postura es diferente, escogemos para el nombre de nuestra marca no solo una descripción de lo que el software hace, sino la realidad en la cual se encuentra inmerso.</p>
+            <p>Gestell es un posicionamiento que nombra la esencia de la tecnología como un modo de revelar el Ser: nuestros productos no son solo herramientas que se aplican sobre la realidad, son <strong>infraestructura cognitiva</strong>.</p>
+            <p>Hacemos visible la estructura latente de los datos, los procesos y las regulaciones de forma orgánica, como un sistema que sintetiza lo artificial y lo humano para cambiar la realidad.</p>
+            <h3>La movilización total de recursos</h3>
+            <p>Nuestras dinámicas sociales y modelos económicos tienden cada vez más a reducir todo lo existente a un recurso disponible más, una existencia calculable lista para ser utilizada para nuestros procesos tecnológicos.</p>
+            <p>En GESTELL entendemos esa ortogonalidad dándole <strong>exactitud, transparencia y trazabilidad</strong> al proceso. Entregamos un encuadramiento preciso que convierte volúmenes masivos de datos desordenados en inteligencia sintética que se autogestiona para realizar de forma autónoma los procesos de nuestros clientes.</p>
+            <h3>Del concepto a las soluciones</h3>
+            <p>Las cuatro sub-marcas del ecosistema GESTELL — sus soluciones — extienden la genealogía filosófica y funcionalidad de nuestros modelos de Inteligencia Artificial.</p>
+            <p>Cada una toma su nombre de un concepto que crea una semántica de capacidades y objetivos ejecutados en dominios específicos.</p>
+            <h3>El nombre como manifiesto</h3>
+            <p>En un mercado saturado de acrónimos vacíos y neologismos fabricados, GESTELL elige un nombre que exige ser comprendido. Esa fricción es intencional. El nombre filtra: quien lo entiende, pertenece. Quien lo investiga, descubre la profundidad del sistema que nombra. El nombre no explica la empresa — <strong>la encuadra</strong>.</p>
+        </div>
+        <div class="nar-side">
+            <div class="nar-side-label">Genealogía filosófica</div>
+            <div class="cn hi"><div class="cn-l">Marca maestra</div><div class="cn-t cn-t--featured">GESTELL</div><div class="cn-d">Ge-stell (Heidegger, 1953). El en-framing: la estructura total que revela y ordena lo real. La infraestructura cognitiva.</div></div>
+            <div class="cline"></div>
+            <div class="sg">
+                <div class="sg-c"><div class="sg-n c1">GNOSIS</div><div class="sg-o">γνῶσις — griego: conocimiento</div><div class="sg-d">Conocimiento que se revela a sí mismo. La solución de análisis y comprensión profunda de datos.</div></div>
+                <div class="sg-c"><div class="sg-n c2">TELOS</div><div class="sg-o">τέλος — griego: fin, propósito</div><div class="sg-d">El fin hacia el cual todo se ordena. La solución de cumplimiento regulatorio y auditoría (RegTech).</div></div>
+                <div class="sg-c"><div class="sg-n c3">UMWELT</div><div class="sg-o">alemán: mundo circundante (von Uexküll)</div><div class="sg-d">El entorno perceptivo propio de cada organismo. La solución de agentes de Inteligencia Artificial que automatizan la vida diaria del individuo.</div></div>
+                <div class="sg-c"><div class="sg-n c4">DASEIN</div><div class="sg-o">alemán: ser-ahí (Heidegger)</div><div class="sg-d">La existencia que se comprende a si misma. La solución de infraestructura tecnológica gubernamental y de supervisión (SupTech).</div></div>
+            </div>
+            <div class="ib"><div class="ib-l">Nota de coherencia nominal</div><div class="ib-t">Cada nombre del ecosistema proviene de la tradición filosófica continental (alemana o griega clásica). Esta decisión no es estética — es estructural: garantiza que el sistema de nomenclatura sea <strong>irreducible a tendencias de mercado</strong> y permanezca estable a través de décadas.</div></div>
+            <div class="ib"><div class="ib-l cy">Declaración de origen — comunicaciones externas</div><div class="ib-t">«GESTELL toma su nombre del concepto de Martin Heidegger que describe la esencia de la tecnología: no como instrumento, sino como el marco que revela y estructura la realidad. Nuestra inteligencia Artificial opera como infraestructura cognitiva que encuadra la complejidad institucional en sistemas de ejecución autónoma.»</div><div class="ib-f">APROBADO PARA USO EN: WEB CORPORATIVA · PITCH DECKS · PRENSA · PROPUESTAS COMERCIALES</div></div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>005</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.2 — ESENCIA DE MARCA — 006
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-1" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.2</div>
+        <h1 class="stp__title">Esencia de Marca</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">La Declaración Irreducible — Lo Que GESTELL Es En Su Núcleo</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>006</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.2 CONTENIDO — ESENCIA DE MARCA — 007
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.2 · Página 1 de 1</div>
+    </header>
+
+    <div class="esencia-layout">
+        <div class="esencia-main">
+            <div class="lang-label">Declaración de esencia — Español</div>
+            <h2 class="essence-word">Infraestructura Cognitiva.</h2>
+            <p>GESTELL no es solamente software; es infraestructura cognitiva que revela, ordena y automatiza la realidad operativa de sus clientes mediante el uso de Inteligencia Artificial.</p>
+            <p>Transformamos volúmenes masivos de datos desordenados en inteligencia sintética que se autogestiona para solucionar la complejidad, de manera simple.</p>
+            <p>Esta esencia actúa como el ancla de todas las operaciones, soluciones y comunicaciones. Cada producto, cada agente desplegado, cada interfaz generada opera bajo esta premisa: <strong>hacer visible lo que era opaco, hacer ejecutable lo que era inerte, hacer autónomo lo que era manual.</strong></p>
+
+            <div class="esencia-divider"></div>
+
+            <div class="lang-label">Declaración de esencia — English</div>
+            <h2 class="essence-word">Cognitive Infrastructure.</h2>
+            <p>We are not simply a software company, but orchestrators of synthetic intelligence.</p>
+            <p>By combining the deployment of AI agents, and the organic malleability of human knowledge, we automate highly complex tasks with simplicity.</p>
+            <p>Always evolving to the never-ending changes of the data stream.</p>
+            <p>This essence anchors every operation, solution, and communication. Every product, every deployed agent, every generated interface operates under this premise: <strong>making visible what was opaque, making executable what was inert, making autonomous what was manual.</strong></p>
+
+            <div class="condensed">
+                <div class="condensed-block"><div class="condensed-label">Versión condensada — Español</div><div class="condensed-value">Automatización encuadrada en Inteligencia Artificial.</div></div>
+                <div class="condensed-block"><div class="condensed-label">Versión condensada — English</div><div class="condensed-value">AI enframed automation.</div></div>
+                <div class="condensed-block"><div class="condensed-label">Versión mínima (El Sello)</div><div class="condensed-value cyan">GESTELL // Cognitive Infrastructure</div></div>
+            </div>
+        </div>
+
+        <div class="esencia-side">
+            <div class="esencia-side-label">Mapa jerárquico de esencia</div>
+
+            <div class="hier-core"><div class="hier-core-text">Infraestructura Cognitiva</div></div>
+            <div class="hier-line"></div>
+
+            <div class="hier-level">
+                <div class="hier-level-label">Anillo 1 — Valores</div>
+                <div class="hier-level-items">Innovación · Minimalismo · Organicismo · Exactitud</div>
+            </div>
+            <div class="hier-line"></div>
+
+            <div class="hier-level">
+                <div class="hier-level-label">Anillo 2 — Personalidad</div>
+                <div class="hier-level-items">Visionaria · Trascendente · Precisa</div>
+            </div>
+            <div class="hier-line"></div>
+
+            <div class="hier-level">
+                <div class="hier-level-label">Anillo 3 — Soluciones</div>
+                <div class="hier-level-items">
+                    <span class="hl-gnosis">GNOSIS</span> (Análisis) · <span class="hl-telos">TELOS</span> (RegTech) · <span class="hl-umwelt">UMWELT</span> (Agentes IA) · <span class="hl-dasein">DASEIN</span> (SupTech)
+                </div>
+            </div>
+            <div class="hier-line"></div>
+
+            <div class="hier-level">
+                <div class="hier-level-label">Anillo 4 — Promesa</div>
+                <div class="hier-level-items">Encuadramiento preciso de la complejidad autogestionada por Inteligencia Artificial</div>
+            </div>
+
+            <div class="ib">
+                <div class="ib-l">Nota de evolución</div>
+                <div class="ib-t">La esencia anterior (<strong>«Inteligencia Sintética»</strong>) se mantiene como término válido en contextos técnicos e internos. <strong>«Infraestructura Cognitiva»</strong> se adopta como esencia de marca porque describe no solo lo que GESTELL produce, sino lo que GESTELL es: un marco estructural, no un producto.</div>
+            </div>
+
+            <div class="ib">
+                <div class="ib-l cy">Regla de uso</div>
+                <div class="ib-t">La declaración de esencia completa se utiliza en <strong>documentos estratégicos, pitch decks</strong> y la sección «Sobre Nosotros» de la web. La versión condensada se usa en <strong>firmas de correo, bios de redes sociales</strong> y headers de propuestas. El sello mínimo se reserva para <strong>lockups de marca</strong> y favicon tooltips.</div>
+            </div>
+
+            <div class="esencia-side-spacer"></div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>007</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.3 — PROPÓSITO — 008
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-2" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.3</div>
+        <h1 class="stp__title">Propósito</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Declaración Operativa · Descomposición Semántica</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>008</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.3 CONTENIDO — PROPÓSITO — 009
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--proposito">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.3 · Página 1 de 1</div>
+    </header>
+
+    <!-- HEAVEN -->
+    <div class="heaven">
+        <h2 class="frase-es">
+            Movilizamos la realidad<br>
+            encuadrándola en sistemas<br>
+            de Inteligencia Artificial.
+        </h2>
+        <p class="frase-en">We mobilize reality, enframing it in Artificial Intelligence systems.</p>
+    </div>
+
+    <!-- SCANLINE -->
+    <div class="scanline"></div>
+
+    <!-- HELL -->
+    <div class="hell">
+        <div class="hell-label-open">Anatomía del propósito — Descomposición semántica</div>
+
+        <div class="hell-stream">
+            <strong>MOVILIZAMOS</strong> — No «queremos» ni «buscamos». Declaración de estado, no de intención. Volvemos al medio ambiente un activo.<span class="sep sep-telos">|</span><strong>REALIDAD</strong> — Nuestro teatro de operaciones. Datos, infraestructura, documentos, ideas y formas de vida.<span class="sep sep-umwelt">|</span><strong>ENCUADRAR</strong> — El verbo de Gestell. No simplificamos, no resolvemos, no optimizamos: encuadramos. Damos estructura visible a lo que antes era caótico poniéndolo al servicio de nuestros usuarios.<span class="sep sep-dasein">|</span><strong>SISTEMAS DE INTELIGENCIA ARTIFICIAL</strong> — Nuestro dominio. No trabajamos solamente con herramientas o con aplicativos. Operamos con la totalidad del medio ambiente de nuestros clientes: sus regulaciones, sus datos, sus procesos gestionados de forma autónoma por agentes de Inteligencia Artificial.
+        </div>
+
+        <div class="hell-label-close">Fin de transmisión</div>
+
+        <div class="singulo-end"></div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>009</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.4 — VISIÓN Y MISIÓN — 010
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-3" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.4</div>
+        <h1 class="stp__title">Visión y Misión</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">El Horizonte · La Operación · Principios de Construcción</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>010</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.4 CONTENIDO — VISIÓN Y MISIÓN — 011
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--vision">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.4 · Página 1 de 1</div>
+    </header>
+
+    <!-- HEAVEN — VISIÓN -->
+    <div class="heaven--vision">
+        <div class="zone-label">Visión — El horizonte (10 años)</div>
+        <h2 class="frase-main">
+            Ser el sistema de productos de Inteligencia Artificial dominante en la automatización de procesos en industrias y actividades altamente reguladas.
+        </h2>
+        <p class="frase-en--sm">Be the dominant system of Artificial Intelligence products that automate processes in highly regulated industries and activities.</p>
+        <div class="word-count">20 palabras ES · 17 palabras EN</div>
+    </div>
+
+    <!-- SCANLINE -->
+    <div class="scanline"></div>
+
+    <!-- HELL — MISIÓN -->
+    <div class="hell--vision">
+        <div class="hell--vision-main">
+            <div class="zone-label">Misión — La operación (hoy)</div>
+            <h2 class="frase-main">
+                Desplegamos agentes de Inteligencia Artificial que encuadran la complejidad que enfrentan nuestros clientes en sistemas que automatizan sus actividades diarias.
+            </h2>
+            <p class="frase-en--sm">We deploy Artificial Intelligence agents that enframe the complexity faced by our clients into systems that automate their daily activities.</p>
+            <div class="word-count">20 palabras ES · 20 palabras EN</div>
+        </div>
+
+        <!-- PRINCIPIOS DE CONSTRUCCIÓN -->
+        <div class="hell-principles">
+            <div class="principles-label">Principios de construcción</div>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-title cy">Sobre la Visión</div>
+                    <div class="principle-desc">No dice «queremos ser» ni «aspiramos a». Dice «ser» — presente infinitivo como destino inevitable, no como deseo. La visión nombra el rol que GESTELL ocupará en la economía global: infraestructura cognitiva no solo para instituciones que mueven mercados, representan industrias y gobiernan datos sino también para personas que día a día enfrentan retos regulatorios y supervisión gubernamental.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-title cy">Sobre la Misión</div>
+                    <div class="principle-desc">No describe la empresa — describe la acción diaria. Utilizamos la tecnología para transformar la realidad de nuestros clientes, utilizando su medio ambiente como un activo a automatizar.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-title">Regla de uso</div>
+                    <div class="principle-desc">Visión y Misión se presentan siempre juntas, nunca por separado. Se usan en: página «Sobre Nosotros» de la web, apertura de reportes anuales, slide 2 de pitch decks institucionales, documentos de onboarding. Nunca se parafrasean — se citan textual o no se usan.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>011</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.5 — VALORES FUNDACIONALES — 012
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-4" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.5</div>
+        <h1 class="stp__title">Valores Fundacionales</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">La Axiología de GESTELL — Lo Que Hacemos y Lo Que No Hacemos</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>012</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.5 CONTENIDO — PÁGINA 1 DE 2 · INNOVACIÓN & SIMPLICIDAD — 013
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.5 · Página 1 de 2</div>
+    </header>
+
+    <div class="page-content">
+        <!-- INNOVACIÓN -->
+        <div class="value-card c-gnosis">
+            <h2 class="value-name c-gnosis">Innovación</h2>
+            <div class="value-def">Creamos nuevas realidades usando herramientas de Inteligencia Artificial (IA).</div>
+            <div class="do-dont">
+                <div class="do-col">
+                    <div class="col-label">Hacemos esto</div>
+                    <div class="col-item">Desarrollamos soluciones únicas, incorporando conocimiento científico «cross-domain».</div>
+                    <div class="col-item">La estética de nuestro UX/UI incorpora los conceptos científicos más avanzados llevando al usuario a una nueva realidad.</div>
+                    <div class="col-item">Nuestras soluciones están adelantadas varios años a las capacidades de nuestra competencia.</div>
+                </div>
+                <div class="dont-col">
+                    <div class="col-label">No hacemos esto</div>
+                    <div class="col-item">No seguimos tendencias de mercado — las establecemos.</div>
+                    <div class="col-item">No ofrecemos la solución mínimamente viable, siempre lo más avanzado.</div>
+                    <div class="col-item">No nos conformamos con la ortodoxia tecnológica.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIMPLICIDAD -->
+        <div class="value-card c-telos">
+            <h2 class="value-name c-telos">Simplicidad</h2>
+            <div class="value-def">Sistemas inteligentes de funcionamiento sencillo.</div>
+            <div class="do-dont">
+                <div class="do-col">
+                    <div class="col-label">Hacemos esto</div>
+                    <div class="col-item">Eliminamos cada elemento que no sea estructuralmente necesario en nuestras soluciones.</div>
+                    <div class="col-item">Diseñamos interfaces donde la complejidad se vuelve invisible para nuestros clientes.</div>
+                    <div class="col-item">Ejecutamos procesos con la intervención mínima del usuario, máximo de automatización posible.</div>
+                </div>
+                <div class="dont-col">
+                    <div class="col-label">No hacemos esto</div>
+                    <div class="col-item">No agregamos funcionalidades por tendencias del mercado — solo por necesidad operativa.</div>
+                    <div class="col-item">No confundimos simplicidad funcional con ausencia — nuestros sistemas son complejos por dentro, sencillos por fuera.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>013</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.5 CONTENIDO — PÁGINA 2 DE 2 · EVOLUCIÓN & EXCELENCIA — 014
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.5 · Página 2 de 2</div>
+    </header>
+
+    <div class="page-content">
+        <!-- EVOLUCIÓN -->
+        <div class="value-card c-umwelt">
+            <h2 class="value-name c-umwelt">Evolución</h2>
+            <div class="value-def">Adaptamos nuestra operación a los últimos avances tecnológicos.</div>
+            <div class="do-dont">
+                <div class="do-col">
+                    <div class="col-label">Hacemos esto</div>
+                    <div class="col-item">Nuestros sistemas evolucionan con los datos, sin intervención manual.</div>
+                    <div class="col-item">Incorporamos avances tecnológicos en semanas, no en trimestres.</div>
+                    <div class="col-item">Tratamos el medio ambiente del cliente como un organismo vivo, no como una máquina estática.</div>
+                    <div class="col-item">Integramos al cliente al avance tecnológico, una unidad sintética.</div>
+                </div>
+                <div class="dont-col">
+                    <div class="col-label">No hacemos esto</div>
+                    <div class="col-item">No desplegamos sistemas estáticos que requieran actualizaciones lentas y programadas con antelación.</div>
+                    <div class="col-item">No forzamos al cliente a adaptarse a nosotros — nosotros nos adaptamos a su ecosistema.</div>
+                    <div class="col-item">No separamos lo técnico de lo humano — lo sintetizamos.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXCELENCIA -->
+        <div class="value-card c-dasein">
+            <h2 class="value-name c-dasein">Excelencia</h2>
+            <div class="value-def">Productos tecnológicos llevados a la perfección.</div>
+            <div class="do-dont">
+                <div class="do-col">
+                    <div class="col-label">Hacemos esto</div>
+                    <div class="col-item">Cada dato procesado por nuestros agentes es trazable y auditable.</div>
+                    <div class="col-item">Calibramos nuestros modelos contra estándares regulatorios, no contra benchmarks genéricos.</div>
+                    <div class="col-item">Medimos todo: precisión, recall, latencia, compliance rate.</div>
+                </div>
+                <div class="dont-col">
+                    <div class="col-label">No hacemos esto</div>
+                    <div class="col-item">No toleramos aproximaciones — cada output tiene certeza documentada.</div>
+                    <div class="col-item">No usamos lenguaje probabilístico donde se requiere determinismo.</div>
+                    <div class="col-item">No entregamos sin validación — cada resultado pasa por auditoría HITL.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>014</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.6 — PERSONALIDAD DE MARCA — 015
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-5" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.6</div>
+        <h1 class="stp__title">Personalidad de Marca</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Cómo Se Comporta GESTELL En El Mundo — Tres Rasgos Que Gobiernan Toda Expresión</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>015</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.6 CONTENIDO — PERSONALIDAD DE MARCA — 016
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.6 · Página 1 de 1</div>
+    </header>
+
+    <div class="page-content">
+
+        <!-- VISIONARIA -->
+        <div class="trait-card">
+            <h2 class="trait-name">Visionaria</h2>
+            <div class="trait-def">Anticipamos los cambios tecnológicos antes de que el mercado los reconozca.</div>
+            <div class="somos-grid">
+                <div class="somos-col">
+                    <div class="col-label">Somos esto</div>
+                    <div class="col-item">Hablamos del futuro como si ya hubiéramos estado ahí.</div>
+                    <div class="col-item">Presentamos soluciones para problemas que la industria aún no ha nombrado.</div>
+                    <div class="col-item">Nuestra comunicación abre ventanas a posibilidades que el cliente no sabía que existían.</div>
+                </div>
+                <div class="no-somos-col">
+                    <div class="col-label">No somos esto</div>
+                    <div class="col-item">No somos especulativos — cada visión tiene ingeniería detrás.</div>
+                    <div class="col-item">No somos utópicos — nuestro futuro es ejecutable hoy.</div>
+                    <div class="col-item">No somos profetas — somos ingenieros que construyen con ciencia.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRASCENDENTE -->
+        <div class="trait-card">
+            <h2 class="trait-name">Trascendente</h2>
+            <div class="trait-def">Incrementamos la capacidad operativa de nuestros clientes más allá de su potencial.</div>
+            <div class="somos-grid">
+                <div class="somos-col">
+                    <div class="col-label">Somos esto</div>
+                    <div class="col-item">Nuestros clientes operan en un nivel de eficiencia exponencial después de usar nuestras soluciones.</div>
+                    <div class="col-item">Cada interacción con nuestra marca deja la impresión de que hay algo más grande detrás.</div>
+                    <div class="col-item">No vendemos software — transferimos una capacidad que transforma a la persona o la organización que nos contrata.</div>
+                </div>
+                <div class="no-somos-col">
+                    <div class="col-label">No somos esto</div>
+                    <div class="col-item">No somos grandilocuentes — nuestra trascendencia se mide en resultados, no en discursos.</div>
+                    <div class="col-item">No somos místicos — somos técnicamente rigurosos con impacto que excede lo técnico.</div>
+                    <div class="col-item">No somos inaccesibles — trascendente no significa distante.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRECISA -->
+        <div class="trait-card">
+            <h2 class="trait-name">Precisa</h2>
+            <div class="trait-def">Nos regimos por diseño y funcionalidad de software exacto, ni más ni menos de lo necesario para nuestros clientes.</div>
+            <div class="somos-grid">
+                <div class="somos-col">
+                    <div class="col-label">Somos esto</div>
+                    <div class="col-item">Cada palabra en nuestra comunicación fue elegida, no improvisada.</div>
+                    <div class="col-item">Cada línea de código tiene justificación documentada.</div>
+                    <div class="col-item">Nuestras interfaces tienen cero elementos decorativos — todo es funcional.</div>
+                </div>
+                <div class="no-somos-col">
+                    <div class="col-label">No somos esto</div>
+                    <div class="col-item">No somos fríos — la precisión es nuestra forma de respeto al cliente.</div>
+                    <div class="col-item">No somos rígidos — somos exactos.</div>
+                    <div class="col-item">No somos minimalistas, somos eficientes.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>016</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.7 — PRINCIPIO ORGANIZADOR — 017
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-6" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.7</div>
+        <h1 class="stp__title">Principio Organizador</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">La Plataforma Estratégica Que Gobierna Toda Decisión de Marca</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>017</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.7 CONTENIDO — PRINCIPIO ORGANIZADOR — 018
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.7 · Página 1 de 1</div>
+    </header>
+
+    <!-- MONUMENTAL ZONE -->
+    <div class="monumental">
+        <h2 class="principio-es">«En GESTELL creamos nuevas realidades usando herramientas de Inteligencia Artificial. Nuestros sistemas se integran de manera autónoma y precisa a la complejidad de la vida de nuestros clientes, resolviendo sus problemáticas diarias y potencializando sus capacidades tecnológicas.»</h2>
+
+        <div class="mono-divider"></div>
+
+        <p class="principio-en">«We assemble new worlds through the use of Artificial Intelligence. Our cognitive systems integrate themselves into the daily complexity of our clients' lives, automating their processes and their technological capabilities.»</p>
+
+        <div class="condensed-row">
+            <div><div class="condensed-label">ES</div><div class="condensed-value">Creamos nuevos mundos usando Inteligencia Artificial.</div></div>
+            <div class="condensed-divider"></div>
+            <div><div class="condensed-label">EN</div><div class="condensed-value">We assemble new worlds through Artificial Intelligence.</div></div>
+        </div>
+    </div>
+
+    <!-- TEST & RULE -->
+    <div class="bottom-zone">
+        <div class="zone-label">Test de decisión</div>
+        <div class="test-grid">
+            <div class="test-card">
+                <div class="test-q">¿Esto crea una nueva realidad para nuestro cliente?</div>
+                <div class="test-a">Si no transforma, no se hace.</div>
+            </div>
+            <div class="test-card">
+                <div class="test-q">¿Se integra de manera autónoma a su complejidad?</div>
+                <div class="test-a">Si requiere supervisión constante, se rediseña.</div>
+            </div>
+            <div class="test-card">
+                <div class="test-q">¿Resuelve una problemática diaria concreta?</div>
+                <div class="test-a">Si es abstracto o teórico, no se lanza.</div>
+            </div>
+            <div class="test-card">
+                <div class="test-q">¿Potencializa una capacidad tecnológica existente?</div>
+                <div class="test-a">Si reemplaza en lugar de elevar, se replantea.</div>
+            </div>
+        </div>
+        <div class="rule-block">
+            <div class="rule-label">Regla de uso</div>
+            <div class="rule-text">El Principio Organizador se presenta siempre como cita monumental entre comillas francesas (« »). Nunca se parafrasea. Se usa en: apertura de documentos estratégicos, cierre de pitch decks, firma de manifiestos internos, primera página de reportes trimestrales.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>018</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.8 — POSICIONAMIENTO COMPETITIVO — 019
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-7" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.8</div>
+        <h1 class="stp__title">Posicionamiento<br>Competitivo</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Dónde Se Ubica GESTELL En El Mapa de La Industria — Y Por Qué Ese Espacio Es Solo Nuestro</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>019</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.8 CONTENIDO — POSICIONAMIENTO COMPETITIVO — 020
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.8 · Página 1 de 1</div>
+    </header>
+
+    <!-- MANHATTAN PLOT -->
+    <div class="chart-container">
+        <svg class="chart-svg" viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#FAFAF8" stroke-width="0.3" opacity="0.06">
+                <line x1="40" y1="50" x2="600" y2="50"/><line x1="40" y1="90" x2="600" y2="90"/>
+                <line x1="40" y1="130" x2="600" y2="130"/><line x1="40" y1="170" x2="600" y2="170"/>
+                <line x1="120" y1="20" x2="120" y2="210"/><line x1="220" y1="20" x2="220" y2="210"/>
+                <line x1="320" y1="20" x2="320" y2="210"/><line x1="420" y1="20" x2="420" y2="210"/>
+                <line x1="520" y1="20" x2="520" y2="210"/>
+            </g>
+            <rect x="40" y="20" width="560" height="190" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+            <line x1="40" y1="210" x2="600" y2="210" stroke="#AAAAAA" stroke-width="0.5"/>
+            <text x="130" y="228" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA" letter-spacing="2" font-weight="700">SOLUCIÓN PUNTUAL</text>
+            <text x="330" y="228" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA" letter-spacing="2" font-weight="700">SISTEMA INTEGRADO</text>
+            <text x="540" y="228" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA" letter-spacing="2" font-weight="700">INFRAESTRUCTURA HOLÍSTICA</text>
+            <text x="15" y="120" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5.5" fill="#AAAAAA" letter-spacing="1" transform="rotate(-90 15 120)">PROFUNDIDAD DE CAPACIDAD</text>
+            <rect x="62" y="135" width="36" height="75" fill="#A4133C" opacity="0.85"/>
+            <text x="80" y="250" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#F26B8A" letter-spacing="0.5">NICE</text>
+            <text x="80" y="259" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#F26B8A" letter-spacing="0.5">ACTIMIZE</text>
+            <rect x="118" y="115" width="40" height="95" fill="#A4133C" opacity="0.85"/>
+            <text x="138" y="252" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7.5" font-weight="700" fill="#F26B8A" letter-spacing="0.5">LEXISNEXIS</text>
+            <rect x="180" y="125" width="40" height="85" fill="#7B3FA0" opacity="0.85"/>
+            <text x="200" y="252" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7.5" font-weight="700" fill="#B99BD6" letter-spacing="0.5">REGNOLOGY</text>
+            <rect x="262" y="120" width="50" height="90" fill="#FF0066" opacity="0.85"/>
+            <text x="287" y="250" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#FF80AA" letter-spacing="0.5">MICROSOFT</text>
+            <text x="287" y="259" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#FF80AA" letter-spacing="0.5">COPILOT</text>
+            <rect x="340" y="95" width="50" height="115" fill="#00D4FF" opacity="0.85"/>
+            <text x="365" y="252" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7.5" font-weight="700" fill="#00D4FF" letter-spacing="0.5">DATABRICKS</text>
+            <rect x="418" y="135" width="58" height="75" fill="#00D4FF" opacity="0.85"/>
+            <rect x="418" y="65" width="58" height="70" fill="#7B3FA0" opacity="0.85"/>
+            <text x="447" y="252" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7.5" font-weight="700" fill="#B99BD6" letter-spacing="0.5">PALANTIR</text>
+            <rect x="510" y="155" width="82" height="55" fill="#00D4FF" opacity="0.9"/>
+            <rect x="510" y="100" width="82" height="55" fill="#A4133C" opacity="0.9"/>
+            <rect x="510" y="45" width="82" height="55" fill="#FF0066" opacity="0.9"/>
+            <rect x="510" y="-10" width="82" height="55" fill="#7B3FA0" opacity="0.9"/>
+            <text x="551" y="132" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="9" font-weight="700" fill="#FAFAF8" letter-spacing="3">GESTELL</text>
+            <text x="551" y="252" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" fill="#FAFAF8" letter-spacing="1">INFRAESTRUCTURA</text>
+            <text x="551" y="261" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" fill="#FAFAF8" letter-spacing="1">COGNITIVA AUTÓNOMA</text>
+            <line x1="551" y1="8" x2="551" y2="0" stroke="#FAFAF8" stroke-width="0.8"/>
+            <polygon points="547,4 551,-2 555,4" fill="#FAFAF8" opacity="0.6"/>
+            <text x="565" y="10" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" fill="#AAAAAA" letter-spacing="1">↑ EXCEDE</text>
+        </svg>
+    </div>
+
+    <!-- LEGENDS (zero inline styles) -->
+    <div class="legends">
+        <div class="legend-block">
+            <div class="legend-title">Leyenda de color — Territorios GESTELL</div>
+            <div class="legend-item"><div class="legend-dot legend-dot--gnosis"></div><div class="legend-text"><span class="lt-gnosis">GNOSIS</span> — Análisis y comprensión de datos</div></div>
+            <div class="legend-item"><div class="legend-dot legend-dot--telos"></div><div class="legend-text"><span class="lt-telos">TELOS</span> — Cumplimiento regulatorio (RegTech)</div></div>
+            <div class="legend-item"><div class="legend-dot legend-dot--umwelt"></div><div class="legend-text"><span class="lt-umwelt">UMWELT</span> — Agentes IA de vida diaria</div></div>
+            <div class="legend-item"><div class="legend-dot legend-dot--dasein"></div><div class="legend-text"><span class="lt-dasein">DASEIN</span> — Infraestructura gubernamental (SupTech)</div></div>
+        </div>
+        <div class="legend-block">
+            <div class="legend-title">Cómo leer este diagrama</div>
+            <div class="legend-reading">La altura representa profundidad de capacidad. El ancho representa amplitud de cobertura. Los segmentos de color indican los territorios de GESTELL con los que cada competidor se solapa. GESTELL es el único sistema que integra los cuatro territorios — su barra excede el marco del gráfico porque su alcance excede los límites del mapa.</div>
+        </div>
+    </div>
+
+    <!-- DESCRIPTORS -->
+    <div class="desc-zone">
+        <div class="desc-label">Descriptores competitivos</div>
+        <div class="desc-grid">
+            <div class="desc-card highlight">
+                <div class="desc-name cy">GESTELL</div>
+                <div class="desc-text">Infraestructura cognitiva autónoma para industrias reguladas, gobierno, enterprise y vida diaria. 4 soluciones integradas en un sistema holístico.</div>
+            </div>
+            <div class="desc-card">
+                <div class="desc-name gray">LexisNexis</div>
+                <div class="desc-text">Compliance y screening regulatorio. Solución puntual para AML/KYC.</div>
+            </div>
+            <div class="desc-card">
+                <div class="desc-name gray">NICE Actimize</div>
+                <div class="desc-text">Automatización de crimen financiero. Especializado pero no holístico.</div>
+            </div>
+            <div class="desc-card">
+                <div class="desc-name gray">Palantir</div>
+                <div class="desc-text">Integración de datos a escala para gobierno y enterprise. Holístico pero sin autonomía regulatoria.</div>
+            </div>
+            <div class="desc-card">
+                <div class="desc-name gray">Databricks</div>
+                <div class="desc-text">Plataforma de datos con IA. Generalista, sin capa regulatoria.</div>
+            </div>
+            <div class="desc-card">
+                <div class="desc-name gray">Regnology</div>
+                <div class="desc-text">SupTech para supervisores financieros. Especializado pero sin agentes autónomos.</div>
+            </div>
+            <div class="desc-card">
+                <div class="desc-name gray">Microsoft Copilot</div>
+                <div class="desc-text">Asistente IA para productividad general. Sin profundidad regulatoria ni autonomía.</div>
+            </div>
+        </div>
+        <div class="rule-block">
+            <div class="rule-label">Regla de uso</div>
+            <div class="rule-text">El mapa se actualiza trimestralmente. Nunca se denigra a un competidor — se describe con precisión factual. GESTELL no se posiciona contra otros — se posiciona en un espacio que los demás no ocupan. Los colores de singularidad representan nuestro territorio, nunca al competidor.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>020</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.9 — PERFILES DE AUDIENCIA OBJETIVO — 021
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-8" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.9</div>
+        <h1 class="stp__title">Perfiles de Audiencia<br>Objetivo</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Los 4 Perfiles de Cliente Ideal — Uno Por Cada Solución del Ecosistema GESTELL</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>021</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.9 CONTENIDO — PÁGINA 1 DE 3 · GRAFO CONCÉNTRICO — 022
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.9 · Página 1 de 3</div>
+    </header>
+
+    <div class="graph-zone">
+        <svg class="graph-svg" viewBox="0 0 540 400" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="270" cy="200" r="75" fill="none" stroke="#FAFAF8" stroke-width="0.4" opacity="0.08"/>
+            <circle cx="270" cy="200" r="145" fill="none" stroke="#FAFAF8" stroke-width="0.3" opacity="0.06"/>
+            <circle cx="270" cy="200" r="195" fill="none" stroke="#FAFAF8" stroke-width="0.3" opacity="0.04"/>
+            <text x="270" y="137" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" fill="#AAAAAA" letter-spacing="3" opacity="0.5">SOLUCIONES</text>
+            <text x="270" y="67" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" fill="#AAAAAA" letter-spacing="3" opacity="0.5">PERFILES</text>
+            <text x="270" y="17" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" fill="#AAAAAA" letter-spacing="3" opacity="0.5">VERTICALES</text>
+            <line x1="296" y1="200" x2="345" y2="200" stroke="#00D4FF" stroke-width="0.6" opacity="0.4"/>
+            <line x1="270" y1="170" x2="270" y2="125" stroke="#A4133C" stroke-width="0.6" opacity="0.4"/>
+            <line x1="270" y1="250" x2="270" y2="275" stroke="#FF0066" stroke-width="0.6" opacity="0.4"/>
+            <line x1="244" y1="200" x2="195" y2="200" stroke="#7B3FA0" stroke-width="0.6" opacity="0.4"/>
+            <line x1="345" y1="200" x2="395" y2="130" stroke="#00D4FF" stroke-width="0.5" opacity="0.3"/>
+            <line x1="270" y1="125" x2="155" y2="95" stroke="#A4133C" stroke-width="0.5" opacity="0.3"/>
+            <line x1="270" y1="275" x2="390" y2="305" stroke="#FF0066" stroke-width="0.5" opacity="0.3"/>
+            <line x1="195" y1="200" x2="135" y2="290" stroke="#7B3FA0" stroke-width="0.5" opacity="0.3"/>
+            <line x1="395" y1="130" x2="465" y2="95" stroke="#00D4FF" stroke-width="0.4" opacity="0.25"/>
+            <line x1="395" y1="130" x2="465" y2="165" stroke="#00D4FF" stroke-width="0.4" opacity="0.25"/>
+            <line x1="155" y1="95" x2="80" y2="35" stroke="#A4133C" stroke-width="0.4" opacity="0.25"/>
+            <line x1="155" y1="95" x2="80" y2="100" stroke="#A4133C" stroke-width="0.4" opacity="0.25"/>
+            <line x1="390" y1="305" x2="455" y2="335" stroke="#FF0066" stroke-width="0.4" opacity="0.25"/>
+            <line x1="390" y1="305" x2="445" y2="380" stroke="#FF0066" stroke-width="0.4" opacity="0.25"/>
+            <line x1="135" y1="290" x2="65" y2="310" stroke="#7B3FA0" stroke-width="0.4" opacity="0.25"/>
+            <line x1="135" y1="290" x2="75" y2="370" stroke="#7B3FA0" stroke-width="0.4" opacity="0.25"/>
+            <line x1="345" y1="200" x2="390" y2="305" stroke="#FAFAF8" stroke-width="0.2" opacity="0.06"/>
+            <line x1="270" y1="125" x2="395" y2="130" stroke="#FAFAF8" stroke-width="0.2" opacity="0.06"/>
+            <line x1="195" y1="200" x2="155" y2="95" stroke="#FAFAF8" stroke-width="0.2" opacity="0.06"/>
+            <line x1="270" y1="275" x2="135" y2="290" stroke="#FAFAF8" stroke-width="0.2" opacity="0.06"/>
+            <circle cx="80" cy="35" r="2.5" fill="#A4133C"/>
+            <text x="80" y="25" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA">LFPIORPI</text>
+            <circle cx="80" cy="100" r="2.5" fill="#A4133C"/>
+            <text x="80" y="115" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA">Medicina · Oil &amp; Gas</text>
+            <circle cx="465" cy="95" r="2.5" fill="#00D4FF"/>
+            <text x="465" y="85" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA">Enterprise</text>
+            <circle cx="465" cy="165" r="2.5" fill="#00D4FF"/>
+            <text x="465" y="180" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA">Data a escala</text>
+            <circle cx="455" cy="335" r="2.5" fill="#FF0066"/>
+            <text x="455" y="325" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA">Legal · Contable</text>
+            <circle cx="445" cy="380" r="2.5" fill="#FF0066"/>
+            <text x="445" y="395" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA">Freelancer · PYME</text>
+            <circle cx="65" cy="310" r="2.5" fill="#7B3FA0"/>
+            <text x="65" y="300" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA">Supervisores fin.</text>
+            <circle cx="75" cy="370" r="2.5" fill="#7B3FA0"/>
+            <text x="75" y="385" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA">Bancos centrales</text>
+            <circle cx="395" cy="130" r="5" fill="#0A0A0A" stroke="#00D4FF" stroke-width="1.2"/>
+            <text x="395" y="120" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#00D4FF">CTO / CDO</text>
+            <circle cx="155" cy="95" r="5" fill="#0A0A0A" stroke="#A4133C" stroke-width="1.2"/>
+            <text x="155" y="82" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#F26B8A">Oficial PLD</text>
+            <circle cx="390" cy="305" r="5" fill="#0A0A0A" stroke="#FF0066" stroke-width="1.2"/>
+            <text x="390" y="295" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#FF80AA">Profesional ind.</text>
+            <circle cx="135" cy="290" r="5" fill="#0A0A0A" stroke="#7B3FA0" stroke-width="1.2"/>
+            <text x="135" y="280" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#B99BD6">Dir. Supervisión</text>
+            <circle cx="345" cy="200" r="7" fill="#0A0A0A" stroke="#00D4FF" stroke-width="1.5"/>
+            <text x="345" y="203" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5.5" font-weight="700" fill="#00D4FF">G</text>
+            <circle cx="270" cy="125" r="7" fill="#0A0A0A" stroke="#A4133C" stroke-width="1.5"/>
+            <text x="270" y="128" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5.5" font-weight="700" fill="#F26B8A">T</text>
+            <circle cx="270" cy="275" r="7" fill="#0A0A0A" stroke="#FF0066" stroke-width="1.5"/>
+            <text x="270" y="278" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5.5" font-weight="700" fill="#FF80AA">U</text>
+            <circle cx="195" cy="200" r="7" fill="#0A0A0A" stroke="#7B3FA0" stroke-width="1.5"/>
+            <text x="195" y="203" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5.5" font-weight="700" fill="#B99BD6">D</text>
+            <text x="362" y="188" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7.5" font-weight="700" fill="#00D4FF" letter-spacing="1">GNOSIS</text>
+            <text x="270" y="115" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7.5" font-weight="700" fill="#F26B8A" letter-spacing="1">TELOS</text>
+            <text x="270" y="290" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7.5" font-weight="700" fill="#FF80AA" letter-spacing="1">UMWELT</text>
+            <text x="178" y="188" text-anchor="end" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7.5" font-weight="700" fill="#B99BD6" letter-spacing="1">DASEIN</text>
+            <g transform="translate(220, 154) scale(0.2)">
+                <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                    <path d="M250 230 A180 180 0 0 1 450 230"/><path d="M250 230 A180 180 0 0 1 391.4 371.4"/>
+                    <path d="M250 230 A180 180 0 0 1 250 430"/><path d="M250 230 A180 180 0 0 1 108.6 371.4"/>
+                    <path d="M250 230 A180 180 0 0 1 50 230"/><path d="M250 230 A180 180 0 0 1 108.6 88.6"/>
+                    <path d="M250 230 A180 180 0 0 1 250 30"/><path d="M250 230 A180 180 0 0 1 391.4 88.6"/>
+                </g>
+                <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160" fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+                <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+            </g>
+            <text x="270" y="242" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#FAFAF8" letter-spacing="4">GESTELL</text>
+        </svg>
+    </div>
+
+    <div class="reading-bar">
+        <div class="reading-text">4 audiencias, 4 soluciones, 1 ecosistema. Cada anillo expande el alcance: del núcleo GESTELL a las soluciones, de las soluciones a los perfiles de cliente ideal, de los perfiles a las verticales de industria. La densidad de la red demuestra la cobertura que ningún competidor replica.</div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>022</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.9 CONTENIDO — PÁGINA 2 DE 3 · TELOS + GNOSIS — 023
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.9 · Página 2 de 3</div>
+    </header>
+
+    <div class="page-content">
+        <div class="icp-card c-telos">
+            <div class="icp-solution c-telos">ICP 1 — TELOS (RegTech)</div>
+            <h2 class="icp-title c-telos">Oficial de Cumplimiento / Responsable PLD</h2>
+            <div class="icp-fields">
+                <div class="icp-field full"><div class="field-label">Industria</div><div class="field-value">Actividades vulnerables a lavado de dinero y financiamiento al terrorismo (LFPIORPI): inmobiliarias, joyerías, notarías, casas de empeño, comercio de arte, concesionarios de autos, blindaje. En segundo nivel: industrias altamente reguladas no financieras — medicina, armamento, oil &amp; gas.</div></div>
+                <div class="icp-field"><div class="field-label">Dolor</div><div class="field-value">Obligaciones regulatorias complejas que cambian constantemente. Riesgo de multas y sanciones por incumplimiento. Equipos pequeños que no pueden procesar manualmente el volumen de reportes y avisos requeridos.</div></div>
+                <div class="icp-field"><div class="field-label">Motivación</div><div class="field-value">Automatizar el cumplimiento regulatorio con certeza auditable. Reducir exposición legal. Pasar de reactivo a predictivo en compliance.</div></div>
+                <div class="icp-field"><div class="field-label">Objeción más fuerte</div><div class="field-value">«¿Puede un sistema de IA realmente cumplir con los estándares de mi regulador sin intervención humana?»</div></div>
+                <div class="icp-field"><div class="field-label">Canal preferido</div><div class="field-value">Presentaciones ejecutivas directas, white papers técnicos, conferencias de prevención de lavado de dinero, asociaciones gremiales del sector.</div></div>
+            </div>
+        </div>
+
+        <div class="icp-card c-gnosis">
+            <div class="icp-solution c-gnosis">ICP 2 — GNOSIS (Análisis de datos)</div>
+            <h2 class="icp-title c-gnosis">CTO / Chief Data Officer</h2>
+            <div class="icp-fields">
+                <div class="icp-field full"><div class="field-label">Industria</div><div class="field-value">Todo tipo de empresa que genera o consume datos a escala.</div></div>
+                <div class="icp-field"><div class="field-label">Dolor</div><div class="field-value">Datos fragmentados en múltiples sistemas que no se comunican. Incapacidad de obtener una vista consolidada. Reportes manuales que llegan tarde y con errores.</div></div>
+                <div class="icp-field"><div class="field-label">Motivación</div><div class="field-value">Un consolidador inteligente que valide, concilie, integre y visualice datos de todas las fuentes en un solo sistema. Decisiones basadas en datos en tiempo real.</div></div>
+                <div class="icp-field"><div class="field-label">Objeción más fuerte</div><div class="field-value">«Ya tenemos un data lake y herramientas de BI. ¿Por qué necesitamos otra capa?»</div></div>
+                <div class="icp-field"><div class="field-label">Canal preferido</div><div class="field-value">Demos técnicos, GitHub, documentación de API, conferencias de data engineering.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>023</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.9 CONTENIDO — PÁGINA 3 DE 3 · UMWELT + DASEIN — 024
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.9 · Página 3 de 3</div>
+    </header>
+
+    <div class="page-content">
+        <div class="icp-card c-umwelt">
+            <div class="icp-solution c-umwelt">ICP 3 — UMWELT (Agentes IA)</div>
+            <h2 class="icp-title c-umwelt">Profesional Independiente / Persona Física</h2>
+            <div class="icp-fields">
+                <div class="icp-field full"><div class="field-label">Industria</div><div class="field-value">Transversal — legal, contable, médico, consultor, freelancer, pequeño empresario.</div></div>
+                <div class="icp-field"><div class="field-label">Dolor</div><div class="field-value">Tareas repetitivas diarias que consumen horas: agendar, conciliar, archivar, reportar, comunicar. No tiene equipo para delegar. Las herramientas actuales no se conectan entre sí.</div></div>
+                <div class="icp-field"><div class="field-label">Motivación</div><div class="field-value">Agentes de IA que se interconectan con sus microaplicativos y automatizan chores diarios en un modelo on-demand. Recuperar horas de su día.</div></div>
+                <div class="icp-field"><div class="field-label">Objeción más fuerte</div><div class="field-value">«Suena bien pero no soy técnico. ¿Realmente funciona sin que yo programe nada?»</div></div>
+                <div class="icp-field"><div class="field-label">Canal preferido</div><div class="field-value">Redes sociales (LinkedIn, X), product demos interactivos, testimoniales en video, app store.</div></div>
+            </div>
+        </div>
+
+        <div class="icp-card c-dasein">
+            <div class="icp-solution c-dasein">ICP 4 — DASEIN (SupTech)</div>
+            <h2 class="icp-title c-dasein">Director de Supervisión / Autoridad Reguladora</h2>
+            <div class="icp-fields">
+                <div class="icp-field full"><div class="field-label">Industria</div><div class="field-value">Gobierno — supervisores financieros, bancos centrales, comisiones reguladoras.</div></div>
+                <div class="icp-field"><div class="field-label">Dolor</div><div class="field-value">Supervisar cientos de entidades reguladas con equipos limitados. Datos que llegan en formatos inconsistentes. Detección tardía de riesgos sistémicos.</div></div>
+                <div class="icp-field"><div class="field-label">Motivación</div><div class="field-value">Infraestructura tecnológica que automatice la supervisión: ingesta de datos, validación, detección de anomalías, generación de reportes de supervisión. Visión sistémica en tiempo real.</div></div>
+                <div class="icp-field"><div class="field-label">Objeción más fuerte</div><div class="field-value">«Somos gobierno — tenemos restricciones de soberanía de datos, procurement público y tiempos de adopción largos.»</div></div>
+                <div class="icp-field"><div class="field-label">Canal preferido</div><div class="field-value">Licitaciones públicas, relaciones institucionales directas, foros de organismos multilaterales (BIS, FSB, FMI), pilotos regulatorios.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>024</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.10 — PROMESA DE MARCA & PROOF POINTS — 025
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-9" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.10</div>
+        <h1 class="stp__title">Promesa de Marca<br>& Proof Points</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Lo Que GESTELL Garantiza — Y La Evidencia Que Lo Respalda</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>025</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.10 CONTENIDO — PROMESA DE MARCA & PROOF POINTS — 026
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.10 · Página 1 de 1</div>
+    </header>
+
+    <!-- PROMISE -->
+    <div class="promise-zone">
+        <h2 class="promise-es">«Cuando contratas una solución GESTELL, tus procesos más complejos se vuelven autónomos, auditables y precisos — sin importar la escala de tu operación ni tu carga regulatoria.»</h2>
+        <div class="promise-divider"></div>
+        <p class="promise-en">«When you use a GESTELL solution, your most complex processes become autonomous, auditable and precise — regardless of your operational scale or regulatory requirements.»</p>
+    </div>
+
+    <!-- PROOF POINTS -->
+    <div class="proof-zone">
+        <div class="proof-label">Proof Points — La evidencia</div>
+        <div class="proof-grid">
+            <div class="proof-card">
+                <div class="proof-keyword">«Autónomos»</div>
+                <div class="proof-desc">Nuestros agentes de IA ejecutan procesos end-to-end sin supervisión constante del operador.</div>
+                <div class="proof-evidence">TELOS genera reportes regulatorios de manera autónoma. UMWELT automatiza tareas diarias sin intervención del usuario.</div>
+            </div>
+            <div class="proof-card">
+                <div class="proof-keyword">«Auditables»</div>
+                <div class="proof-desc">Cada decisión tomada por nuestros sistemas es trazable: input, procesamiento y output documentados.</div>
+                <div class="proof-evidence">GNOSIS consolida datos con log de auditoría completo. DASEIN genera reportes de supervisión con cadena de evidencia.</div>
+            </div>
+            <div class="proof-card">
+                <div class="proof-keyword">«Precisos»</div>
+                <div class="proof-desc">Calibramos contra estándares regulatorios específicos, no contra benchmarks genéricos de la industria.</div>
+                <div class="proof-evidence">TELOS cumple con requisitos LFPIORPI. DASEIN opera bajo marcos de supervisión de bancos centrales.</div>
+            </div>
+            <div class="proof-card">
+                <div class="proof-keyword">«Sin importar la escala»</div>
+                <div class="proof-desc">De una notaría con 3 empleados a un supervisor financiero que vigila cientos de entidades reguladas — el sistema escala sin degradación.</div>
+            </div>
+            <div class="proof-card wide">
+                <div class="proof-keyword">«Ni tu carga regulatoria»</div>
+                <div class="proof-desc">Operamos en los entornos regulatorios más complejos del mercado: prevención de lavado de dinero, supervisión financiera, industrias de alto riesgo.</div>
+            </div>
+        </div>
+
+        <div class="rule-block">
+            <div class="rule-label">Regla de uso</div>
+            <div class="rule-text">La promesa de marca se usa en: landing pages, apertura de propuestas comerciales, slide 3 de pitch decks (después de Visión/Misión), cierre de presentaciones ejecutivas. Los proof points se seleccionan según el ICP al que se dirige la comunicación — no se usan todos simultáneamente. Se citan máximo 2-3 proof points por pieza de comunicación.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>026</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.11 — MARCO DE MENSAJES — 027
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-10" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.11</div>
+        <h1 class="stp__title">Marco de Mensajes</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">La Arquitectura Verbal de GESTELL — Qué Decimos, A Quién y Cómo</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>027</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.11 CONTENIDO — PÁGINA 1 DE 2 · ARQUITECTURA EN CASCADA — 028
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.11 · Página 1 de 2</div>
+    </header>
+
+    <div class="cascade">
+        <!-- TAGLINE -->
+        <div class="cascade-tagline">
+            <div class="cascade-tagline-label">Tagline</div>
+            <h2 class="cascade-tagline-es">Creamos nuevos mundos con IA.</h2>
+            <div class="cascade-tagline-en">We assemble new worlds through AI.</div>
+        </div>
+
+        <!-- POSITIONING STATEMENT -->
+        <div class="cascade-positioning">
+            <div class="cascade-label">Positioning Statement</div>
+            <div class="cascade-text-es">Para organizaciones y personas que enfrentan complejidad regulatoria y operativa, GESTELL es la infraestructura cognitiva que encuadra sus procesos en sistemas autónomos de Inteligencia Artificial, porque ningún otro sistema integra RegTech, SupTech, agentes de vida diaria y consolidación de datos en un solo ecosistema.</div>
+            <div class="cascade-text-en">For organizations and individuals facing regulatory and operational complexity, GESTELL is the cognitive infrastructure that enframes their processes in autonomous AI systems, because no other system integrates RegTech, SupTech, daily life agents and data consolidation in a single ecosystem.</div>
+        </div>
+
+        <!-- ELEVATOR 30s -->
+        <div class="cascade-elevator">
+            <div class="cascade-label">Elevator Pitch — 30 segundos</div>
+            <div class="cascade-elevator-text">GESTELL despliega agentes de Inteligencia Artificial que automatizan los procesos más complejos de sus clientes. Operamos en cuatro dominios: consolidación de datos empresariales, cumplimiento regulatorio, automatización de la vida diaria y supervisión gubernamental. Nuestros sistemas son autónomos, auditables y precisos — sin importar la escala de la operación ni la carga regulatoria del cliente.</div>
+        </div>
+
+        <!-- ELEVATOR 2min -->
+        <div class="cascade-2min">
+            <div class="cascade-label">Elevator Pitch — 2 minutos</div>
+            <div class="cascade-2min-formula">Fórmula: Elevator 30s + Proof Points de la sección 1.10 + un caso de uso por solución adaptado al ICP presente. El equipo comercial construye la versión de 2 minutos sobre esta base según la audiencia específica.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>028</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.11 CONTENIDO — PÁGINA 2 DE 2 · MENSAJES + TONO — 029
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.11 · Página 2 de 2</div>
+    </header>
+
+    <div class="page-content">
+        <!-- GNOSIS -->
+        <div class="msg-card c-gnosis">
+            <div class="msg-solution c-gnosis">GNOSIS — Análisis de datos</div>
+            <div class="msg-icp">→ CTO / Chief Data Officer</div>
+            <div class="msg-text">«GNOSIS consolida, valida y visualiza todos tus datos en un solo sistema inteligente — eliminando fragmentación, errores manuales y reportes tardíos.»</div>
+        </div>
+
+        <!-- TELOS -->
+        <div class="msg-card c-telos">
+            <div class="msg-solution c-telos">TELOS — Cumplimiento regulatorio</div>
+            <div class="msg-icp">→ Oficial de Cumplimiento / Responsable PLD</div>
+            <div class="msg-text">«TELOS automatiza tu cumplimiento regulatorio con agentes de IA que procesan, validan y reportan de manera autónoma — para que tu operación cumpla antes de que el regulador pregunte.»</div>
+        </div>
+
+        <!-- UMWELT -->
+        <div class="msg-card c-umwelt">
+            <div class="msg-solution c-umwelt">UMWELT — Agentes IA de vida diaria</div>
+            <div class="msg-icp">→ Profesional independiente / Persona física</div>
+            <div class="msg-text">«UMWELT conecta tus aplicaciones diarias con agentes de IA que automatizan tus tareas repetitivas — para que recuperes las horas que tu operación te roba.»</div>
+        </div>
+
+        <!-- DASEIN -->
+        <div class="msg-card c-dasein">
+            <div class="msg-solution c-dasein">DASEIN — Infraestructura gubernamental</div>
+            <div class="msg-icp">→ Director de Supervisión / Autoridad reguladora</div>
+            <div class="msg-text">«DASEIN despliega infraestructura de supervisión autónoma que ingesta, valida y analiza datos de entidades reguladas — dándote visión sistémica en tiempo real.»</div>
+        </div>
+    </div>
+
+    <!-- TONE SPECTRUM -->
+    <div class="tone-zone">
+        <div class="tone-label">Espectro de tono — Así sí / Así no</div>
+        <div class="tone-grid">
+            <div class="tone-header no">Así no</div>
+            <div class="tone-header si">Así sí</div>
+            <div class="tone-cell no">«Soluciones innovadoras de IA»</div>
+            <div class="tone-cell si">«Agentes de IA que automatizan cumplimiento regulatorio»</div>
+            <div class="tone-cell no">«Partner estratégico en transformación digital»</div>
+            <div class="tone-cell si">«Infraestructura cognitiva para industrias reguladas»</div>
+            <div class="tone-cell no">«Tecnología de punta para empresas líderes»</div>
+            <div class="tone-cell si">«Sistemas autónomos que escalan sin degradación»</div>
+            <div class="tone-cell no">«Revolucionamos la industria»</div>
+            <div class="tone-cell si">«Encuadramos la complejidad en sistemas precisos»</div>
+        </div>
+        <div class="tone-rule">
+            <div class="tone-rule-label">Regla de tono</div>
+            <div class="tone-rule-text">Verbos de acción siempre. Sujeto + verbo + beneficio concreto + diferenciador. Máximo 2 líneas por mensaje. Sin adjetivos vacíos: cada adjetivo debe ser verificable (auditable, autónomo, preciso = sí; innovador, líder, disruptivo = no).</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>029</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 1.12 — PRINCIPIOS DE IA RESPONSABLE — 030
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-11" class="page section-title-page">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico</div>
+    </header>
+
+    <div class="stp__center">
+        <div class="stp__code">1.12</div>
+        <h1 class="stp__title">Principios de IA<br>Responsable</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">El Marco Ético Que Gobierna Toda Operación de Inteligencia Artificial En GESTELL</p>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>030</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1.12 CONTENIDO — PRINCIPIOS DE IA RESPONSABLE — 031
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. I · ADN Estratégico · 1.12 · Página 1 de 1</div>
+    </header>
+
+    <!-- HEXAGONAL GOVERNANCE DIAGRAM -->
+    <div class="hex-container">
+        <svg class="hex-svg" viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="260,30 348,75 348,165 260,210 172,165 172,75" fill="none" stroke="#00D4FF" stroke-width="0.5" opacity="0.15"/>
+            <line x1="282" y1="38" x2="338" y2="68" stroke="#AAAAAA" stroke-width="0.8" opacity="0.4"/>
+            <line x1="352" y1="88" x2="352" y2="152" stroke="#AAAAAA" stroke-width="0.8" opacity="0.4"/>
+            <line x1="340" y1="172" x2="282" y2="202" stroke="#AAAAAA" stroke-width="0.8" opacity="0.4"/>
+            <line x1="238" y1="202" x2="180" y2="172" stroke="#AAAAAA" stroke-width="0.8" opacity="0.4"/>
+            <line x1="168" y1="152" x2="168" y2="88" stroke="#AAAAAA" stroke-width="0.8" opacity="0.4"/>
+            <line x1="180" y1="68" x2="238" y2="38" stroke="#AAAAAA" stroke-width="0.8" opacity="0.4"/>
+            <circle cx="310" cy="53" r="1.5" fill="#AAAAAA" opacity="0.5"/>
+            <circle cx="352" cy="120" r="1.5" fill="#AAAAAA" opacity="0.5"/>
+            <circle cx="311" cy="187" r="1.5" fill="#AAAAAA" opacity="0.5"/>
+            <circle cx="209" cy="187" r="1.5" fill="#AAAAAA" opacity="0.5"/>
+            <circle cx="168" cy="120" r="1.5" fill="#AAAAAA" opacity="0.5"/>
+            <circle cx="209" cy="53" r="1.5" fill="#AAAAAA" opacity="0.5"/>
+            <circle cx="260" cy="30" r="6" fill="#0A0A0A" stroke="#00D4FF" stroke-width="1.2"/>
+            <text x="260" y="33" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" font-weight="700" fill="#00D4FF">1</text>
+            <text x="260" y="18" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#00D4FF" letter-spacing="1">AUTONOMÍA</text>
+            <circle cx="348" cy="75" r="6" fill="#0A0A0A" stroke="#00D4FF" stroke-width="1.2"/>
+            <text x="348" y="78" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" font-weight="700" fill="#00D4FF">2</text>
+            <text x="370" y="68" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#00D4FF" letter-spacing="1">TRAZABILIDAD</text>
+            <circle cx="348" cy="165" r="6" fill="#0A0A0A" stroke="#00D4FF" stroke-width="1.2"/>
+            <text x="348" y="168" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" font-weight="700" fill="#00D4FF">3</text>
+            <text x="370" y="170" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#00D4FF" letter-spacing="1">PRECISIÓN</text>
+            <circle cx="260" cy="210" r="6" fill="#0A0A0A" stroke="#00D4FF" stroke-width="1.2"/>
+            <text x="260" y="213" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" font-weight="700" fill="#00D4FF">4</text>
+            <text x="260" y="228" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#00D4FF" letter-spacing="1">PRIVACIDAD</text>
+            <circle cx="172" cy="165" r="6" fill="#0A0A0A" stroke="#00D4FF" stroke-width="1.2"/>
+            <text x="172" y="168" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" font-weight="700" fill="#00D4FF">5</text>
+            <text x="150" y="170" text-anchor="end" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#00D4FF" letter-spacing="1">EQUIDAD</text>
+            <circle cx="172" cy="75" r="6" fill="#0A0A0A" stroke="#00D4FF" stroke-width="1.2"/>
+            <text x="172" y="78" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="5" font-weight="700" fill="#00D4FF">6</text>
+            <text x="150" y="68" text-anchor="end" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="700" fill="#00D4FF" letter-spacing="1">COMPLIANCE</text>
+            <text x="260" y="116" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA" letter-spacing="3">CICLO DE</text>
+            <text x="260" y="126" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6" fill="#AAAAAA" letter-spacing="3">GOBERNANZA</text>
+            <text x="260" y="260" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6.5" fill="#AAAAAA">El hexágono de gobernanza replica la geometría del isotipo GESTELL.</text>
+            <text x="260" y="272" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-size="6.5" fill="#AAAAAA">Los 6 principios se auditan en ciclo continuo — no son estáticos.</text>
+        </svg>
+    </div>
+
+    <!-- PRINCIPLES -->
+    <div class="principles-zone">
+        <div class="principles-label">Los 6 principios</div>
+        <div class="principles-grid">
+            <div class="principle-card">
+                <div class="principle-num">01</div>
+                <h2 class="principle-name-ia">Autonomía con supervisión</h2>
+                <div class="principle-desc-ia">Nuestros agentes operan de manera autónoma, pero toda decisión crítica mantiene un punto de intervención humana (HITL). La autonomía es una capacidad, no una licencia.</div>
+            </div>
+            <div class="principle-card">
+                <div class="principle-num">02</div>
+                <h2 class="principle-name-ia">Trazabilidad total</h2>
+                <div class="principle-desc-ia">Cada output tiene cadena de evidencia documentada: qué dato entró, cómo se procesó, qué decisión se tomó y por qué. No operamos cajas negras.</div>
+            </div>
+            <div class="principle-card">
+                <div class="principle-num">03</div>
+                <h2 class="principle-name-ia">Precisión antes que velocidad</h2>
+                <div class="principle-desc-ia">Ante la disyuntiva entre resultado rápido e impreciso o preciso que toma más tiempo, elegimos precisión. En entornos regulados, un error es más costoso que una demora.</div>
+            </div>
+            <div class="principle-card">
+                <div class="principle-num">04</div>
+                <h2 class="principle-name-ia">Privacidad por diseño</h2>
+                <div class="principle-desc-ia">Datos procesados bajo principio de minimización: solo accedemos a lo necesario, lo retenemos el mínimo tiempo, y lo protegemos con cifrado de grado institucional.</div>
+            </div>
+            <div class="principle-card">
+                <div class="principle-num">05</div>
+                <h2 class="principle-name-ia">Equidad algorítmica</h2>
+                <div class="principle-desc-ia">Nuestros modelos se auditan contra sesgos periódicamente. Ningún sistema de GESTELL debe producir resultados que discriminen por género, origen, ubicación o nivel socioeconómico.</div>
+            </div>
+            <div class="principle-card">
+                <div class="principle-num">06</div>
+                <h2 class="principle-name-ia">Compliance nativo</h2>
+                <div class="principle-desc-ia">Nuestros sistemas de IA se diseñan para cumplir con las regulaciones de IA vigentes y emergentes en cada jurisdicción. No esperamos a que la ley nos alcance — nos adelantamos.</div>
+            </div>
+        </div>
+
+        <div class="commitment">
+            <div class="commitment-text">«GESTELL se compromete a que su Inteligencia Artificial opere como extensión de la capacidad humana, no como reemplazo de la responsabilidad humana.»</div>
+        </div>
+
+        <div class="rule-block">
+            <div class="rule-label">Regla de uso</div>
+            <div class="rule-text">Los Principios de IA Responsable se incluyen en: contratos con clientes (como anexo), documentación técnica de cada solución, onboarding de empleados, página web (sección dedicada), reportes anuales. Se revisan anualmente por el comité de ética de GESTELL.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. I</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>031</span>
+    </footer>
+</section>
+
+</body>
+</html>
+

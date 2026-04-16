@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTELL — Brand Operating System · Volumen II</title>
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           GESTELL · BRAND OPERATING SYSTEM · 2026
+           MASTER DATA GOLDEN COPY — VOLUMEN II
+           Mesa: Ogilvy · Pentagram · Noomo · Cieden · Studio Dumbar
+           ═══════════════════════════════════════════════════════════ */
+
+        :root {
+            --gstl-black: #030303;
+            --gstl-white: #FAFAF8;
+            --gstl-border: #1A1A1A;
+            --gstl-bg-2: #050505;
+            --gstl-bg-3: #0A0A0A;
+            --gnosis: #00D4FF;
+            --telos: #A4133C;
+            --umwelt: #FF0066;
+            --dasein: #7B3FA0;
+            --text-1: #FAFAF8;
+            --text-2: #CCCCCC;
+            --text-3: #AAAAAA;
+            --gnosis-text: #00D4FF;
+            --telos-text: #F26B8A;
+            --umwelt-text: #FF80AA;
+            --dasein-text: #B99BD6;
+            --font-d: 'Akzidenz-Grotesk', 'Helvetica Neue', 'Arial', sans-serif;
+            --font-b: 'Helvetica Neue LT Pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            --font-mono: 'Courier New', 'Courier', monospace;
+            --ts-micro: 7px; --ts-caption: 8px; --ts-small: 9px; --ts-body: 10px;
+            --ts-body-lg: 11px; --ts-sub-head: 12px; --ts-emphasis: 14px;
+            --ts-head-sm: 16px; --ts-head-md: 18px; --ts-head-lg: 24px;
+            --ts-display-sm: 36px; --ts-display-md: 42px; --ts-display-lg: 72px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--gstl-black); color: var(--text-1); font-family: var(--font-b); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+        .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+        .page { width: 210mm; height: 297mm; margin: 0 auto; padding: 20mm; position: relative; background: var(--gstl-black); page-break-after: always; border-bottom: 1px solid var(--gstl-border); }
+        @media screen { .page { box-shadow: 0 4px 60px rgba(0,0,0,0.8); } }
+        @media print { body { background: var(--gstl-black); } .page { margin: 0; border: none; box-shadow: none; } }
+        @page { size: A4; margin: 0; }
+
+        /* ── HEADER & FOOTER ── */
+        .ph { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--gstl-border); margin-bottom: 40px; }
+        .ph-l { display: flex; align-items: center; gap: 10px; }
+        .ph-l .isotipo { width: 30px; height: 36px; flex-shrink: 0; }
+        .ph-l span { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-small); letter-spacing: 6px; text-transform: uppercase; }
+        .ph-r { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; color: var(--text-3); text-transform: uppercase; }
+        .pf { position: absolute; bottom: 20mm; left: 20mm; right: 20mm; display: flex; justify-content: space-between; font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 3px; color: var(--text-3); text-transform: uppercase; border-top: 1px solid var(--gstl-border); padding-top: 10px; }
+
+        /* ── PORTADA MAESTRA ── */
+        .master-cover { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .mc__isotipo-area { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; }
+        .mc__isotipo-area svg { width: 220px; height: auto; display: block; }
+        .mc__title-block { text-align: center; padding-bottom: 8mm; }
+        .mc__divider { width: 56px; height: 1px; background: var(--gstl-border); margin: 0 auto 28px; }
+        .mc__subtitle { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-small); letter-spacing: 6px; text-transform: uppercase; color: var(--text-3); text-indent: 6px; margin-bottom: 6px; }
+        .mc__year { font-family: var(--font-mono); font-size: var(--ts-small); letter-spacing: 4px; color: var(--text-3); }
+        .mc__footer { position: absolute; bottom: 20mm; left: 20mm; right: 20mm; display: flex; justify-content: space-between; align-items: flex-end; }
+        .mc__classification { font-family: var(--font-mono); font-size: var(--ts-micro); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); border: 1px solid var(--gstl-border); padding: 3px 8px; }
+        .mc__version { font-family: var(--font-mono); font-size: var(--ts-micro); letter-spacing: 2px; color: var(--text-3); }
+
+        /* ── PORTADA VOLUMEN (sin header) ── */
+        .vol-cover { display: flex; flex-direction: column; }
+        .vol-cover::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(250,250,248,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(250,250,248,0.018) 1px, transparent 1px); background-size: 8mm 8mm; pointer-events: none; z-index: 0; }
+        .vc__center { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
+        .vc__vol-label { font-family: var(--font-mono); font-size: var(--ts-small); letter-spacing: 5px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 20px; }
+        .vc__title { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-display-md); letter-spacing: 16px; text-transform: uppercase; color: var(--text-1); line-height: 1.2; text-indent: 16px; }
+        .vc__accent-line { width: 48px; height: 2px; background: var(--gnosis); margin: 36px 0; }
+        .vc__description { font-family: var(--font-b); font-size: var(--ts-body); line-height: 1.85; color: var(--text-2); max-width: 400px; letter-spacing: 0.2px; }
+        .vol-cover .pf { position: absolute; z-index: 1; }
+
+        /* ── ÍNDICE ── */
+        .page--flex { display: flex; flex-direction: column; padding-bottom: calc(20mm + 32px); }
+        .idx__title-area { margin-bottom: 8mm; }
+        .idx__vol-label { font-family: var(--font-mono); font-size: var(--ts-caption); letter-spacing: 5px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 10px; }
+        .idx__title { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-head-sm); letter-spacing: 8px; text-transform: uppercase; color: var(--text-1); text-indent: 8px; }
+        .idx__list { display: flex; flex-direction: column; justify-content: flex-start; flex: 1; gap: 0; }
+        .idx__item { display: flex; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--gstl-border); }
+        .idx__item:first-child { padding-top: 0; }
+        .idx__item:last-child { border-bottom: none; }
+        .idx__code { font-family: var(--font-mono); font-size: var(--ts-small); letter-spacing: 2px; color: var(--gnosis-text); min-width: 48px; flex-shrink: 0; }
+        .idx__name { font-family: var(--font-b); font-size: var(--ts-body-lg); letter-spacing: 0.4px; color: var(--text-1); }
+        .idx__dots { flex: 1; margin: 0 12px; border-bottom: 1px dotted rgba(250,250,248,0.08); min-width: 20px; position: relative; top: -3px; }
+        .idx__page-ref { font-family: var(--font-mono); font-size: var(--ts-caption); letter-spacing: 2px; color: var(--text-3); flex-shrink: 0; min-width: 24px; text-align: right; }
+
+        /* ── PORTADILLA DE SECCIÓN (sin header) ── */
+        .section-title-page { display: flex; flex-direction: column; }
+        .stp__center { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 4mm; }
+        .stp__code { font-family: var(--font-mono); font-size: var(--ts-head-md); letter-spacing: 4px; color: var(--gnosis-text); font-weight: 700; margin-bottom: 16px; }
+        .stp__title { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-display-sm); letter-spacing: 12px; text-transform: uppercase; color: var(--text-1); line-height: 1.3; text-indent: 12px; margin-bottom: 24px; }
+        .stp__accent { width: 48px; height: 2px; background: var(--gnosis); margin-bottom: 24px; }
+        .stp__subtitle { font-family: var(--font-b); font-size: var(--ts-body); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); }
+
+        /* ── 2.1 CONTENT LAYOUTS ── */
+        .arch-layout { display: grid; grid-template-columns: 56% 40%; gap: 4%; flex: 1; }
+        .arch-main h3 { font-family: var(--font-d); font-size: var(--ts-body-lg); font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 14px; margin-top: 32px; }
+        .arch-main h3:first-child { margin-top: 0; }
+        .arch-main p { font-family: var(--font-b); font-size: var(--ts-body-lg); line-height: 1.7; color: var(--text-2); text-align: justify; margin-bottom: 12px; }
+        .arch-main p strong { color: var(--text-1); }
+        .arch-side { padding-left: 20px; border-left: 1px solid var(--gstl-border); }
+
+        .model-card { padding: 14px 16px; background: var(--gstl-bg-3); border: 1px solid var(--gstl-border); margin-bottom: 8px; position: relative; }
+        .model-card::before { content: ''; position: absolute; left: -21px; top: 50%; width: 20px; height: 1px; background: var(--gstl-border); }
+        .model-card.selected { border-color: var(--gnosis); background: rgba(0,212,255,0.03); }
+        .model-label { font-family: var(--font-b); font-size: var(--ts-micro); letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
+        .model-name { font-family: var(--font-d); font-size: var(--ts-body-lg); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+        .model-card.selected .model-name { color: var(--gnosis-text); }
+        .model-desc { font-family: var(--font-b); font-size: var(--ts-small); color: var(--text-3); line-height: 1.5; }
+        .model-status { display: inline-block; font-family: var(--font-mono); font-size: var(--ts-micro); letter-spacing: 2px; text-transform: uppercase; padding: 2px 6px; margin-top: 6px; }
+        .model-status--active { color: var(--gnosis-text); border: 1px solid var(--gnosis); }
+        .model-status--inactive { color: var(--text-3); border: 1px solid var(--gstl-border); }
+        .sidebar-connector { width: 1px; height: 12px; background: var(--gstl-border); margin: 0 auto; }
+
+        /* ── DIAGRAM FULL PAGE ── */
+        .diagram-fullpage { flex: 1; display: flex; align-items: center; justify-content: center; }
+        .diagram-fullpage svg { width: 100%; height: 100%; max-height: calc(297mm - 40mm - 60px - 40px); }
+
+        /* ── TABLE & RATIONALE PAGE ── */
+        .shared-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        .shared-table th { font-family: var(--font-d); font-size: var(--ts-caption); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-3); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--gstl-border); }
+        .shared-table td { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-2); padding: 8px 10px; border-bottom: 1px solid var(--gstl-border); line-height: 1.5; vertical-align: top; }
+        .shared-table td.element-name { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-body); letter-spacing: 1px; color: var(--text-1); white-space: nowrap; }
+        .shared-table .shared { color: var(--gnosis-text); }
+
+        .rationale { background: var(--gstl-bg-2); border-left: 2px solid var(--gnosis); padding: 24px 28px; margin: 24px 0; }
+        .rationale-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+        .rationale blockquote { font-family: var(--font-d); font-size: var(--ts-emphasis); font-weight: 300; font-style: italic; line-height: 1.7; margin-bottom: 12px; }
+        .rationale .rationale-body { font-family: var(--font-b); font-size: var(--ts-body); line-height: 1.7; color: var(--text-3); }
+        .rationale .rationale-body strong { color: var(--text-1); }
+
+        .rule-block { background: var(--gstl-bg-3); border: 1px solid var(--gstl-border); padding: 10px 14px; }
+        .rule-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 3px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 4px; }
+        .rule-text { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.6; }
+
+        /* ── Section labels (reusable) ── */
+        .section-label { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 4px; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+
+        /* ── Operative principle cards ── */
+        .op-zone { margin: 20px 0; }
+        .op-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+        .op-card { background: var(--gstl-bg-3); padding: 12px 14px; }
+        .op-card--gnosis { border-left: 2px solid var(--gnosis); }
+        .op-card--telos { border-left: 2px solid var(--telos); }
+        .op-card--umwelt { border-left: 2px solid var(--umwelt); }
+        .op-card-title { font-family: var(--font-d); font-size: var(--ts-body); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+        .op-card-title--gnosis { color: var(--gnosis-text); }
+        .op-card-title--telos { color: var(--telos-text); }
+        .op-card-title--umwelt { color: var(--umwelt-text); }
+        .op-card-body { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.6; }
+
+        /* ── Model card variant: result (no selected state) ── */
+        .model-card--result { border-color: var(--gstl-border); background: var(--gstl-bg-3); }
+        .model-card--result .model-label { color: var(--gnosis-text); }
+
+        /* ── Spacing utilities ── */
+        .section-label--lg { margin-bottom: 16px; }
+        .content-block { margin-bottom: 16px; }
+        .mt-sm { margin-top: 12px; }
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 2.2 — MAPA DE JERARQUÍA VISUAL
+           ══════════════════════════════════════════════════════════ */
+
+        /* ── Chromatic decomposition (page hero) ── */
+        .chroma-page { flex: 1; display: flex; align-items: center; justify-content: center; }
+        .chroma-page svg { width: 100%; height: 100%; max-height: calc(297mm - 40mm - 60px - 40px); }
+
+        /* ── Volume dial ── */
+        .dial-zone { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .dial-intro { font-family: var(--font-b); font-size: var(--ts-body-lg); line-height: 1.7; color: var(--text-2); max-width: 75%; margin-bottom: 24px; }
+        .dial-intro strong { color: var(--text-1); }
+        .dial-row { display: grid; grid-template-columns: 140px 1fr 200px; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--gstl-border); }
+        .dial-row:last-child { border-bottom: none; }
+        .dial-context { font-family: var(--font-d); font-size: var(--ts-body-lg); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+        .dial-bar { height: 6px; background: var(--gstl-bg-3); position: relative; border-radius: 0; }
+        .dial-fill-master { position: absolute; left: 0; top: 0; height: 100%; background: var(--gstl-white); opacity: 0.9; }
+        .dial-fill-sing { position: absolute; right: 0; top: 0; height: 100%; opacity: 0.6; }
+        .dial-bar-labels { display: flex; justify-content: space-between; margin-top: 4px; }
+        .dial-bar-label { font-family: var(--font-mono); font-size: var(--ts-micro); color: var(--text-3); letter-spacing: 2px; }
+        .dial-examples { font-family: var(--font-b); font-size: var(--ts-small); color: var(--text-3); line-height: 1.5; }
+        .dial-legend { display: flex; gap: 24px; padding-top: 12px; border-top: 1px solid var(--gstl-border); }
+        .dial-legend-item { display: flex; align-items: center; gap: 6px; }
+        .dial-legend-swatch { width: 16px; height: 6px; }
+        .dial-legend-text { font-family: var(--font-b); font-size: var(--ts-caption); letter-spacing: 2px; text-transform: uppercase; color: var(--text-3); }
+
+        /* ── Lockup matrix ── */
+        .lockup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; flex: 1; align-items: stretch; }
+        .lockup-card { background: var(--gstl-bg-2); border: 1px solid var(--gstl-border); padding: 16px; display: flex; flex-direction: column; }
+        .lockup-card--horizontal { flex-direction: row; align-items: center; gap: 16px; }
+        .lockup-type { font-family: var(--font-d); font-size: var(--ts-caption); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gnosis-text); margin-bottom: 4px; }
+        .lockup-context { font-family: var(--font-b); font-size: var(--ts-small); color: var(--text-3); line-height: 1.5; margin-bottom: 12px; }
+        .lockup-render { flex: 1; display: flex; align-items: center; justify-content: center; background: var(--gstl-bg-3); padding: 16px 12px; position: relative; }
+        .lockup-render::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(250,250,248,0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(250,250,248,0.01) 1px, transparent 1px); background-size: 8mm 8mm; pointer-events: none; }
+
+        .lockup-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2px; }
+        .lockup-text-render { font-family: var(--font-d); font-weight: 700; font-size: 12px; letter-spacing: 5px; color: var(--text-1); white-space: nowrap; }
+        .lockup-text-sep { color: var(--text-3); font-weight: 400; }
+
+        /* ══════════════════════════════════════════════════════════
+           SECCIÓN 2.3 — REGLAS POR SUB-MARCA
+           ══════════════════════════════════════════════════════════ */
+
+        /* ── Fichas de identidad (2 per page, split) ── */
+        .fichas-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; flex: 1; }
+        .ficha { padding: 0 20px; display: flex; flex-direction: column; justify-content: space-between; }
+        .ficha:first-child { padding-left: 0; padding-right: 20px; border-right: 1px solid var(--gstl-border); }
+        .ficha:last-child { padding-left: 20px; padding-right: 0; }
+        .ficha-header { text-align: center; margin-bottom: 0; }
+        .ficha-isotipo { width: 110px; height: 110px; margin: 0 auto 10px; display: block; }
+        .ficha-name { font-family: var(--font-d); font-weight: 700; font-size: var(--ts-head-sm); letter-spacing: 5px; text-transform: uppercase; }
+        .ficha-etym { font-family: var(--font-b); font-size: var(--ts-small); font-style: italic; color: var(--text-3); margin-top: 4px; }
+        .ficha-meta { display: flex; gap: 8px; align-items: center; justify-content: center; margin-bottom: 14px; }
+        .ficha-swatch { width: 24px; height: 8px; flex-shrink: 0; }
+        .ficha-hex { font-family: var(--font-mono); font-size: var(--ts-caption); color: var(--text-3); }
+        .ficha-token { font-family: var(--font-mono); font-size: var(--ts-micro); color: var(--text-3); background: var(--gstl-bg-3); padding: 1px 5px; }
+        .ficha-domain { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-2); line-height: 1.5; }
+
+        .ficha-message { background: var(--gstl-bg-2); border-left: 2px solid var(--gstl-border); padding: 8px 12px; }
+        .ficha-message--gnosis { border-left-color: var(--gnosis); }
+        .ficha-message--telos { border-left-color: var(--telos); }
+        .ficha-message--umwelt { border-left-color: var(--umwelt); }
+        .ficha-message--dasein { border-left-color: var(--dasein); }
+        .ficha-message-label { font-family: var(--font-d); font-size: var(--ts-micro); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-3); margin-bottom: 3px; }
+        .ficha-message-text { font-family: var(--font-b); font-size: var(--ts-body); font-style: italic; color: var(--text-2); line-height: 1.5; }
+
+        .ficha-block { }
+        .ficha-block-label { font-family: var(--font-d); font-size: var(--ts-caption); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3px; }
+        .ficha-block-label--hereda { color: var(--text-1); }
+        .ficha-block-label--propio { color: var(--text-1); }
+        .ficha-block-label--propio.c-gnosis { color: var(--gnosis-text); }
+        .ficha-block-label--propio.c-telos { color: var(--telos-text); }
+        .ficha-block-label--propio.c-umwelt { color: var(--umwelt-text); }
+        .ficha-block-label--propio.c-dasein { color: var(--dasein-text); }
+        .ficha-block-label--prohibido { color: var(--text-3); }
+        .ficha-block-text { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.5; }
+
+        .ficha-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .ficha-do, .ficha-dont { padding: 6px 8px; font-family: var(--font-b); font-size: var(--ts-small); line-height: 1.4; color: var(--text-3); }
+        .ficha-do { border-left: 2px solid var(--gstl-border); }
+        .ficha-do--gnosis { border-left-color: var(--gnosis); }
+        .ficha-do--telos { border-left-color: var(--telos); }
+        .ficha-do--umwelt { border-left-color: var(--umwelt); }
+        .ficha-do--dasein { border-left-color: var(--dasein); }
+        .ficha-dont { border-left: 2px solid var(--text-3); }
+        .ficha-do-label, .ficha-dont-label { font-family: var(--font-d); font-size: var(--ts-micro); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px; }
+        .ficha-do-label { color: var(--text-1); }
+        .ficha-do-label.c-gnosis { color: var(--gnosis-text); }
+        .ficha-do-label.c-telos { color: var(--telos-text); }
+        .ficha-do-label.c-umwelt { color: var(--umwelt-text); }
+        .ficha-do-label.c-dasein { color: var(--dasein-text); }
+        .ficha-dont-label { color: var(--text-3); }
+
+        .ficha-touchpoints { }
+        .ficha-touchpoints-label { font-family: var(--font-d); font-size: var(--ts-micro); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
+        .ficha-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+        .ficha-tag { font-family: var(--font-mono); font-size: var(--ts-micro); letter-spacing: 2px; text-transform: uppercase; color: var(--text-3); border: 1px solid var(--gstl-border); padding: 2px 6px; }
+
+        /* ── Comparative table (extends shared-table) ── */
+        .comp-table { width: 100%; border-collapse: collapse; flex: 1; }
+        .comp-table th { font-family: var(--font-d); font-size: var(--ts-caption); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-align: center; padding: 10px 8px; border-bottom: 1px solid var(--gstl-border); }
+        .comp-table th:first-child { text-align: left; }
+        .comp-table td { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-2); padding: 8px; border-bottom: 1px solid var(--gstl-border); text-align: center; line-height: 1.4; vertical-align: top; }
+        .comp-table td:first-child { text-align: left; font-family: var(--font-d); font-weight: 700; font-size: var(--ts-body); letter-spacing: 1px; color: var(--text-1); }
+        .comp-table .swatch-cell { display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+        /* ── Decision tree ── */
+        .tree-zone { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .tree-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+        .tree-card { background: var(--gstl-bg-3); padding: 12px 14px; }
+        .tree-question { font-family: var(--font-b); font-size: var(--ts-body); color: var(--text-3); line-height: 1.5; margin-bottom: 8px; }
+        .tree-answer { font-family: var(--font-d); font-size: var(--ts-body-lg); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+        .tree-icp { font-family: var(--font-b); font-size: var(--ts-small); color: var(--text-3); margin-top: 4px; }
+    </style>
+
+<meta name="gbos-vol-slug" content="vol-2"><meta name="gbos-vol-roman" content="II"><meta name="gbos-vol-title" content="Arquitectura de Marca"><meta name="gbos-vol-color" content="#7B3FA0">
+<link rel="stylesheet" href="assets/chrome.css">
+<script>window.__GBOS__={vol:"vol-2",roman:"II",title:"Arquitectura de Marca",color:"#7B3FA0",sections:[{"id": "sec-0", "code": "2.1", "title": "Modelo de Arquitectura", "subtitle": "Branded House — La Decisión Estructural de GESTELL"}, {"id": "sec-1", "code": "2.2", "title": "Mapa de Jerarquía Visual", "subtitle": "Cómo la marca maestra se expresa a través de sus singularidades (soluciones)"}, {"id": "sec-2", "code": "2.3", "title": "Reglas por Sub-Marca", "subtitle": "Herencia, identidad propia y prohibiciones de cada singularidad (solución)"}, {"id": "sec-3", "code": "2.4", "title": "Sistema de Nomenclatura", "subtitle": "Reglas para nombrar productos, versiones, features y servicios dentro del ecosistema"}, {"id": "sec-4", "code": "2.5", "title": "Taxonomía de Términos", "subtitle": "El vocabulario oficial del ecosistema — qué decir, qué evitar, qué prohibir"}, {"id": "sec-5", "code": "2.6", "title": "Co-Branding & Partnerships", "subtitle": "Reglas de convivencia visual cuando GESTELL coexiste con marcas externas"}, {"id": "sec-6", "code": "2.7", "title": "Reglas de Extensión de Portfolio", "subtitle": "Cuándo crear, extender, retirar o rechazar una singularidad (solución)"}]};</script>
+<script defer src="assets/chrome.js"></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="gbos-mount"></div>
+
+
+<!-- ═══════════ SHARED SVG DEFINITIONS (all brand marks verbatim) ═══════════ -->
+<svg class="svg-defs" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- GESTELL Master: clip, gradient, header symbol -->
+        <clipPath id="gstl-matrix">
+            <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160"/>
+        </clipPath>
+        <radialGradient id="ai-core-energy" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#00D4FF"/>
+            <stop offset="15%" stop-color="#7B3FA0"/>
+            <stop offset="35%" stop-color="#FF0066"/>
+            <stop offset="65%" stop-color="#FAFAF8"/>
+            <stop offset="100%" stop-color="#FAFAF8"/>
+        </radialGradient>
+        <symbol id="isotipo-header" viewBox="60 50 380 360">
+            <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                <path d="M250 230 A180 180 0 0 1 450 230"/><path d="M250 230 A180 180 0 0 1 391.4 371.4"/>
+                <path d="M250 230 A180 180 0 0 1 250 430"/><path d="M250 230 A180 180 0 0 1 108.6 371.4"/>
+                <path d="M250 230 A180 180 0 0 1 50 230"/><path d="M250 230 A180 180 0 0 1 108.6 88.6"/>
+                <path d="M250 230 A180 180 0 0 1 250 30"/><path d="M250 230 A180 180 0 0 1 391.4 88.6"/>
+            </g>
+            <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160" fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+            <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+        </symbol>
+        <!-- Singularity isotipo components (verbatim from Dark Brandbook) -->
+        <g id="gstl-gns-ray">
+            <line x1="158" y1="150" x2="255" y2="150" stroke="#00D4FF" stroke-width="1.25" stroke-opacity="0.3"/>
+            <circle cx="195" cy="150" r="2.5" fill="none" stroke="#00D4FF" stroke-width="1" stroke-opacity="0.8"/>
+            <circle cx="222" cy="150" r="2" fill="#00D4FF" fill-opacity="0.6"/>
+            <circle cx="245" cy="150" r="1.5" fill="#00D4FF" fill-opacity="0.3"/>
+        </g>
+        <g id="gstl-tls-arm">
+            <line x1="158" y1="150" x2="258" y2="150" stroke="#A4133C" stroke-width="1.25" stroke-opacity="0.5"/>
+            <line x1="215" y1="142" x2="215" y2="158" stroke="#A4133C" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="238" y1="138" x2="238" y2="162" stroke="#A4133C" stroke-width="0.75" stroke-opacity="0.3"/>
+            <circle cx="258" cy="150" r="2" fill="#A4133C" fill-opacity="0.4"/>
+        </g>
+        <g id="gstl-tls-saturn-shape">
+            <line x1="150" y1="134" x2="150" y2="174"/>
+            <line x1="138" y1="150" x2="166" y2="150"/>
+            <path d="M150,134 Q173,132 178,150 Q183,170 166,177"/>
+        </g>
+        <g id="gstl-umw-fragments">
+            <polygon points="142,42 42,142 142,142"/>
+            <polygon points="158,42 258,142 158,142"/>
+            <polygon points="158,158 258,158 158,258"/>
+            <polygon points="142,158 42,158 142,258"/>
+        </g>
+        <g id="gstl-dsn-web">
+            <path d="M110 50 L110 250 M150 50 L150 250 M190 50 L190 250" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M70 90 L230 210 M230 90 L70 210" stroke-width="1" stroke-linecap="round"/>
+        </g>
+        <g id="gstl-dsn-web-glow">
+            <path d="M110 50 L110 250 M150 50 L150 250 M190 50 L190 250" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <g id="gstl-dsn-web-links">
+            <path d="M70 150 L190 250 M110 50 L230 150 M230 150 L110 250 M190 50 L70 150" stroke-width="0.75" stroke-linecap="round"/>
+        </g>
+        <g id="gstl-dsn-nodes">
+            <circle cx="110" cy="90" r="2.5"/><circle cx="150" cy="90" r="2.5"/><circle cx="190" cy="90" r="2.5"/>
+            <circle cx="110" cy="150" r="2.5"/><circle cx="190" cy="150" r="2.5"/>
+            <circle cx="110" cy="210" r="2.5"/><circle cx="150" cy="210" r="2.5"/><circle cx="190" cy="210" r="2.5"/>
+        </g>
+    </defs>
+</svg>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADA MAESTRA DEL BRANDBOOK (idéntica al Vol. I, sin paginación)
+     ══════════════════════════════════════════════════════════ -->
+<section id="cover" class="page master-cover">
+    <div class="mc__isotipo-area">
+        <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                <path d="M 250 230 A 180 180 0 0 1 450 230"/>
+                <path d="M 250 230 A 180 180 0 0 1 391.4 371.4"/>
+                <path d="M 250 230 A 180 180 0 0 1 250 430"/>
+                <path d="M 250 230 A 180 180 0 0 1 108.6 371.4"/>
+                <path d="M 250 230 A 180 180 0 0 1 50 230"/>
+                <path d="M 250 230 A 180 180 0 0 1 108.6 88.6"/>
+                <path d="M 250 230 A 180 180 0 0 1 250 30"/>
+                <path d="M 250 230 A 180 180 0 0 1 391.4 88.6"/>
+            </g>
+            <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160" fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+            <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+            <g transform="translate(250, 480)">
+                <text x="12" y="0" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="52" letter-spacing="24" fill="#FAFAF8">GESTELL</text>
+            </g>
+        </svg>
+    </div>
+    <div class="mc__title-block">
+        <div class="mc__divider"></div>
+        <div class="mc__subtitle">Brand Operating System</div>
+        <div class="mc__year">2026</div>
+    </div>
+    <footer class="mc__footer">
+        <div class="mc__classification">CONFIDENCIAL · USO INTERNO</div>
+        <div class="mc__version">v2.0.0</div>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADA VOLUMEN II · ARQUITECTURA DE MARCA — 032
+     SIN HEADER (estándar AAA: páginas ceremoniales limpias)
+     ══════════════════════════════════════════════════════════ -->
+<section class="page vol-cover">
+    <div class="vc__center">
+        <div class="vc__vol-label">VOLUMEN II · 7 SECCIONES</div>
+        <h1 class="vc__title">ARQUITECTURA<br>DE MARCA</h1>
+        <div class="vc__accent-line"></div>
+        <p class="vc__description">
+            La estructura jerárquica del ecosistema GESTELL y sus cuatro singularidades operativas (soluciones).
+            Modelo de arquitectura, mapa de relaciones, reglas de convivencia entre marca maestra
+            y sub-marcas, nomenclatura, taxonomía y protocolos de extensión del portfolio.
+        </p>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>032</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     ÍNDICE DEL VOLUMEN II — 033 (con header: es página de contenido)
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · Índice</div>
+    </header>
+    <div class="idx__title-area">
+        <div class="idx__vol-label">VOLUMEN II · CONTENIDO</div>
+        <h2 class="idx__title">ÍNDICE DE SECCIONES</h2>
+    </div>
+    <nav class="idx__list" aria-label="Índice del Volumen II">
+        <div class="idx__item"><span class="idx__code">2.1</span><span class="idx__name">Modelo de Arquitectura</span><span class="idx__dots"></span><span class="idx__page-ref">034</span></div>
+        <div class="idx__item"><span class="idx__code">2.2</span><span class="idx__name">Mapa de Jerarquía Visual</span><span class="idx__dots"></span><span class="idx__page-ref">038</span></div>
+        <div class="idx__item"><span class="idx__code">2.3</span><span class="idx__name">Reglas por Sub-Marca</span><span class="idx__dots"></span><span class="idx__page-ref">042</span></div>
+        <div class="idx__item"><span class="idx__code">2.4</span><span class="idx__name">Sistema de Nomenclatura</span><span class="idx__dots"></span><span class="idx__page-ref">047</span></div>
+        <div class="idx__item"><span class="idx__code">2.5</span><span class="idx__name">Taxonomía de Términos</span><span class="idx__dots"></span><span class="idx__page-ref">049</span></div>
+        <div class="idx__item"><span class="idx__code">2.6</span><span class="idx__name">Co-Branding & Partnerships</span><span class="idx__dots"></span><span class="idx__page-ref">051</span></div>
+        <div class="idx__item"><span class="idx__code">2.7</span><span class="idx__name">Reglas de Extensión de Portfolio</span><span class="idx__dots"></span><span class="idx__page-ref">053</span></div>
+    </nav>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>033</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 2.1 — MODELO DE ARQUITECTURA — 034
+     SIN HEADER (estándar AAA: portadillas limpias)
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-0" class="page section-title-page">
+    <div class="stp__center">
+        <div class="stp__code">2.1</div>
+        <h1 class="stp__title">Modelo de<br>Arquitectura</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Branded House — La Decisión Estructural de GESTELL</p>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>034</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.1 CONTENIDO — PÁGINA 1 DE 3 · DEFINICIÓN — 035
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.1 · Página 1 de 3</div>
+    </header>
+    <div class="arch-layout">
+        <div class="arch-main">
+            <h3>¿Qué es un modelo de arquitectura?</h3>
+            <p>El modelo de arquitectura de marca define cómo se relacionan jerárquicamente la marca maestra y sus sub-marcas. Determina qué elementos se comparten, cuáles son exclusivos, y cómo el cliente percibe la relación entre los productos del ecosistema.</p>
+            <p>Existen tres modelos canónicos en la industria. Cada uno responde a una lógica estratégica diferente. La elección no es estética — es <strong>operativa, legal y comercial</strong>.</p>
+            <h3>La decisión de GESTELL</h3>
+            <p>GESTELL opera bajo un modelo de <strong>Branded House</strong>: una marca maestra única que contiene cuatro singularidades operativas — las soluciones del ecosistema — (GNOSIS, TELOS, UMWELT, DASEIN) como expresiones especializadas del mismo sistema.</p>
+            <p>Las singularidades <strong>no son marcas independientes</strong>. Son manifestaciones funcionales de GESTELL en dominios específicos. Comparten el ADN genético — el isotipo del vórtice hexagonal, la tipografía, la filosofía — y se diferencian por <strong>color, iconografía propia y dominio de especialización</strong>.</p>
+            <p>La identidad cromática de la marca maestra es el <strong>espectro completo del gradiente</strong> que reúne todos los colores de las singularidades (soluciones). Cuando los cuatro colores convergen, es GESTELL. Cuando se aísla uno, es la singularidad hablando dentro del sistema.</p>
+
+            <h3>Referentes de industria</h3>
+            <p>El modelo Branded House es la arquitectura elegida por las empresas de tecnología que priorizan cohesión y transferencia de equity: <strong>Google</strong> (Search, Maps, Drive, Cloud — todo es Google), <strong>Apple</strong> (iPhone, iPad, Mac — el prefijo es la marca), <strong>FedEx</strong> (Express, Ground, Freight — variaciones de un sistema). En IA, <strong>Anthropic</strong> (Claude como marca única con variantes de modelo) y <strong>OpenAI</strong> (GPT como familia bajo un paraguas) siguen esta misma lógica.</p>
+            <p>La alternativa — House of Brands — fragmenta la percepción: el cliente tendría que aprender qué es GNOSIS, qué es TELOS, y conectarlos manualmente con GESTELL. En un mercado emergente donde la marca aún construye awareness, esa fragmentación es un lujo que no podemos permitirnos.</p>
+        </div>
+        <div class="arch-side">
+            <div class="section-label section-label--lg">Modelos canónicos</div>
+            <div class="model-card selected">
+                <div class="model-label">Modelo A</div>
+                <div class="model-name">Branded House</div>
+                <div class="model-desc">Una marca maestra gobierna todo. Las sub-marcas son extensiones descriptivas. Máxima cohesión, máxima transferencia de equity.</div>
+                <div class="model-status model-status--active">✓ GESTELL</div>
+            </div>
+            <div class="sidebar-connector"></div>
+            <div class="model-card">
+                <div class="model-label">Modelo B</div>
+                <div class="model-name">House of Brands</div>
+                <div class="model-desc">Cada producto tiene marca independiente. La empresa matriz es invisible. Máxima autonomía, cero transferencia de equity.</div>
+                <div class="model-status model-status--inactive">Descartado</div>
+            </div>
+            <div class="sidebar-connector"></div>
+            <div class="model-card">
+                <div class="model-label">Modelo C</div>
+                <div class="model-name">Endorsed</div>
+                <div class="model-desc">Las sub-marcas tienen identidad propia pero llevan un endorsement visible de la marca madre. Equilibrio parcial.</div>
+                <div class="model-status model-status--inactive">Descartado</div>
+            </div>
+            <div class="sidebar-connector"></div>
+            <div class="model-card model-card--result">
+                <div class="model-label">Resultado</div>
+                <div class="model-desc">Máxima transferencia de equity entre marca maestra y singularidades (soluciones). Cada victoria de una singularidad fortalece a GESTELL.</div>
+            </div>
+        </div>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>035</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.1 CONTENIDO — PÁGINA 2 DE 3 · DIAGRAMA FULL-PAGE — 036
+     Isotipos SVG verbatim + editorial layer (bezier curves, data dots)
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.1 · Página 2 de 3</div>
+    </header>
+
+    <div class="diagram-fullpage">
+        <svg viewBox="0 0 640 820" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" role="img" aria-label="Diagrama de arquitectura Branded House: GESTELL como marca maestra con cuatro singularidades operativas — GNOSIS, TELOS, UMWELT, DASEIN">
+            <!-- ═══ EDITORIAL LAYER: Grid background ═══ -->
+            <defs>
+                <pattern id="diag-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(250,250,248,0.02)" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="640" height="820" fill="url(#diag-grid)"/>
+
+            <!-- ═══ EDITORIAL LAYER: Diagram label ═══ -->
+            <text x="320" y="20" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" letter-spacing="4" fill="#AAAAAA" text-transform="uppercase">DIAGRAMA DE ARQUITECTURA · BRANDED HOUSE</text>
+
+            <!-- ═══ BRAND MARK: GESTELL Master Isotipo (verbatim, zero modifications) ═══ -->
+            <svg x="240" y="50" width="160" height="140" viewBox="50 30 400 350">
+                <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                    <path d="M250 230 A180 180 0 0 1 450 230"/><path d="M250 230 A180 180 0 0 1 391.4 371.4"/>
+                    <path d="M250 230 A180 180 0 0 1 250 430"/><path d="M250 230 A180 180 0 0 1 108.6 371.4"/>
+                    <path d="M250 230 A180 180 0 0 1 50 230"/><path d="M250 230 A180 180 0 0 1 108.6 88.6"/>
+                    <path d="M250 230 A180 180 0 0 1 250 30"/><path d="M250 230 A180 180 0 0 1 391.4 88.6"/>
+                </g>
+                <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160" fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+                <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+            </svg>
+
+            <!-- ═══ EDITORIAL LAYER: Master logotype + descriptor ═══ -->
+            <text x="320" y="215" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="22" letter-spacing="12" fill="#FAFAF8">GESTELL</text>
+            <text x="320" y="235" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" letter-spacing="4" fill="#AAAAAA">MARCA MAESTRA · BRAND OPERATING SYSTEM</text>
+
+            <!-- ═══ EDITORIAL LAYER: Bezier connections with data flow dots ═══ -->
+            <!-- GNOSIS connection -->
+            <path d="M 320,250 C 320,370 95,390 95,520" fill="none" stroke="#00D4FF" stroke-width="0.75" stroke-opacity="0.4"/>
+            <circle cx="290" cy="300" r="1.5" fill="#00D4FF" opacity="0.6"/>
+            <circle cx="220" cy="365" r="1.2" fill="#00D4FF" opacity="0.4"/>
+            <circle cx="140" cy="440" r="1" fill="#00D4FF" opacity="0.25"/>
+
+            <!-- TELOS connection -->
+            <path d="M 320,250 C 320,360 245,390 245,520" fill="none" stroke="#A4133C" stroke-width="0.75" stroke-opacity="0.4"/>
+            <circle cx="310" cy="305" r="1.5" fill="#A4133C" opacity="0.6"/>
+            <circle cx="275" cy="365" r="1.2" fill="#A4133C" opacity="0.4"/>
+            <circle cx="255" cy="440" r="1" fill="#A4133C" opacity="0.25"/>
+
+            <!-- UMWELT connection -->
+            <path d="M 320,250 C 320,360 395,390 395,520" fill="none" stroke="#FF0066" stroke-width="0.75" stroke-opacity="0.4"/>
+            <circle cx="330" cy="305" r="1.5" fill="#FF0066" opacity="0.6"/>
+            <circle cx="365" cy="365" r="1.2" fill="#FF0066" opacity="0.4"/>
+            <circle cx="385" cy="440" r="1" fill="#FF0066" opacity="0.25"/>
+
+            <!-- DASEIN connection -->
+            <path d="M 320,250 C 320,370 545,390 545,520" fill="none" stroke="#7B3FA0" stroke-width="0.75" stroke-opacity="0.4"/>
+            <circle cx="350" cy="300" r="1.5" fill="#7B3FA0" opacity="0.6"/>
+            <circle cx="415" cy="365" r="1.2" fill="#7B3FA0" opacity="0.4"/>
+            <circle cx="495" cy="440" r="1" fill="#7B3FA0" opacity="0.25"/>
+
+            <!-- ═══ EDITORIAL LAYER: Singularidades label ═══ -->
+            <line x1="40" y1="495" x2="600" y2="495" stroke="#1A1A1A" stroke-width="0.5"/>
+            <text x="320" y="510" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" letter-spacing="5" fill="#AAAAAA">SINGULARIDADES OPERATIVAS (SOLUCIONES)</text>
+
+            <!-- ═══ BRAND MARK: GNOSIS Isotipo (verbatim) ═══ -->
+            <svg x="30" y="530" width="130" height="130" viewBox="0 0 300 300">
+                <g fill="none" stroke="#00D4FF">
+                    <circle cx="150" cy="150" r="110" stroke-width="1.5" stroke-opacity="0.4"/>
+                    <circle cx="150" cy="150" r="110" stroke-width="0.75" stroke-opacity="0.85"/>
+                    <circle cx="150" cy="150" r="68" stroke-width="1" stroke-opacity="0.4" stroke-dasharray="3,5"/>
+                    <circle cx="150" cy="150" r="42" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="2,4"/>
+                </g>
+                <g>
+                    <use href="#gstl-gns-ray"/><use href="#gstl-gns-ray" transform="rotate(45 150 150)"/>
+                    <use href="#gstl-gns-ray" transform="rotate(90 150 150)"/><use href="#gstl-gns-ray" transform="rotate(135 150 150)"/>
+                    <use href="#gstl-gns-ray" transform="rotate(180 150 150)"/><use href="#gstl-gns-ray" transform="rotate(225 150 150)"/>
+                    <use href="#gstl-gns-ray" transform="rotate(270 150 150)"/><use href="#gstl-gns-ray" transform="rotate(315 150 150)"/>
+                </g>
+                <circle cx="150" cy="150" r="12" fill="none" stroke="#FAFAF8" stroke-width="2"/>
+                <circle cx="150" cy="150" r="5" fill="#00D4FF"/>
+            </svg>
+            <!-- GNOSIS labels -->
+            <text x="95" y="678" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="12" letter-spacing="4" fill="#00D4FF">GNOSIS</text>
+            <text x="95" y="695" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" font-style="italic" fill="#888888">γνῶσις — conocimiento</text>
+            <text x="95" y="712" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7.5" letter-spacing="1" fill="#CCCCCC">Análisis y Comprensión</text>
+            <text x="95" y="724" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7.5" letter-spacing="1" fill="#CCCCCC">de Datos</text>
+
+            <!-- ═══ BRAND MARK: TELOS Isotipo (verbatim) ═══ -->
+            <svg x="180" y="530" width="130" height="130" viewBox="0 0 300 300">
+                <g>
+                    <use href="#gstl-tls-arm"/><use href="#gstl-tls-arm" transform="rotate(45 150 150)"/>
+                    <use href="#gstl-tls-arm" transform="rotate(90 150 150)"/><use href="#gstl-tls-arm" transform="rotate(135 150 150)"/>
+                    <use href="#gstl-tls-arm" transform="rotate(180 150 150)"/><use href="#gstl-tls-arm" transform="rotate(225 150 150)"/>
+                    <use href="#gstl-tls-arm" transform="rotate(270 150 150)"/><use href="#gstl-tls-arm" transform="rotate(315 150 150)"/>
+                </g>
+                <use href="#gstl-tls-saturn-shape" stroke="#A4133C" stroke-width="5" stroke-opacity="0.15" fill="none"/>
+                <use href="#gstl-tls-saturn-shape" stroke="#A4133C" stroke-width="2.5" fill="none"/>
+                <circle cx="150" cy="150" r="3" fill="#FAFAF8" opacity="0.9"/>
+            </svg>
+            <!-- TELOS labels -->
+            <text x="245" y="678" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="12" letter-spacing="4" fill="#F26B8A">TELOS</text>
+            <text x="245" y="695" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" font-style="italic" fill="#888888">τέλος — fin, propósito</text>
+            <text x="245" y="712" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7.5" letter-spacing="1" fill="#CCCCCC">Cumplimiento Regulatorio</text>
+            <text x="245" y="724" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7.5" letter-spacing="1" fill="#CCCCCC">RegTech</text>
+
+            <!-- ═══ BRAND MARK: UMWELT Isotipo (verbatim) ═══ -->
+            <svg x="330" y="530" width="130" height="130" viewBox="0 0 300 300">
+                <g stroke="#FAFAF8" stroke-width="0.75" opacity="0.3" stroke-dasharray="4,8">
+                    <line x1="20" y1="150" x2="280" y2="150"/>
+                    <line x1="150" y1="20" x2="150" y2="280"/>
+                </g>
+                <use href="#gstl-umw-fragments" fill="none" stroke="#FF0066" stroke-width="6" stroke-opacity="0.15"/>
+                <use href="#gstl-umw-fragments" fill="none" stroke="#FF0066" stroke-width="1.75" stroke-opacity="0.9"/>
+                <circle cx="150" cy="150" r="10" fill="none" stroke="#FF0066" stroke-width="1" opacity="0.6" stroke-dasharray="2,3"/>
+                <circle cx="150" cy="150" r="2.5" fill="#FF0066" opacity="0.8"/>
+            </svg>
+            <!-- UMWELT labels -->
+            <text x="395" y="678" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="12" letter-spacing="4" fill="#FF80AA">UMWELT</text>
+            <text x="395" y="695" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" font-style="italic" fill="#888888">Umwelt — mundo circundante</text>
+            <text x="395" y="712" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7.5" letter-spacing="1" fill="#CCCCCC">Agentes IA</text>
+            <text x="395" y="724" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7.5" letter-spacing="1" fill="#CCCCCC">Vida Diaria</text>
+
+            <!-- ═══ BRAND MARK: DASEIN Isotipo (verbatim) ═══ -->
+            <svg x="480" y="530" width="130" height="130" viewBox="0 0 300 300">
+                <use href="#gstl-dsn-web-glow" stroke="#7B3FA0" stroke-opacity="0.15" fill="none"/>
+                <use href="#gstl-dsn-web" stroke="#7B3FA0" stroke-opacity="0.8" fill="none"/>
+                <use href="#gstl-dsn-web-links" stroke="#7B3FA0" stroke-opacity="0.3" fill="none"/>
+                <use href="#gstl-dsn-nodes" fill="#030303" stroke="#7B3FA0" stroke-width="1"/>
+                <circle cx="150" cy="150" r="8" fill="none" stroke="#FAFAF8" stroke-width="1.5"/>
+                <circle cx="150" cy="150" r="4" fill="#7B3FA0"/>
+            </svg>
+            <!-- DASEIN labels -->
+            <text x="545" y="678" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="12" letter-spacing="4" fill="#B99BD6">DASEIN</text>
+            <text x="545" y="695" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" font-style="italic" fill="#888888">Dasein — ser-ahí</text>
+            <text x="545" y="712" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7.5" letter-spacing="1" fill="#CCCCCC">Infraestructura Gubernamental</text>
+            <text x="545" y="724" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7.5" letter-spacing="1" fill="#CCCCCC">SupTech</text>
+
+            <!-- ═══ EDITORIAL LAYER: Bottom note ═══ -->
+            <line x1="40" y1="760" x2="600" y2="760" stroke="#1A1A1A" stroke-width="0.5"/>
+            <text x="320" y="778" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="6.5" letter-spacing="2" fill="#888888">Cada singularidad (solución) hereda la autoridad de la marca maestra y la extiende a un dominio específico.</text>
+        </svg>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>036</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.1 CONTENIDO — PÁGINA 3 DE 3 · TABLA + RATIONALE — 037
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.1 · Página 3 de 3</div>
+    </header>
+
+    <div class="content-block">
+        <div class="section-label">Elementos compartidos vs. exclusivos</div>
+        <table class="shared-table">
+            <thead>
+                <tr><th>Elemento</th><th>Hereda de GESTELL</th><th>Propio de Singularidad (Solución)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="element-name">Isotipo</td><td class="shared">Hexágono + vórtice (marca maestra)</td><td>Isotipo propio: GNOSIS (radial), TELOS (saturno), UMWELT (fragmentos), DASEIN (malla neural)</td></tr>
+                <tr><td class="element-name">Tipografía</td><td class="shared">Akzidenz Grotesk + Helvetica Neue</td><td>Misma familia — sin variación</td></tr>
+                <tr><td class="element-name">Color</td><td class="shared">Fondo #030303 / Texto #FAFAF8</td><td>Color de singularidad: Cyan, Carmesí, Magenta, Amatista</td></tr>
+                <tr><td class="element-name">Iconografía</td><td class="shared">Grid de 24px, stroke-width consistente</td><td>Formas específicas por dominio funcional</td></tr>
+                <tr><td class="element-name">Voz</td><td class="shared">Tono quirúrgico, definitivo, imparcial</td><td>Personalidad adaptada por producto</td></tr>
+                <tr><td class="element-name">Filosofía</td><td class="shared">Heidegger, Gestell, encuadre tecnológico</td><td>Concepto filosófico propio (γνῶσις, τέλος, Umwelt, Dasein)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="rationale">
+        <div class="rationale-label">Por qué Branded House</div>
+        <blockquote>La coherencia del sistema es la coherencia de la marca.</blockquote>
+        <div class="rationale-body">En un mercado donde las empresas de IA fragmentan su identidad entre múltiples productos desconectados, GESTELL elige la máxima cohesión. Cada singularidad (solución) <strong>hereda la autoridad de la marca maestra</strong> y la extiende a un dominio específico. El cliente no compra GNOSIS como producto aislado — compra <strong>GESTELL operando en modo GNOSIS</strong>. Esta arquitectura maximiza la transferencia de equity: cada victoria de una singularidad fortalece al sistema completo.</div>
+    </div>
+
+    <!-- Principio operativo -->
+    <div class="op-zone">
+        <div class="section-label">Principio operativo — Cómo se manifiesta en la ejecución diaria</div>
+        <div class="op-grid">
+            <div class="op-card op-card--gnosis">
+                <div class="op-card-title op-card-title--gnosis">Comunicación externa</div>
+                <div class="op-card-body">El email se firma «GESTELL · TELOS», no «TELOS» a secas. La propuesta comercial abre con GESTELL y presenta la singularidad (solución) como el modo operativo relevante para ese cliente.</div>
+            </div>
+            <div class="op-card op-card--telos">
+                <div class="op-card-title op-card-title--telos">Pitch deck</div>
+                <div class="op-card-body">Slide 1: GESTELL (marca maestra, propósito). Slide 2: la singularidad (solución) relevante al cliente. Nunca se presenta una singularidad sin haber establecido primero el ecosistema GESTELL.</div>
+            </div>
+            <div class="op-card op-card--umwelt">
+                <div class="op-card-title op-card-title--umwelt">Producto digital</div>
+                <div class="op-card-body">El dashboard de UMWELT lleva el isotipo de GESTELL en el header y el isotipo de UMWELT como marca de producto. La jerarquía visual es siempre: ecosistema primero, singularidad segundo.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rule-block">
+        <div class="rule-label">Regla de uso</div>
+        <div class="rule-text">Las singularidades (soluciones) nunca se presentan sin referencia a GESTELL. En toda comunicación, la marca maestra tiene presencia: ya sea como lockup principal, como footer, o como nota contextual. La fórmula es: «[SINGULARIDAD], parte del ecosistema GESTELL» o «GESTELL · [SINGULARIDAD]».</div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>037</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 2.2 — MAPA DE JERARQUÍA VISUAL — 038
+     SIN HEADER (estándar AAA)
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-1" class="page section-title-page">
+    <div class="stp__center">
+        <div class="stp__code">2.2</div>
+        <h1 class="stp__title">Mapa de Jerarquía<br>Visual</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Cómo la marca maestra se expresa a través de sus singularidades (soluciones)</p>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>038</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.2 CONTENIDO — PÁGINA 1 DE 3 · DESCOMPOSICIÓN CROMÁTICA — 039
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.2 · Página 1 de 3</div>
+    </header>
+
+    <div class="chroma-page">
+        <svg viewBox="0 0 640 800" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" role="img" aria-label="Descomposición cromática: el gradiente GESTELL se separa en los cuatro colores de sus singularidades">
+            <defs>
+                <pattern id="chroma-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(250,250,248,0.015)" stroke-width="0.5"/>
+                </pattern>
+                <!-- Editorial gradient: same brand colors, white reduced to subtle matiz -->
+                <radialGradient id="orb-editorial" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                    <stop offset="0%" stop-color="#00D4FF"/>
+                    <stop offset="15%" stop-color="#7B3FA0"/>
+                    <stop offset="35%" stop-color="#FF0066"/>
+                    <stop offset="65%" stop-color="rgba(250,250,248,0.15)"/>
+                    <stop offset="100%" stop-color="rgba(250,250,248,0.03)"/>
+                </radialGradient>
+            </defs>
+            <rect width="640" height="800" fill="url(#chroma-grid)"/>
+
+            <!-- ═══ Title ═══ -->
+            <text x="320" y="20" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" letter-spacing="4" fill="#AAAAAA">DESCOMPOSICIÓN CROMÁTICA · LA IDENTIDAD COMO ESPECTRO</text>
+
+            <!-- ═══ EDITORIAL: Newtype Orbe — bloom + rings + hairlines ═══ -->
+            <!-- Layer 1: Bloom/Halo (behind orbe) -->
+            <circle cx="320" cy="170" r="155" fill="url(#orb-editorial)" opacity="0.06"/>
+
+            <!-- Layer 2: Concentric energy rings -->
+            <circle cx="320" cy="170" r="135" fill="none" stroke="rgba(250,250,248,0.06)" stroke-width="0.5" stroke-dasharray="2,8"/>
+            <circle cx="320" cy="170" r="155" fill="none" stroke="rgba(250,250,248,0.04)" stroke-width="0.5" stroke-dasharray="3,12"/>
+            <circle cx="320" cy="170" r="175" fill="none" stroke="rgba(250,250,248,0.025)" stroke-width="0.5" stroke-dasharray="4,16"/>
+
+            <!-- Layer 3: Radial hairlines (8 rays, 45° apart) -->
+            <g stroke="rgba(250,250,248,0.06)" stroke-width="0.3">
+                <line x1="320" y1="40" x2="320" y2="0"/>
+                <line x1="412" y1="78" x2="440" y2="50"/>
+                <line x1="450" y1="170" x2="500" y2="170"/>
+                <line x1="412" y1="262" x2="440" y2="290"/>
+                <line x1="320" y1="300" x2="320" y2="350"/>
+                <line x1="228" y1="262" x2="200" y2="290"/>
+                <line x1="190" y1="170" x2="140" y2="170"/>
+                <line x1="228" y1="78" x2="200" y2="50"/>
+            </g>
+
+            <!-- Primary orbe -->
+            <circle cx="320" cy="170" r="120" fill="url(#orb-editorial)" opacity="0.95"/>
+            <circle cx="320" cy="170" r="120" fill="none" stroke="rgba(250,250,248,0.1)" stroke-width="0.75"/>
+
+            <!-- ═══ EDITORIAL: Logotipo solo (sin isotipo — variante autorizada) ═══ -->
+            <text x="320" y="320" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="20" letter-spacing="12" fill="#FAFAF8">GESTELL</text>
+            <text x="320" y="340" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="7" letter-spacing="3" fill="#AAAAAA">ESPECTRO COMPLETO · TODOS LOS COLORES CONVERGEN</text>
+
+            <!-- ═══ EDITORIAL: Dramatic decomposition flows ═══ -->
+            <!-- GNOSIS flow (Cyan — from left side of circle) -->
+            <path d="M 210,210 C 180,320 103,380 103,490" fill="none" stroke="#00D4FF" stroke-width="3" stroke-opacity="0.5"/>
+            <path d="M 210,210 C 180,320 103,380 103,490" fill="none" stroke="#00D4FF" stroke-width="10" stroke-opacity="0.05"/>
+            <circle cx="190" cy="290" r="2.5" fill="#00D4FF" opacity="0.6"/>
+            <circle cx="150" cy="370" r="2" fill="#00D4FF" opacity="0.4"/>
+            <circle cx="118" cy="440" r="1.5" fill="#00D4FF" opacity="0.25"/>
+
+            <!-- DASEIN flow (Amatista — from lower-left of circle) -->
+            <path d="M 260,278 C 252,360 248,400 248,490" fill="none" stroke="#7B3FA0" stroke-width="3" stroke-opacity="0.5"/>
+            <path d="M 260,278 C 252,360 248,400 248,490" fill="none" stroke="#7B3FA0" stroke-width="10" stroke-opacity="0.05"/>
+            <circle cx="255" cy="340" r="2.5" fill="#7B3FA0" opacity="0.6"/>
+            <circle cx="250" cy="400" r="2" fill="#7B3FA0" opacity="0.4"/>
+            <circle cx="249" cy="450" r="1.5" fill="#7B3FA0" opacity="0.25"/>
+
+            <!-- UMWELT flow (Magenta — from lower-right of circle) -->
+            <path d="M 380,278 C 388,360 393,400 393,490" fill="none" stroke="#FF0066" stroke-width="3" stroke-opacity="0.5"/>
+            <path d="M 380,278 C 388,360 393,400 393,490" fill="none" stroke="#FF0066" stroke-width="10" stroke-opacity="0.05"/>
+            <circle cx="385" cy="340" r="2.5" fill="#FF0066" opacity="0.6"/>
+            <circle cx="390" cy="400" r="2" fill="#FF0066" opacity="0.4"/>
+            <circle cx="392" cy="450" r="1.5" fill="#FF0066" opacity="0.25"/>
+
+            <!-- TELOS flow (Carmesí — from right side of circle) -->
+            <path d="M 430,210 C 460,320 538,380 538,490" fill="none" stroke="#A4133C" stroke-width="3" stroke-opacity="0.5"/>
+            <path d="M 430,210 C 460,320 538,380 538,490" fill="none" stroke="#A4133C" stroke-width="10" stroke-opacity="0.05"/>
+            <circle cx="450" cy="290" r="2.5" fill="#A4133C" opacity="0.6"/>
+            <circle cx="495" cy="370" r="2" fill="#A4133C" opacity="0.4"/>
+            <circle cx="525" cy="440" r="1.5" fill="#A4133C" opacity="0.25"/>
+
+            <!-- ═══ Color arrival blocks (equal width, equal gaps) ═══ -->
+            <!-- GNOSIS -->
+            <rect x="40" y="500" width="125" height="16" fill="#00D4FF" opacity="0.9"/>
+            <text x="103" y="538" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#00D4FF">GNOSIS</text>
+            <text x="103" y="556" text-anchor="middle" font-family="'Courier New',monospace" font-size="7.5" fill="#888888">#00D4FF · Cyan</text>
+            <text x="103" y="572" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#CCCCCC">Análisis y Comprensión</text>
+            <text x="103" y="586" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#CCCCCC">de Datos</text>
+
+            <!-- DASEIN -->
+            <rect x="185" y="500" width="125" height="16" fill="#7B3FA0" opacity="0.9"/>
+            <text x="248" y="538" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#B99BD6">DASEIN</text>
+            <text x="248" y="556" text-anchor="middle" font-family="'Courier New',monospace" font-size="7.5" fill="#888888">#7B3FA0 · Amatista</text>
+            <text x="248" y="572" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#CCCCCC">Infraestructura</text>
+            <text x="248" y="586" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#CCCCCC">Gubernamental · SupTech</text>
+
+            <!-- UMWELT -->
+            <rect x="330" y="500" width="125" height="16" fill="#FF0066" opacity="0.9"/>
+            <text x="393" y="538" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#FF80AA">UMWELT</text>
+            <text x="393" y="556" text-anchor="middle" font-family="'Courier New',monospace" font-size="7.5" fill="#888888">#FF0066 · Magenta</text>
+            <text x="393" y="572" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#CCCCCC">Agentes IA</text>
+            <text x="393" y="586" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#CCCCCC">Vida Diaria</text>
+
+            <!-- TELOS -->
+            <rect x="475" y="500" width="125" height="16" fill="#A4133C" opacity="0.9"/>
+            <text x="538" y="538" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#F26B8A">TELOS</text>
+            <text x="538" y="556" text-anchor="middle" font-family="'Courier New',monospace" font-size="7.5" fill="#888888">#A4133C · Carmesí</text>
+            <text x="538" y="572" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#CCCCCC">Cumplimiento</text>
+            <text x="538" y="586" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#CCCCCC">Regulatorio · RegTech</text>
+
+            <!-- ═══ Divider ═══ -->
+            <line x1="40" y1="616" x2="600" y2="616" stroke="#1A1A1A" stroke-width="0.5"/>
+
+            <!-- ═══ REGLA CROMÁTICA FUNDAMENTAL ═══ -->
+            <text x="320" y="645" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="10" letter-spacing="5" fill="#FAFAF8">REGLA CROMÁTICA FUNDAMENTAL</text>
+
+            <!-- Left column -->
+            <rect x="40" y="665" width="270" height="1" fill="#1A1A1A"/>
+            <text x="40" y="685" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="8" letter-spacing="3" fill="#00D4FF">ESPECTRO UNIFICADO = GESTELL</text>
+            <text x="40" y="704" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" line-height="1.6" fill="#AAAAAA">Cuando los cuatro colores aparecen juntos — en el</text>
+            <text x="40" y="718" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">gradiente del vórtice, en materiales institucionales,</text>
+            <text x="40" y="732" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">en la portada del brandbook — es GESTELL hablando</text>
+            <text x="40" y="746" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">como sistema completo. El espectro es indivisible:</text>
+            <text x="40" y="760" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">ningún color domina, todos coexisten.</text>
+
+            <!-- Right column -->
+            <rect x="350" y="665" width="250" height="1" fill="#1A1A1A"/>
+            <text x="350" y="685" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="8" letter-spacing="3" fill="#FAFAF8">COLOR AISLADO = SINGULARIDAD (SOLUCIÓN)</text>
+            <text x="350" y="704" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">Cuando un solo color domina — en la interfaz de</text>
+            <text x="350" y="718" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">un producto, en una propuesta comercial específica,</text>
+            <text x="350" y="732" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">en documentación técnica — es la singularidad</text>
+            <text x="350" y="746" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">(solución) hablando dentro del sistema. El color</text>
+            <text x="350" y="760" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="8" fill="#AAAAAA">identifica la solución sin necesidad de texto.</text>
+
+            <!-- ═══ Nota de variante ═══ -->
+            <rect x="40" y="780" width="560" height="1" fill="#1A1A1A"/>
+            <text x="320" y="796" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="6.5" letter-spacing="2" fill="#888888">Variante «solo logotipo» (GESTELL sin isotipo) autorizada para contextos cromáticos. Especificaciones completas en Vol. III.</text>
+        </svg>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>039</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.2 CONTENIDO — PÁGINA 2 DE 3 · DIAL DE VOLUMEN DE MARCA — 040
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.2 · Página 2 de 3</div>
+    </header>
+
+    <div class="dial-zone">
+        <div>
+            <div class="section-label section-label--lg">Dial de volumen de marca</div>
+            <div class="dial-intro">¿Cuánto GESTELL y cuánta singularidad (solución) aparece en cada contexto? El <strong>volumen de marca</strong> se ajusta según la audiencia y el touchpoint. La marca maestra nunca desaparece — solo modula su protagonismo.</div>
+        </div>
+
+        <div>
+            <!-- INSTITUCIONAL -->
+            <div class="dial-row">
+                <div>
+                    <div class="dial-context" style="color:var(--text-1);">Institucional</div>
+                </div>
+                <div>
+                    <div class="dial-bar">
+                        <div class="dial-fill-master" style="width:100%;"></div>
+                    </div>
+                    <div class="dial-bar-labels">
+                        <span class="dial-bar-label">GESTELL 100%</span>
+                        <span class="dial-bar-label">Singularidad 0%</span>
+                    </div>
+                </div>
+                <div class="dial-examples">Inversores, board, prensa, web corporativa, reporte anual, onboarding institucional.</div>
+            </div>
+
+            <!-- COMERCIAL -->
+            <div class="dial-row">
+                <div>
+                    <div class="dial-context" style="color:var(--gnosis-text);">Comercial</div>
+                </div>
+                <div>
+                    <div class="dial-bar">
+                        <div class="dial-fill-master" style="width:60%;"></div>
+                        <div class="dial-fill-sing" style="width:40%;background:linear-gradient(90deg,#00D4FF,#A4133C,#FF0066,#7B3FA0);"></div>
+                    </div>
+                    <div class="dial-bar-labels">
+                        <span class="dial-bar-label">GESTELL 60%</span>
+                        <span class="dial-bar-label">Singularidad 40%</span>
+                    </div>
+                </div>
+                <div class="dial-examples">Pitch deck, propuesta comercial, demo a cliente, caso de estudio, landing page de producto.</div>
+            </div>
+
+            <!-- PRODUCTO -->
+            <div class="dial-row">
+                <div>
+                    <div class="dial-context" style="color:var(--telos-text);">Producto</div>
+                </div>
+                <div>
+                    <div class="dial-bar">
+                        <div class="dial-fill-master" style="width:30%;"></div>
+                        <div class="dial-fill-sing" style="width:70%;background:linear-gradient(90deg,#00D4FF,#A4133C,#FF0066,#7B3FA0);"></div>
+                    </div>
+                    <div class="dial-bar-labels">
+                        <span class="dial-bar-label">GESTELL 30%</span>
+                        <span class="dial-bar-label">Singularidad 70%</span>
+                    </div>
+                </div>
+                <div class="dial-examples">Dashboard UI, documentación técnica, API docs, pantallas de producto, notificaciones del sistema.</div>
+            </div>
+
+            <!-- TÁCTICO -->
+            <div class="dial-row">
+                <div>
+                    <div class="dial-context" style="color:var(--umwelt-text);">Táctico</div>
+                </div>
+                <div>
+                    <div class="dial-bar">
+                        <div class="dial-fill-master" style="width:50%;opacity:0.4;"></div>
+                        <div class="dial-fill-sing" style="width:50%;background:linear-gradient(90deg,#00D4FF,#A4133C,#FF0066,#7B3FA0);opacity:0.4;"></div>
+                    </div>
+                    <div class="dial-bar-labels">
+                        <span class="dial-bar-label">Flexible</span>
+                        <span class="dial-bar-label">Flexible</span>
+                    </div>
+                </div>
+                <div class="dial-examples">Social media, blog, newsletter, eventos, webinars. Lidera quien sea más relevante para la audiencia.</div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="dial-legend">
+            <div class="dial-legend-item">
+                <div class="dial-legend-swatch" style="background:var(--gstl-white);"></div>
+                <div class="dial-legend-text">Gestell (marca maestra)</div>
+            </div>
+            <div class="dial-legend-item">
+                <div class="dial-legend-swatch" style="background:linear-gradient(90deg,#00D4FF,#A4133C,#FF0066,#7B3FA0);"></div>
+                <div class="dial-legend-text">Singularidad (solución)</div>
+            </div>
+        </div>
+
+        <!-- Rule -->
+        <div class="rule-block">
+            <div class="rule-label">Regla inviolable</div>
+            <div class="rule-text">En ningún nivel del dial la marca maestra llega a 0%. GESTELL siempre tiene presencia — como isotipo en header, como mención en footer, como «parte del ecosistema GESTELL» en copy. La singularidad (solución) puede modular su volumen, pero el sistema siempre se identifica.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>040</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.2 CONTENIDO — PÁGINA 3 DE 3 · MATRIZ DE LOCKUPS — 041
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.2 · Página 3 de 3</div>
+    </header>
+
+    <div class="section-label">Matriz de lockups — combinaciones autorizadas</div>
+
+    <div class="lockup-grid">
+        <!-- LOCKUP A: Horizontal completo -->
+        <div class="lockup-card">
+            <div class="lockup-type">A · Horizontal Completo</div>
+            <div class="lockup-context">Pitch decks, headers web, propuestas comerciales. Máxima identificación del ecosistema.</div>
+            <div class="lockup-render">
+                <svg viewBox="0 0 275 60" width="260" height="52" xmlns="http://www.w3.org/2000/svg">
+                    <svg x="0" y="5" width="40" height="50" viewBox="50 30 400 350">
+                        <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                            <path d="M250 230 A180 180 0 0 1 450 230"/><path d="M250 230 A180 180 0 0 1 391.4 371.4"/>
+                            <path d="M250 230 A180 180 0 0 1 250 430"/><path d="M250 230 A180 180 0 0 1 108.6 371.4"/>
+                            <path d="M250 230 A180 180 0 0 1 50 230"/><path d="M250 230 A180 180 0 0 1 108.6 88.6"/>
+                            <path d="M250 230 A180 180 0 0 1 250 30"/><path d="M250 230 A180 180 0 0 1 391.4 88.6"/>
+                        </g>
+                        <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160" fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+                        <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+                    </svg>
+                    <text x="50" y="35" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#FAFAF8">GESTELL</text>
+                    <line x1="148" y1="15" x2="148" y2="45" stroke="#1A1A1A" stroke-width="1"/>
+                    <svg x="158" y="8" width="36" height="44" viewBox="0 0 300 300">
+                        <g fill="none" stroke="#00D4FF"><circle cx="150" cy="150" r="110" stroke-width="1.5" stroke-opacity="0.4"/></g>
+                        <g><use href="#gstl-gns-ray"/><use href="#gstl-gns-ray" transform="rotate(90 150 150)"/><use href="#gstl-gns-ray" transform="rotate(180 150 150)"/><use href="#gstl-gns-ray" transform="rotate(270 150 150)"/></g>
+                        <circle cx="150" cy="150" r="12" fill="none" stroke="#FAFAF8" stroke-width="2"/><circle cx="150" cy="150" r="5" fill="#00D4FF"/>
+                    </svg>
+                    <text x="202" y="35" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="11" letter-spacing="4" fill="#00D4FF">GNOSIS</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- LOCKUP E: Horizontal simplificado (sin isotipo de singularidad) -->
+        <div class="lockup-card">
+            <div class="lockup-type">E · Horizontal Simplificado</div>
+            <div class="lockup-context">Headers de email, footers, breadcrumbs UI, barras de navegación. Para tamaños reducidos.</div>
+            <div class="lockup-render">
+                <svg viewBox="0 0 225 60" width="210" height="52" xmlns="http://www.w3.org/2000/svg">
+                    <svg x="0" y="5" width="40" height="50" viewBox="50 30 400 350">
+                        <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                            <path d="M250 230 A180 180 0 0 1 450 230"/><path d="M250 230 A180 180 0 0 1 391.4 371.4"/>
+                            <path d="M250 230 A180 180 0 0 1 250 430"/><path d="M250 230 A180 180 0 0 1 108.6 371.4"/>
+                            <path d="M250 230 A180 180 0 0 1 50 230"/><path d="M250 230 A180 180 0 0 1 108.6 88.6"/>
+                            <path d="M250 230 A180 180 0 0 1 250 30"/><path d="M250 230 A180 180 0 0 1 391.4 88.6"/>
+                        </g>
+                        <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160" fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+                        <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+                    </svg>
+                    <text x="50" y="35" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#FAFAF8">GESTELL</text>
+                    <text x="148" y="35" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="13" fill="#AAAAAA"> · </text>
+                    <text x="164" y="35" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="11" letter-spacing="4" fill="#F26B8A">TELOS</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- LOCKUP B: Vertical -->
+        <div class="lockup-card">
+            <div class="lockup-type">B · Vertical Apilado</div>
+            <div class="lockup-context">App icons, favicons, formatos cuadrados, avatares de redes sociales.</div>
+            <div class="lockup-render">
+                <svg viewBox="0 0 140 110" width="120" height="95" xmlns="http://www.w3.org/2000/svg">
+                    <svg x="30" y="0" width="80" height="55" viewBox="50 30 400 350">
+                        <g clip-path="url(#gstl-matrix)" fill="none" stroke="url(#ai-core-energy)" stroke-width="8.5">
+                            <path d="M250 230 A180 180 0 0 1 450 230"/><path d="M250 230 A180 180 0 0 1 391.4 371.4"/>
+                            <path d="M250 230 A180 180 0 0 1 250 430"/><path d="M250 230 A180 180 0 0 1 108.6 371.4"/>
+                            <path d="M250 230 A180 180 0 0 1 50 230"/><path d="M250 230 A180 180 0 0 1 108.6 88.6"/>
+                            <path d="M250 230 A180 180 0 0 1 250 30"/><path d="M250 230 A180 180 0 0 1 391.4 88.6"/>
+                        </g>
+                        <polygon points="250,90 371.24,160 371.24,300 250,370 128.76,300 128.76,160" fill="none" stroke="#FAFAF8" stroke-width="8" stroke-linejoin="round"/>
+                        <circle cx="250" cy="230" r="10.5" fill="#00D4FF"/>
+                    </svg>
+                    <text x="70" y="68" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="7" letter-spacing="4" fill="#FAFAF8">GESTELL</text>
+                    <line x1="30" y1="76" x2="110" y2="76" stroke="#1A1A1A" stroke-width="0.5"/>
+                    <text x="70" y="90" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="7" letter-spacing="3" fill="#FF80AA">UMWELT</text>
+                    <text x="70" y="102" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="5" fill="#888888">Agentes IA · Vida Diaria</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- LOCKUP D: Endorsement -->
+        <div class="lockup-card">
+            <div class="lockup-type">D · Endorsement</div>
+            <div class="lockup-context">Dashboards, pantallas de login, splash screens, material técnico de producto.</div>
+            <div class="lockup-render">
+                <svg viewBox="0 0 180 100" width="155" height="85" xmlns="http://www.w3.org/2000/svg">
+                    <svg x="40" y="0" width="100" height="56" viewBox="0 0 300 300">
+                        <use href="#gstl-dsn-web" stroke="#7B3FA0" stroke-opacity="0.8" fill="none"/>
+                        <use href="#gstl-dsn-web-links" stroke="#7B3FA0" stroke-opacity="0.3" fill="none"/>
+                        <use href="#gstl-dsn-nodes" fill="#030303" stroke="#7B3FA0" stroke-width="1"/>
+                        <circle cx="150" cy="150" r="8" fill="none" stroke="#FAFAF8" stroke-width="1.5"/>
+                        <circle cx="150" cy="150" r="4" fill="#7B3FA0"/>
+                    </svg>
+                    <text x="90" y="70" text-anchor="middle" font-family="'Akzidenz-Grotesk','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="11" letter-spacing="5" fill="#B99BD6">DASEIN</text>
+                    <line x1="30" y1="80" x2="150" y2="80" stroke="#1A1A1A" stroke-width="0.5"/>
+                    <text x="90" y="93" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="5.5" letter-spacing="2" fill="#888888">PARTE DEL ECOSISTEMA GESTELL</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lockup C inline + rule -->
+    <div class="lockup-bottom-row">
+        <div class="lockup-card lockup-card--horizontal">
+            <div>
+                <div class="lockup-type">C · Solo Logotipos</div>
+                <div class="lockup-context">Documentación legal, contratos, firmas de email, footers.</div>
+            </div>
+            <div class="lockup-text-render">GESTELL <span class="lockup-text-sep">·</span> <span style="color:var(--gnosis-text);">GNOSIS</span></div>
+        </div>
+        <div class="rule-block">
+            <div class="rule-label">Regla de uso</div>
+            <div class="rule-text">Lockups A y E: GESTELL lidera (Institucional/Comercial). Lockups B y D: singularidad (solución) lidera (Producto/Táctico). Lockup C: contextos mínimos. Proporciones exactas en Vol. III. Variante «solo logotipo» autorizada — ver p. 039.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>041</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 2.3 — REGLAS POR SUB-MARCA — 042
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-2" class="page section-title-page">
+    <div class="stp__center">
+        <div class="stp__code">2.3</div>
+        <h1 class="stp__title">Reglas por<br>Sub-Marca</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Herencia, identidad propia y prohibiciones de cada singularidad (solución)</p>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>042</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.3 CONTENIDO — PÁGINA 1 DE 4 · TABLA COMPARATIVA — 043
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.3 · Página 1 de 4</div>
+    </header>
+
+    <div class="section-label">Vista panorámica — Las cuatro singularidades (soluciones) en paralelo</div>
+
+    <table class="comp-table">
+        <thead>
+            <tr>
+                <th style="width:18%;">Atributo</th>
+                <th style="color:var(--gnosis-text);">GNOSIS</th>
+                <th style="color:var(--telos-text);">TELOS</th>
+                <th style="color:var(--umwelt-text);">UMWELT</th>
+                <th style="color:var(--dasein-text);">DASEIN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Etimología</td>
+                <td>γνῶσις — conocimiento</td>
+                <td>τέλος — fin, propósito</td>
+                <td>Umwelt — mundo circundante</td>
+                <td>Dasein — ser-ahí</td>
+            </tr>
+            <tr>
+                <td>Dominio</td>
+                <td>Análisis y comprensión de datos</td>
+                <td>Cumplimiento regulatorio (RegTech)</td>
+                <td>Agentes IA de vida diaria</td>
+                <td>Infraestructura gubernamental (SupTech)</td>
+            </tr>
+            <tr>
+                <td>ICP primario</td>
+                <td>CTO / Chief Data Officer</td>
+                <td>Oficial de Cumplimiento / Responsable PLD</td>
+                <td>Profesional independiente / Persona física</td>
+                <td>Director de Supervisión / Autoridad reguladora</td>
+            </tr>
+            <tr>
+                <td>Color</td>
+                <td style="color:var(--gnosis-text);">#00D4FF · Cyan</td>
+                <td style="color:var(--telos-text);">#A4133C · Carmesí</td>
+                <td style="color:var(--umwelt-text);">#FF0066 · Magenta</td>
+                <td style="color:var(--dasein-text);">#7B3FA0 · Amatista</td>
+            </tr>
+            <tr>
+                <td>Token CSS</td>
+                <td><code style="font-size:var(--ts-micro);color:var(--text-3);">var(--gnosis)</code></td>
+                <td><code style="font-size:var(--ts-micro);color:var(--text-3);">var(--telos)</code></td>
+                <td><code style="font-size:var(--ts-micro);color:var(--text-3);">var(--umwelt)</code></td>
+                <td><code style="font-size:var(--ts-micro);color:var(--text-3);">var(--dasein)</code></td>
+            </tr>
+            <tr>
+                <td>Token texto AAA</td>
+                <td><code style="font-size:var(--ts-micro);color:var(--text-3);">var(--gnosis-text)</code></td>
+                <td><code style="font-size:var(--ts-micro);color:var(--text-3);">var(--telos-text)</code></td>
+                <td><code style="font-size:var(--ts-micro);color:var(--text-3);">var(--umwelt-text)</code></td>
+                <td><code style="font-size:var(--ts-micro);color:var(--text-3);">var(--dasein-text)</code></td>
+            </tr>
+            <tr>
+                <td>Isotipo</td>
+                <td>Radial (Progresión Áurea)</td>
+                <td>Saturno × Aegis I</td>
+                <td>Lente Perceptiva (Fragmentos)</td>
+                <td>Malla Neuronal</td>
+            </tr>
+            <tr>
+                <td>Tono de voz</td>
+                <td>Analítico, revelador, preciso</td>
+                <td>Autoritativo, regulatorio, categórico</td>
+                <td>Accesible, práctico, personal</td>
+                <td>Institucional, sistémico, supervisorio</td>
+            </tr>
+            <tr>
+                <td>Industria</td>
+                <td>Todo tipo de empresa con datos a escala</td>
+                <td>Actividades vulnerables (LFPIORPI), finanzas</td>
+                <td>Transversal: legal, contable, freelancer</td>
+                <td>Gobierno, bancos centrales, reguladores</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="rule-block">
+        <div class="rule-label">Principio de lectura</div>
+        <div class="rule-text">Lo que comparten las cuatro singularidades (soluciones) es GESTELL: fondo #030303, texto #FAFAF8, tipografía Akzidenz Grotesk + Helvetica Neue, tono quirúrgico y definitivo, y el isotipo master en todo header. Lo que las diferencia es exclusivamente: color, isotipo propio, dominio funcional y tono de voz.</div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>043</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.3 CONTENIDO — PÁGINA 2 DE 4 · FICHAS GNOSIS + TELOS — 044
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.3 · Página 2 de 4</div>
+    </header>
+
+    <div class="fichas-split">
+        <!-- FICHA GNOSIS -->
+        <div class="ficha">
+            <div class="ficha-header">
+                <svg class="ficha-isotipo" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#00D4FF"><circle cx="150" cy="150" r="110" stroke-width="1.5" stroke-opacity="0.4"/></g>
+                    <g><use href="#gstl-gns-ray"/><use href="#gstl-gns-ray" transform="rotate(45 150 150)"/><use href="#gstl-gns-ray" transform="rotate(90 150 150)"/><use href="#gstl-gns-ray" transform="rotate(135 150 150)"/><use href="#gstl-gns-ray" transform="rotate(180 150 150)"/><use href="#gstl-gns-ray" transform="rotate(225 150 150)"/><use href="#gstl-gns-ray" transform="rotate(270 150 150)"/><use href="#gstl-gns-ray" transform="rotate(315 150 150)"/></g>
+                    <circle cx="150" cy="150" r="12" fill="none" stroke="#FAFAF8" stroke-width="2"/><circle cx="150" cy="150" r="5" fill="#00D4FF"/>
+                </svg>
+                <div class="ficha-name" style="color:var(--gnosis-text);">GNOSIS</div>
+                <div class="ficha-etym">γνῶσις — conocimiento que se revela a sí mismo</div>
+            </div>
+            <div class="ficha-meta">
+                <div class="ficha-swatch" style="background:#00D4FF;"></div>
+                <span class="ficha-hex">#00D4FF · Cyan</span>
+                <span class="ficha-token">var(--gnosis)</span>
+            </div>
+            <div class="ficha-domain">Análisis y comprensión profunda de datos. ICP: CTO / Chief Data Officer en empresas que generan o consumen datos a escala.</div>
+            <div class="ficha-message ficha-message--gnosis">
+                <div class="ficha-message-label">Mensaje clave</div>
+                <div class="ficha-message-text">«GNOSIS consolida, valida y visualiza todos tus datos en un solo sistema inteligente — eliminando fragmentación, errores manuales y reportes tardíos.»</div>
+            </div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--hereda">Hereda de GESTELL</div><div class="ficha-block-text">Fondo #030303, texto #FAFAF8, Akzidenz Grotesk + Helvetica Neue, tono quirúrgico, isotipo master en header, filosofía heideggeriana.</div></div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--propio c-gnosis">Propio</div><div class="ficha-block-text">Color cyan (#00D4FF), isotipo radial, vocabulario analítico-revelador, énfasis en visualización de datos y consolidación.</div></div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--prohibido">Prohibido</div><div class="ficha-block-text">Usar carmesí, magenta o amatista. Usar isotipos de otras singularidades. Presentarse sin referencia a GESTELL.</div></div>
+            <div class="ficha-touchpoints"><div class="ficha-touchpoints-label">Touchpoints</div><div class="ficha-tags"><span class="ficha-tag">Dashboard</span><span class="ficha-tag">API Docs</span><span class="ficha-tag">Data Reports</span><span class="ficha-tag">Pitch B2B</span></div></div>
+            <div class="ficha-dodont">
+                <div class="ficha-do ficha-do--gnosis"><div class="ficha-do-label c-gnosis">✓ Así sí</div>GNOSIS en cyan sobre fondo #030303</div>
+                <div class="ficha-dont"><div class="ficha-dont-label">✗ Así no</div>GNOSIS en carmesí o con isotipo de TELOS</div>
+            </div>
+        </div>
+
+        <!-- FICHA TELOS -->
+        <div class="ficha">
+            <div class="ficha-header">
+                <svg class="ficha-isotipo" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <g><use href="#gstl-tls-arm"/><use href="#gstl-tls-arm" transform="rotate(45 150 150)"/><use href="#gstl-tls-arm" transform="rotate(90 150 150)"/><use href="#gstl-tls-arm" transform="rotate(135 150 150)"/><use href="#gstl-tls-arm" transform="rotate(180 150 150)"/><use href="#gstl-tls-arm" transform="rotate(225 150 150)"/><use href="#gstl-tls-arm" transform="rotate(270 150 150)"/><use href="#gstl-tls-arm" transform="rotate(315 150 150)"/></g>
+                    <use href="#gstl-tls-saturn-shape" stroke="#A4133C" stroke-width="5" stroke-opacity="0.15" fill="none"/>
+                    <use href="#gstl-tls-saturn-shape" stroke="#A4133C" stroke-width="2.5" fill="none"/>
+                    <circle cx="150" cy="150" r="3" fill="#FAFAF8" opacity="0.9"/>
+                </svg>
+                <div class="ficha-name" style="color:var(--telos-text);">TELOS</div>
+                <div class="ficha-etym">τέλος — el fin hacia el cual todo se ordena</div>
+            </div>
+            <div class="ficha-meta">
+                <div class="ficha-swatch" style="background:#A4133C;"></div>
+                <span class="ficha-hex">#A4133C · Carmesí</span>
+                <span class="ficha-token">var(--telos)</span>
+            </div>
+            <div class="ficha-domain">Cumplimiento regulatorio y auditoría (RegTech). ICP: Oficial de Cumplimiento / Responsable PLD en actividades vulnerables y sector financiero.</div>
+            <div class="ficha-message ficha-message--telos">
+                <div class="ficha-message-label">Mensaje clave</div>
+                <div class="ficha-message-text">«TELOS automatiza tu cumplimiento regulatorio con agentes de IA que procesan, validan y reportan de manera autónoma — para que tu operación cumpla antes de que el regulador pregunte.»</div>
+            </div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--hereda">Hereda de GESTELL</div><div class="ficha-block-text">Fondo #030303, texto #FAFAF8, Akzidenz Grotesk + Helvetica Neue, tono quirúrgico, isotipo master en header, filosofía heideggeriana.</div></div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--propio c-telos">Propio</div><div class="ficha-block-text">Color carmesí (#A4133C), isotipo Saturno, vocabulario regulatorio-autoritativo, énfasis en compliance autónomo y reportes probatorios.</div></div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--prohibido">Prohibido</div><div class="ficha-block-text">Usar cyan, magenta o amatista. Usar isotipos de otras singularidades. Presentarse sin referencia a GESTELL.</div></div>
+            <div class="ficha-touchpoints"><div class="ficha-touchpoints-label">Touchpoints</div><div class="ficha-tags"><span class="ficha-tag">Reportes PLD</span><span class="ficha-tag">Dashboard AML</span><span class="ficha-tag">Auditorías</span><span class="ficha-tag">Compliance UI</span></div></div>
+            <div class="ficha-dodont">
+                <div class="ficha-do ficha-do--telos"><div class="ficha-do-label c-telos">✓ Así sí</div>TELOS en carmesí con lenguaje regulatorio</div>
+                <div class="ficha-dont"><div class="ficha-dont-label">✗ Así no</div>TELOS con tono casual o colores de UMWELT</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>044</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.3 CONTENIDO — PÁGINA 3 DE 4 · FICHAS UMWELT + DASEIN — 045
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.3 · Página 3 de 4</div>
+    </header>
+
+    <div class="fichas-split">
+        <!-- FICHA UMWELT -->
+        <div class="ficha">
+            <div class="ficha-header">
+                <svg class="ficha-isotipo" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke="#FAFAF8" stroke-width="0.75" opacity="0.3" stroke-dasharray="4,8"><line x1="20" y1="150" x2="280" y2="150"/><line x1="150" y1="20" x2="150" y2="280"/></g>
+                    <use href="#gstl-umw-fragments" fill="none" stroke="#FF0066" stroke-width="6" stroke-opacity="0.15"/>
+                    <use href="#gstl-umw-fragments" fill="none" stroke="#FF0066" stroke-width="1.75" stroke-opacity="0.9"/>
+                    <circle cx="150" cy="150" r="10" fill="none" stroke="#FF0066" stroke-width="1" opacity="0.6" stroke-dasharray="2,3"/>
+                    <circle cx="150" cy="150" r="2.5" fill="#FF0066" opacity="0.8"/>
+                </svg>
+                <div class="ficha-name" style="color:var(--umwelt-text);">UMWELT</div>
+                <div class="ficha-etym">Umwelt — el entorno perceptivo propio de cada organismo</div>
+            </div>
+            <div class="ficha-meta">
+                <div class="ficha-swatch" style="background:#FF0066;"></div>
+                <span class="ficha-hex">#FF0066 · Magenta</span>
+                <span class="ficha-token">var(--umwelt)</span>
+            </div>
+            <div class="ficha-domain">Agentes de IA que automatizan la vida diaria del individuo. ICP: Profesional independiente, persona física — legal, contable, freelancer, pequeño empresario.</div>
+            <div class="ficha-message ficha-message--umwelt">
+                <div class="ficha-message-label">Mensaje clave</div>
+                <div class="ficha-message-text">«UMWELT conecta tus aplicaciones diarias con agentes de IA que automatizan tus tareas repetitivas — para que recuperes las horas que tu operación te roba.»</div>
+            </div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--hereda">Hereda de GESTELL</div><div class="ficha-block-text">Fondo #030303, texto #FAFAF8, Akzidenz Grotesk + Helvetica Neue, tono quirúrgico, isotipo master en header, filosofía heideggeriana.</div></div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--propio c-umwelt">Propio</div><div class="ficha-block-text">Color magenta (#FF0066), isotipo de fragmentos, vocabulario accesible-práctico, énfasis en automatización personal y recuperación de tiempo.</div></div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--prohibido">Prohibido</div><div class="ficha-block-text">Usar cyan, carmesí o amatista. Usar isotipos de otras singularidades. Presentarse sin referencia a GESTELL.</div></div>
+            <div class="ficha-touchpoints"><div class="ficha-touchpoints-label">Touchpoints</div><div class="ficha-tags"><span class="ficha-tag">App Móvil</span><span class="ficha-tag">Integraciones</span><span class="ficha-tag">Onboarding</span><span class="ficha-tag">Social Media</span></div></div>
+            <div class="ficha-dodont">
+                <div class="ficha-do ficha-do--umwelt"><div class="ficha-do-label c-umwelt">✓ Así sí</div>UMWELT con tono accesible dirigido a personas</div>
+                <div class="ficha-dont"><div class="ficha-dont-label">✗ Así no</div>UMWELT con jerga regulatoria o tono institucional</div>
+            </div>
+        </div>
+
+        <!-- FICHA DASEIN -->
+        <div class="ficha">
+            <div class="ficha-header">
+                <svg class="ficha-isotipo" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <use href="#gstl-dsn-web-glow" stroke="#7B3FA0" stroke-opacity="0.15" fill="none"/>
+                    <use href="#gstl-dsn-web" stroke="#7B3FA0" stroke-opacity="0.8" fill="none"/>
+                    <use href="#gstl-dsn-web-links" stroke="#7B3FA0" stroke-opacity="0.3" fill="none"/>
+                    <use href="#gstl-dsn-nodes" fill="#030303" stroke="#7B3FA0" stroke-width="1"/>
+                    <circle cx="150" cy="150" r="8" fill="none" stroke="#FAFAF8" stroke-width="1.5"/>
+                    <circle cx="150" cy="150" r="4" fill="#7B3FA0"/>
+                </svg>
+                <div class="ficha-name" style="color:var(--dasein-text);">DASEIN</div>
+                <div class="ficha-etym">Dasein — la existencia que se comprende a sí misma</div>
+            </div>
+            <div class="ficha-meta">
+                <div class="ficha-swatch" style="background:#7B3FA0;"></div>
+                <span class="ficha-hex">#7B3FA0 · Amatista</span>
+                <span class="ficha-token">var(--dasein)</span>
+            </div>
+            <div class="ficha-domain">Infraestructura tecnológica gubernamental y de supervisión (SupTech). ICP: Director de Supervisión, autoridad reguladora, bancos centrales.</div>
+            <div class="ficha-message ficha-message--dasein">
+                <div class="ficha-message-label">Mensaje clave</div>
+                <div class="ficha-message-text">«DASEIN despliega infraestructura de supervisión autónoma que ingesta, valida y analiza datos de entidades reguladas — dándote visión sistémica en tiempo real.»</div>
+            </div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--hereda">Hereda de GESTELL</div><div class="ficha-block-text">Fondo #030303, texto #FAFAF8, Akzidenz Grotesk + Helvetica Neue, tono quirúrgico, isotipo master en header, filosofía heideggeriana.</div></div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--propio c-dasein">Propio</div><div class="ficha-block-text">Color amatista (#7B3FA0), isotipo de malla neural, vocabulario institucional-supervisorio, énfasis en visión sistémica y cadena de evidencia.</div></div>
+            <div class="ficha-block"><div class="ficha-block-label ficha-block-label--prohibido">Prohibido</div><div class="ficha-block-text">Usar cyan, carmesí o magenta. Usar isotipos de otras singularidades. Presentarse sin referencia a GESTELL.</div></div>
+            <div class="ficha-touchpoints"><div class="ficha-touchpoints-label">Touchpoints</div><div class="ficha-tags"><span class="ficha-tag">SupTech UI</span><span class="ficha-tag">Reportes Gov</span><span class="ficha-tag">Supervisión</span><span class="ficha-tag">White Papers</span></div></div>
+            <div class="ficha-dodont">
+                <div class="ficha-do ficha-do--dasein"><div class="ficha-do-label c-dasein">✓ Así sí</div>DASEIN con tono institucional para gobierno</div>
+                <div class="ficha-dont"><div class="ficha-dont-label">✗ Así no</div>DASEIN con tono personal o colores de GNOSIS</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>045</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.3 CONTENIDO — PÁGINA 4 DE 4 · ÁRBOL + MULTI-SINGULARIDAD — 046
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.3 · Página 4 de 4</div>
+    </header>
+
+    <div class="tree-zone">
+        <div class="section-label section-label--lg">Árbol de despliegue — ¿Qué singularidad (solución) lidera?</div>
+
+        <div class="tree-grid">
+            <div class="tree-card" style="border-left:2px solid var(--gnosis);">
+                <div class="tree-question">¿Tu cliente necesita consolidar, visualizar o analizar datos a escala?</div>
+                <div class="tree-answer" style="color:var(--gnosis-text);">→ GNOSIS</div>
+                <div class="tree-icp">CTO, CDO, equipos de data engineering</div>
+            </div>
+            <div class="tree-card" style="border-left:2px solid var(--telos);">
+                <div class="tree-question">¿Tu cliente necesita cumplir regulación, automatizar reportes PLD o auditar operaciones?</div>
+                <div class="tree-answer" style="color:var(--telos-text);">→ TELOS</div>
+                <div class="tree-icp">Oficial de cumplimiento, responsable PLD, áreas legales</div>
+            </div>
+            <div class="tree-card" style="border-left:2px solid var(--umwelt);">
+                <div class="tree-question">¿Tu cliente es una persona física que necesita automatizar tareas repetitivas de su día a día?</div>
+                <div class="tree-answer" style="color:var(--umwelt-text);">→ UMWELT</div>
+                <div class="tree-icp">Freelancer, profesional independiente, PYME</div>
+            </div>
+            <div class="tree-card" style="border-left:2px solid var(--dasein);">
+                <div class="tree-question">¿Tu cliente es gobierno, banco central o autoridad supervisora que necesita infraestructura de vigilancia?</div>
+                <div class="tree-answer" style="color:var(--dasein-text);">→ DASEIN</div>
+                <div class="tree-icp">Director de supervisión, regulador, autoridad financiera</div>
+            </div>
+        </div>
+
+        <!-- Multi-singularidad -->
+        <div class="section-label">Escenario multi-singularidad — Cuando el cliente necesita más de una solución</div>
+        <div class="rationale mt-sm">
+            <div class="rationale-label">Regla de convivencia</div>
+            <blockquote>Si el cliente necesita dos o más singularidades, GESTELL lidera.</blockquote>
+            <div class="rationale-body">Nunca se presentan dos singularidades (soluciones) como productos paralelos. Se presenta <strong>GESTELL como ecosistema</strong> y se mencionan las singularidades relevantes como capacidades del sistema. Ejemplo: un banco que necesita TELOS (cumplimiento) + GNOSIS (análisis) recibe un pitch de <strong>«GESTELL para instituciones financieras»</strong>, no un pitch de «TELOS + GNOSIS». El lockup es el master. Los colores de las singularidades aparecen dentro del material como acentos por sección, no como co-protagonistas.</div>
+        </div>
+
+        <!-- Practical examples -->
+        <div class="op-grid">
+            <div class="op-card op-card--gnosis">
+                <div class="op-card-title op-card-title--gnosis">Pitch multi-singularidad</div>
+                <div class="op-card-body">«GESTELL despliega para su institución capacidades de cumplimiento regulatorio autónomo (TELOS) integradas con análisis predictivo de datos (GNOSIS).» — La marca maestra siempre abre y cierra.</div>
+            </div>
+            <div class="op-card op-card--telos">
+                <div class="op-card-title op-card-title--telos">Material visual</div>
+                <div class="op-card-body">Portada: isotipo GESTELL con gradiente completo. Interior: secciones coloreadas con el acento de cada singularidad relevante. Nunca dos isotipos de singularidad en la misma página.</div>
+            </div>
+            <div class="op-card op-card--umwelt">
+                <div class="op-card-title op-card-title--umwelt">Jerarquía de lockup</div>
+                <div class="op-card-body">Se usa Lockup A (Horizontal Completo) con GESTELL solamente. Las singularidades se mencionan en texto como: «potenciado por TELOS y GNOSIS» — sin lockup propio en este contexto.</div>
+            </div>
+        </div>
+
+        <div class="rule-block mt-sm">
+            <div class="rule-label">Regla inviolable</div>
+            <div class="rule-text">Dos singularidades (soluciones) nunca comparten protagonismo visual en una misma pieza. Si ambas son relevantes, GESTELL absorbe la identidad visual y las singularidades se mencionan verbalmente como capacidades del ecosistema. Excepción: documentación técnica interna donde se necesite separar módulos operativos.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>046</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 2.4 — SISTEMA DE NOMENCLATURA — 047
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-3" class="page section-title-page">
+    <div class="stp__center">
+        <div class="stp__code">2.4</div>
+        <h1 class="stp__title">Sistema de<br>Nomenclatura</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Reglas para nombrar productos, versiones, features y servicios dentro del ecosistema</p>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>047</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.4 CONTENIDO — PÁGINA 1 DE 1 · NOMENCLATURA — 048
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.4 · Página 1 de 1</div>
+    </header>
+
+    <div class="tree-zone">
+        <!-- ZONA 1: Fórmula visual -->
+        <div class="section-label">Fórmula de nomenclatura</div>
+        <div class="rationale">
+            <blockquote style="font-style:normal;letter-spacing:2px;">GESTELL · <span style="color:var(--gnosis-text);">SINGULARIDAD</span> · <span style="color:var(--text-3);">Descriptor</span> · <span style="color:var(--text-3);">Versión</span></blockquote>
+            <div class="rationale-body">Ejemplo: <strong>GESTELL · TELOS · Sentinel · v2.4</strong> — Marca maestra, singularidad (solución), descriptor funcional en inglés, versión semántica.</div>
+        </div>
+
+        <!-- ZONA 2: Niveles -->
+        <table class="shared-table">
+            <thead><tr><th>Nivel</th><th>Patrón</th><th>Ejemplo</th><th>Aprueba</th></tr></thead>
+            <tbody>
+                <tr><td class="element-name">Singularidad</td><td>GESTELL + Nombre filosófico</td><td>GESTELL · GNOSIS</td><td>Board</td></tr>
+                <tr><td class="element-name">Producto</td><td>Singularidad + Descriptor funcional</td><td>GNOSIS Lens</td><td>VP Producto</td></tr>
+                <tr><td class="element-name">Feature</td><td>Producto + Capacidad</td><td>GNOSIS Lens · Deep Merge</td><td>Product Manager</td></tr>
+                <tr><td class="element-name">Versión</td><td>Producto + Semver</td><td>GNOSIS Lens v3.1</td><td>Engineering Lead</td></tr>
+            </tbody>
+        </table>
+
+        <!-- ZONA 3: Reglas operativas (3 cards) -->
+        <div class="op-grid">
+            <div class="op-card op-card--gnosis">
+                <div class="op-card-title op-card-title--gnosis">Idioma</div>
+                <div class="op-card-body">Las singularidades conservan su forma original (griego/alemán). Los descriptores son siempre en inglés como nombre oficial. Las traducciones editoriales se permiten en copy pero nunca en lockups, interfaces ni documentación técnica.</div>
+            </div>
+            <div class="op-card op-card--telos">
+                <div class="op-card-title op-card-title--telos">Abreviaturas</div>
+                <div class="op-card-body">Las singularidades NUNCA se abrevian: siempre GNOSIS, nunca «GNS». Los descriptores pueden tener un short-name oficial (ej: «Lens») pero debe registrarse formalmente antes de su uso público.</div>
+            </div>
+            <div class="op-card op-card--umwelt">
+                <div class="op-card-title op-card-title--umwelt">Naming técnico</div>
+                <div class="op-card-body">Repos: <code>gestell-gnosis-*</code>. Tokens CSS: <code>--gnosis</code>. URLs: <code>/gnosis/</code>. Packages: <code>@gestell/gnosis</code>. La convención técnica hereda la jerarquía de marca sin excepción.</div>
+            </div>
+        </div>
+
+        <!-- ZONA 4: Así sí / Así no -->
+        <div class="ficha-dodont">
+            <div class="ficha-do ficha-do--gnosis">
+                <div class="ficha-do-label c-gnosis">✓ Así sí</div>
+                GESTELL · TELOS · Sentinel v2.4<br>
+                GNOSIS Lens · Deep Merge<br>
+                «potenciado por UMWELT»
+            </div>
+            <div class="ficha-dont">
+                <div class="ficha-dont-label">✗ Así no</div>
+                GNS-Lens v2 (abreviatura)<br>
+                Telos Centinela (traducción en nombre)<br>
+                Sentinel by TELOS (singularidad después)
+            </div>
+        </div>
+
+        <!-- ZONA 5: Regla inviolable -->
+        <div class="rule-block">
+            <div class="rule-label">Regla inviolable</div>
+            <div class="rule-text">Ningún nombre nuevo se crea fuera de este sistema. Los nombres filosóficos de las singularidades (soluciones) son permanentes e inamovibles — se eligieron por su carga conceptual, no por tendencia. Los descriptores funcionales se renuevan con cada ciclo de producto pero siempre pasan por aprobación formal antes de uso público.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>048</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 2.5 — TAXONOMÍA DE TÉRMINOS — 049
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-4" class="page section-title-page">
+    <div class="stp__center">
+        <div class="stp__code">2.5</div>
+        <h1 class="stp__title">Taxonomía de<br>Términos</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">El vocabulario oficial del ecosistema — qué decir, qué evitar, qué prohibir</p>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>049</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.5 CONTENIDO — PÁGINA 1 DE 1 · TAXONOMÍA — 050
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.5 · Página 1 de 1</div>
+    </header>
+
+    <div class="tree-zone">
+        <div class="section-label">Gobernanza léxica — Sistema de tres cubetas (ES / EN)</div>
+
+        <div class="rationale">
+            <div class="rationale-body">El vocabulario de GESTELL no es decorativo — es posicionamiento. Cada término elegido refuerza la esencia de nuestra marca; cada término censurado previene la degradación de nuestra semántica. Este sistema es filtro obligatorio para toda comunicación: humana o generada por un LLM.</div>
+        </div>
+
+        <!-- CUBETA 1: USAR LIBREMENTE -->
+        <div>
+            <div class="section-label" style="color:var(--gnosis-text);">✅ Usar libremente</div>
+            <table class="shared-table">
+                <thead><tr><th>Término ES / EN</th><th>Sustituye a</th><th>Por qué</th></tr></thead>
+                <tbody>
+                    <tr><td class="element-name">Infraestructura Cognitiva<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Cognitive Infrastructure</span></td><td>Plataforma</td><td>Esencia de marca oficial (Vol. I p.007). Posiciona como infraestructura crítica, no como plataforma genérica.</td></tr>
+                    <tr><td class="element-name">Singularidad (solución)<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Singularity (solution)</span></td><td>Producto, Módulo</td><td>Nomenclatura oficial del ecosistema. Las sub-marcas son singularidades, no productos genéricos. (Vol. I p.005)</td></tr>
+                    <tr><td class="element-name">Auditor<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Auditor</span></td><td>—</td><td>Quien interactúa con los outputs de GESTELL audita resultados determinísticos, no "recibe sugerencias".</td></tr>
+                    <tr><td class="element-name">Dictamen / Resolución<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Ruling / Resolution</span></td><td>Sugerencia, Consejo</td><td>Los outputs de GESTELL son determinísticos. No "sugiere" — resuelve.</td></tr>
+                    <tr><td class="element-name">Determinismo / Exactitud<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Determinism / Exactitude</span></td><td>Mágico, Inteligente</td><td>Adjetivos verificables. Lo que GESTELL hace es medible y auditable. (Vol. I p.029)</td></tr>
+                    <tr><td class="element-name">Encuadramiento<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Enframing</span></td><td>Transformación, Disrupción</td><td>Concepto heideggeriano fundacional. GESTELL encuadra la complejidad, no la "transforma". (Vol. I p.004)</td></tr>
+                    <tr><td class="element-name">Agentes de IA<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">AI Agents</span></td><td>Bots, Asistentes</td><td>Término técnico preciso. Un agente es autónomo; un bot es reactivo.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- CUBETA 2: USAR PERO DEFINIR -->
+        <div>
+            <div class="section-label" style="color:var(--umwelt-text);">🔶 Usar pero definir</div>
+            <table class="shared-table">
+                <thead><tr><th>Término ES / EN</th><th>Contexto permitido</th><th>Definición obligatoria</th></tr></thead>
+                <tbody>
+                    <tr><td class="element-name">Inteligencia Sintética<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Synthetic Intelligence</span></td><td>Docs técnicos, contextos internos, comunicación especialista</td><td>Esencia anterior de GESTELL. Válida pero subordinada a «Infraestructura Cognitiva» en comunicación externa. (Vol. I p.007)</td></tr>
+                    <tr><td class="element-name">Inteligencia Artificial<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Artificial Intelligence</span></td><td>Referencia a la industria. Autodescripción comercial a discreción.</td><td>«GESTELL opera en la industria de la Inteligencia Artificial» = correcto. «GESTELL es una empresa de IA» = aceptable en contexto comercial.</td></tr>
+                    <tr><td class="element-name">Modelo<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Model</span></td><td>Documentación técnica</td><td>Definir como "sistema" o "infraestructura". Nunca como "herramienta".</td></tr>
+                    <tr><td class="element-name">Automatización<br><span style="color:var(--text-3);font-weight:400;font-style:italic;">Automation</span></td><td>Copy comercial con contexto</td><td>Siempre acompañada de "encuadrada", "autónoma" o "cognitiva". Nunca sola — evita parecer RPA genérico.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- CUBETA 3: PROHIBIDO -->
+        <div>
+            <div class="section-label" style="color:var(--telos-text);">❌ Prohibido</div>
+            <table class="shared-table">
+                <thead><tr><th>Término ES / EN</th><th>Por qué se prohíbe</th></tr></thead>
+                <tbody>
+                    <tr><td class="element-name">Chatbot</td><td>Posiciona como commodity conversacional. GESTELL es infraestructura, no chat.</td></tr>
+                    <tr><td class="element-name">Asistente Virtual · <span style="color:var(--text-3);font-weight:400;">Virtual Assistant</span></td><td>Implica subordinación y simpleza. Los agentes de GESTELL son autónomos.</td></tr>
+                    <tr><td class="element-name">Plataforma · <span style="color:var(--text-3);font-weight:400;">Platform</span></td><td>Es «Infraestructura Cognitiva». Plataforma es genérico y no diferenciador.</td></tr>
+                    <tr><td class="element-name">Disrupción / Revolucionario · <span style="color:var(--text-3);font-weight:400;">Disruption / Revolutionary</span></td><td>Jerga vacía. GESTELL encuadra, no "disrumpe". (Vol. I p.029)</td></tr>
+                    <tr><td class="element-name">Fácil de usar · <span style="color:var(--text-3);font-weight:400;">Easy to use</span></td><td>Trivializa la sofisticación. GESTELL es preciso, no "fácil".</td></tr>
+                    <tr><td class="element-name">Mágico / Inteligente · <span style="color:var(--text-3);font-weight:400;">Magical / Smart</span></td><td>Adjetivos no verificables. Violan la regla de tono del Vol. I.</td></tr>
+                    <tr><td class="element-name">Startup</td><td>Posicionamiento institucional, no emprendedor.</td></tr>
+                    <tr><td class="element-name">Partner estratégico · <span style="color:var(--text-3);font-weight:400;">Strategic partner</span></td><td>Genérico, no diferenciador. (Vol. I p.029: "Así no")</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="rule-block">
+            <div class="rule-label">Regla inviolable</div>
+            <div class="rule-text">Este léxico es filtro obligatorio para toda comunicación oficial. Ningún término ❌ aparece en material de marca bajo ninguna circunstancia. Los términos 🔶 requieren su definición acompañante en primera mención. El vocabulario se revisa trimestralmente (ciclo PULSE) y alimenta directamente los Brand Style Packs (JSON) que gobiernan los system prompts de los LLMs del ecosistema.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>050</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 2.6 — CO-BRANDING & PARTNERSHIPS — 051
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-5" class="page section-title-page">
+    <div class="stp__center">
+        <div class="stp__code">2.6</div>
+        <h1 class="stp__title">Co-Branding &<br>Partnerships</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Reglas de convivencia visual cuando GESTELL coexiste con marcas externas</p>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>051</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.6 CONTENIDO — PÁGINA 1 DE 1 · CO-BRANDING — 052
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.6 · Página 1 de 1</div>
+    </header>
+
+    <div class="tree-zone">
+        <!-- Zona 1: Principio -->
+        <div class="section-label">Principio de jerarquía</div>
+        <div class="rationale">
+            <blockquote>GESTELL siempre tiene presencia igual o superior al partner. Nunca subordinada.</blockquote>
+            <div class="rationale-body">La marca maestra no se reduce para acomodar a un tercero. Si el espacio no permite paridad, GESTELL lidera. La excepción es el modelo white-label (Co-brand C), donde el partner lidera visualmente pero GESTELL conserva presencia como "powered by".</div>
+        </div>
+
+        <!-- Zona 2: Lockups -->
+        <div class="section-label">Lockups de co-branding permitidos</div>
+        <table class="shared-table">
+            <thead><tr><th>Tipo</th><th>Composición</th><th>Contexto</th></tr></thead>
+            <tbody>
+                <tr><td class="element-name">Co-brand A · Paridad</td><td>GESTELL [divider vertical] PARTNER — misma escala</td><td>Alianzas estratégicas, comunicados conjuntos, eventos co-organizados</td></tr>
+                <tr><td class="element-name">Co-brand B · GESTELL lidera</td><td>GESTELL arriba + «integrado con [PARTNER]» debajo</td><td>Integraciones propias, marketplaces, caso de estudio</td></tr>
+                <tr><td class="element-name">Co-brand C · Partner lidera</td><td>PARTNER arriba + «powered by GESTELL» debajo</td><td>White-label, OEM, embeds en producto del partner</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Zona 3: Reglas operativas -->
+        <div class="op-grid">
+            <div class="op-card op-card--gnosis">
+                <div class="op-card-title op-card-title--gnosis">Zona de exclusión</div>
+                <div class="op-card-body">El clear space de GESTELL (1G = altura de la letra G) nunca se viola. Entre ambas marcas, el espacio mínimo es 2G. La zona de exclusión del partner se respeta igualmente. Especificaciones en Vol. III.</div>
+            </div>
+            <div class="op-card op-card--telos">
+                <div class="op-card-title op-card-title--telos">Color</div>
+                <div class="op-card-body">El gradiente de GESTELL y los colores de las singularidades (soluciones) nunca se mezclan con la paleta del partner. Cada marca conserva su sistema cromático íntegro. Fondo neutro (#030303 o #FAFAF8) en zona compartida.</div>
+            </div>
+            <div class="op-card op-card--umwelt">
+                <div class="op-card-title op-card-title--umwelt">Co-branding digital</div>
+                <div class="op-card-body">En integraciones de API o embeds, el «powered by GESTELL» incluye el isotipo master a mínimo 24px y un link a <strong>gestell.co</strong>. El badge no se modifica, recorta ni recolorea.</div>
+            </div>
+        </div>
+
+        <!-- Zona 4: Así sí / Así no -->
+        <div class="ficha-dodont">
+            <div class="ficha-do ficha-do--gnosis">
+                <div class="ficha-do-label c-gnosis">✓ Así sí</div>
+                GESTELL | IBM — paridad, fondo neutro<br>
+                «powered by GESTELL» con isotipo 24px<br>
+                Clear space 2G entre marcas
+            </div>
+            <div class="ficha-dont">
+                <div class="ficha-dont-label">✗ Así no</div>
+                Logo GESTELL más pequeño que el partner<br>
+                Isotipo recoloreado con paleta del partner<br>
+                «powered by GESTELL» sin isotipo ni link
+            </div>
+        </div>
+
+        <!-- Zona 5: Proceso + Regla -->
+        <div class="rule-block">
+            <div class="rule-label">Proceso obligatorio</div>
+            <div class="rule-text">Todo co-branding pasa por el Brand Guardian antes de publicación. Flujo: solicitud → revisión de cumplimiento con estas reglas → aprobación o rechazo → archivo de uso autorizado. Ningún material co-branded se publica sin esta aprobación. El partner recibe un kit con los lockups pre-aprobados — nunca construye el lockup por su cuenta.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>052</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PORTADILLA 2.7 — REGLAS DE EXTENSIÓN DE PORTFOLIO — 053
+     ══════════════════════════════════════════════════════════ -->
+<section id="sec-6" class="page section-title-page">
+    <div class="stp__center">
+        <div class="stp__code">2.7</div>
+        <h1 class="stp__title">Reglas de Extensión<br>de Portfolio</h1>
+        <div class="stp__accent"></div>
+        <p class="stp__subtitle">Cuándo crear, extender, retirar o rechazar una singularidad (solución)</p>
+    </div>
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>053</span>
+    </footer>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2.7 CONTENIDO — PÁGINA 1 DE 1 · EXTENSIÓN DE PORTFOLIO — 054
+     ══════════════════════════════════════════════════════════ -->
+<section class="page page--flex">
+    <header class="ph">
+        <div class="ph-l">
+            <svg class="isotipo" aria-hidden="true"><use href="#isotipo-header"/></svg>
+            <span>GESTELL</span>
+        </div>
+        <div class="ph-r">Vol. II · Arquitectura de Marca · 2.7 · Página 1 de 1</div>
+    </header>
+
+    <div class="tree-zone">
+        <!-- Zona 1: Árbol de decisión -->
+        <div class="section-label">¿Nueva singularidad o extensión de una existente?</div>
+        <div class="tree-grid">
+            <div class="tree-card" style="border-left:2px solid var(--gnosis);">
+                <div class="tree-question">¿Tiene un ICP radicalmente diferente a las 4 singularidades (soluciones) actuales?</div>
+                <div class="tree-answer" style="color:var(--gnosis-text);">Si todos = sí → Nueva</div>
+            </div>
+            <div class="tree-card" style="border-left:2px solid var(--telos);">
+                <div class="tree-question">¿Requiere un dominio funcional que ninguna singularidad cubre actualmente?</div>
+                <div class="tree-answer" style="color:var(--telos-text);">Si alguno = no → Extensión</div>
+            </div>
+            <div class="tree-card" style="border-left:2px solid var(--umwelt);">
+                <div class="tree-question">¿Necesita un tono de voz propio que no encaja en los 4 existentes?</div>
+                <div class="tree-answer" style="color:var(--umwelt-text);">Los 4 criterios son simultáneos</div>
+            </div>
+            <div class="tree-card" style="border-left:2px solid var(--dasein);">
+                <div class="tree-question">¿Justifica un color e isotipo exclusivo sin fragmentar el espectro del gradiente?</div>
+                <div class="tree-answer" style="color:var(--dasein-text);">Techo: 4–6 singularidades máx.</div>
+            </div>
+        </div>
+
+        <!-- Zona 2: Regla de extensión -->
+        <div class="op-grid">
+            <div class="op-card op-card--gnosis">
+                <div class="op-card-title op-card-title--gnosis">Extensión</div>
+                <div class="op-card-body">Se usa el sistema de nomenclatura (§2.4): <strong>SINGULARIDAD + Descriptor</strong>. Ejemplo: GNOSIS Lens, TELOS Sentinel. El color, isotipo y tono de la singularidad madre se heredan íntegros. Aprueba VP de Producto.</div>
+            </div>
+            <div class="op-card op-card--telos">
+                <div class="op-card-title op-card-title--telos">Creación</div>
+                <div class="op-card-body">Requiere aprobación del Board. Debe cumplir los 4 criterios simultáneamente. <strong>Kit de nacimiento:</strong> nombre filosófico (griego/alemán), color + tokens CSS (<code>--nueva</code>, <code>--nueva-text</code>), nuevo <code>&lt;symbol&gt;</code> SVG, entrada en Brand Style Packs (JSON), ficha en este volumen.</div>
+            </div>
+            <div class="op-card op-card--umwelt">
+                <div class="op-card-title op-card-title--umwelt">Retiro</div>
+                <div class="op-card-body">Una singularidad (solución) se retira cuando su dominio es absorbido por otra o su ICP deja de existir. El color se libera pero no se reasigna inmediatamente. El isotipo se archiva. La transición se comunica como evolución, nunca como fracaso.</div>
+            </div>
+        </div>
+
+        <!-- Zona 4: No-fusión + techo -->
+        <div class="ficha-dodont">
+            <div class="ficha-do ficha-do--gnosis">
+                <div class="ficha-do-label c-gnosis">✓ Permitido</div>
+                Extender: GNOSIS Lens, GNOSIS Core<br>
+                Crear con 4 criterios + Board<br>
+                Retirar con protocolo de sunset
+            </div>
+            <div class="ficha-dont">
+                <div class="ficha-dont-label">✗ Prohibido</div>
+                Fusionar dos singularidades visualmente<br>
+                Crear sin cumplir los 4 criterios<br>
+                Superar 6 singularidades en el ecosistema
+            </div>
+        </div>
+
+        <!-- Zona 5: Regla + cierre del volumen -->
+        <div class="rule-block">
+            <div class="rule-label">Regla inviolable</div>
+            <div class="rule-text">Dos singularidades (soluciones) nunca se fusionan visualmente. Si sus dominios convergen, una absorbe el dominio de la otra y la absorbida se retira. El gradiente <code>ai-core-energy</code> está diseñado para 4–6 stops cromáticos — más allá de eso, el ecosistema pierde legibilidad y el espectro se diluye.</div>
+        </div>
+
+        <div class="rationale">
+            <div class="rationale-label">Cierre del Volumen II</div>
+            <blockquote>La arquitectura está definida. Ahora se ejecuta.</blockquote>
+            <div class="rationale-body">Este volumen estableció el modelo (Branded House), la jerarquía visual (descomposición cromática, dial de volumen, lockups), las reglas por singularidad (fichas de identidad), la nomenclatura, la taxonomía léxica, las reglas de co-branding y los criterios de extensión. El <strong>Volumen III — Identidad Visual</strong> traduce esta arquitectura en especificaciones de ejecución: construcción geométrica, zonas de exclusión, tipografía, color y aplicaciones.</div>
+        </div>
+    </div>
+
+    <footer class="pf">
+        <span>GESTELL · BRAND OPERATING SYSTEM · VOL. II</span>
+        <span>CONFIDENCIAL · 2026</span>
+        <span>054</span>
+    </footer>
+</section>
+
+</body>
+</html>
+
