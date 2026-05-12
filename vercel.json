@@ -29,6 +29,7 @@
     { "source": "/vol/1", "destination": "/vol-1", "permanent": false },
     { "source": "/vol/2", "destination": "/vol-2", "permanent": false },
     { "source": "/vol/3", "destination": "/vol-3", "permanent": false },
-    { "source": "/vol/4", "destination": "/vol-4", "permanent": false }
+    { "source": "/vol/4", "destination": "/vol-4", "permanent": false },
+    { "source": "/vol/6", "destination": "/vol-6", "permanent": false }
   ]
 }

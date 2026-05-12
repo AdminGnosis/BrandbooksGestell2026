@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#030303">
-<meta name="description" content="GESTELL — Brand Operating System · Master Data 2026. Four-volume confidential brandbook: Strategic DNA, Brand Architecture, Visual Identity, Verbal Identity.">
+<meta name="description" content="GESTELL — Brand Operating System · Master Data 2026. Five-volume confidential brandbook: Strategic DNA, Brand Architecture, Visual Identity, Verbal Identity, Digital Infrastructure.">
 <title>GESTELL · Brand Operating System · 2026</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -540,16 +540,16 @@ a:focus-visible, button:focus-visible {
         </h1>
 
         <p class="hero__deck">
-            Cuatro volúmenes. Doscientas veintitrés páginas. Una sola fuente de verdad
-            para cada decisión de identidad, voz, arquitectura y expresión visual del
-            ecosistema <strong>GESTELL</strong> — gobernada por el rigor de la mesa
-            Ogilvy · Pentagram · Noomo · Cieden · Studio Dumbar.
+            Cinco volúmenes. Trescientas cuarenta y tres páginas. Una sola fuente de verdad
+            para cada decisión de identidad, voz, arquitectura, expresión visual e
+            infraestructura digital del ecosistema <strong>GESTELL</strong> — gobernada por el
+            rigor de la mesa Ogilvy · Pentagram · Noomo · Cieden · Studio Dumbar.
         </p>
 
         <dl class="hero__meta">
-            <div><dt>Volúmenes</dt><dd>04 · I–IV</dd></div>
-            <div><dt>Secciones</dt><dd>35 capítulos</dd></div>
-            <div><dt>Páginas A4</dt><dd>223 total</dd></div>
+            <div><dt>Volúmenes</dt><dd>05 · I–IV, VI</dd></div>
+            <div><dt>Secciones</dt><dd>43 capítulos</dd></div>
+            <div><dt>Páginas A4</dt><dd>343 total</dd></div>
             <div><dt>Idiomas</dt><dd>ES-MX / EN-US</dd></div>
             <div><dt>Clasificación</dt><dd>Confidencial</dd></div>
         </dl>
@@ -560,8 +560,8 @@ a:focus-visible, button:focus-visible {
     <!-- ──────── VOLUMES ──────── -->
     <section class="volumes" id="volumenes">
         <div class="volumes__head">
-            <div class="volumes__label">Los Cuatro Volúmenes</div>
-            <div class="volumes__count">04 / 04 disponibles</div>
+            <div class="volumes__label">Los Cinco Volúmenes</div>
+            <div class="volumes__count">05 / 05 disponibles</div>
         </div>
 
         <div class="vol-list">
@@ -658,6 +658,29 @@ a:focus-visible, button:focus-visible {
                 </div>
             </a>
 
+            <a class="vol" href="vol-6.html" style="--vol-accent: #B99BD6;">
+                <div class="vol__num">06</div>
+                <div class="vol__header">
+                    <span class="vol__roman">Volumen VI</span>
+                    <h2 class="vol__title">Infraestructura Digital</h2>
+                    <div class="vol__subtitle">Digital Infrastructure</div>
+                </div>
+                <div class="vol__desc">
+                    Design Tokens DTCG 2025.10, pipeline CI/CD, repositorio SVG canónico, Schema Markup JSON-LD, Brand Style Packs y la marca como sistema operativo legible por humanos, máquinas y modelos.
+                    <em class="vol__desc-en">DTCG 2025.10 design tokens, CI/CD pipeline, canonical SVG repo, JSON-LD schema, Brand Style Packs — the brand as an operating system legible to humans, machines and models.</em>
+                </div>
+                <div class="vol__meta">
+                    <div class="vol__stats">
+                        <div><b>08</b>Secciones</div>
+                        <div><b>120</b>Páginas</div>
+                    </div>
+                    <div class="vol__cta">
+                        Abrir volumen
+                        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+                    </div>
+                </div>
+            </a>
+
         </div>
     </section>
 
@@ -701,7 +724,7 @@ a:focus-visible, button:focus-visible {
 document.addEventListener('keydown', function (e) {
     var t = e.target;
     if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-    var m = { '1':'vol-1.html','2':'vol-2.html','3':'vol-3.html','4':'vol-4.html' };
+    var m = { '1':'vol-1.html','2':'vol-2.html','3':'vol-3.html','4':'vol-4.html','6':'vol-6.html' };
     if (m[e.key]) window.location.href = m[e.key];
 });
 
