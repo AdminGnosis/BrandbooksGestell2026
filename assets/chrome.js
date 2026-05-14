@@ -12,6 +12,7 @@
     { slug: 'vol-2', roman: 'II',  title: 'Arquitectura de Marca' },
     { slug: 'vol-3', roman: 'III', title: 'Identidad Visual' },
     { slug: 'vol-4', roman: 'IV',  title: 'Identidad Verbal' },
+    { slug: 'vol-5', roman: 'V',   title: 'Identidad Dinámica & Sensorial' },
     { slug: 'vol-6', roman: 'VI',  title: 'Infraestructura Digital' }
   ];
 

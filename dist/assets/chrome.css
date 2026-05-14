@@ -1,0 +1,383 @@
+/* ═══════════════════════════════════════════════════════════
+   GESTELL · Brand Operating System · WEB CHROME
+   Overlays that never touch the source volume markup.
+   Namespace: .gbos-*  (safe from collisions)
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --gbos-accent: #00D4FF;                /* set per-vol in chrome.js */
+  --gbos-ink: #FAFAF8;
+  --gbos-ink-dim: #8A8A8A;
+  --gbos-ink-dimmer: #555;
+  --gbos-bg: rgba(3, 3, 3, 0.82);
+  --gbos-bg-solid: #030303;
+  --gbos-border: rgba(255, 255, 255, 0.08);
+  --gbos-border-strong: rgba(255, 255, 255, 0.16);
+  --gbos-mono: 'JetBrains Mono', 'Courier New', 'Courier', monospace;
+  --gbos-sans: 'Akzidenz-Grotesk', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+  --gbos-nav-h: 52px;
+  --gbos-ease: cubic-bezier(0.22, 1, 0.36, 1);    /* Apple-like */
+}
+
+/* Re-assert a consistent typographic baseline for chrome only */
+.gbos-nav, .gbos-drawer, .gbos-fab, .gbos-toast,
+.gbos-sheet, .gbos-mini {
+  font-family: var(--gbos-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0.01em;
+}
+
+/* Push the document content below the fixed nav */
+body { padding-top: var(--gbos-nav-h); }
+
+/* ─── TOP NAV ──────────────────────────────────────────────── */
+
+.gbos-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--gbos-nav-h);
+  z-index: 9000;
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) auto minmax(200px, 1fr);
+  align-items: center;
+  padding: 0 20px;
+  background: var(--gbos-bg);
+  backdrop-filter: saturate(1.6) blur(18px);
+  -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  border-bottom: 1px solid var(--gbos-border);
+  color: var(--gbos-ink);
+  transition: transform 420ms var(--gbos-ease), opacity 300ms linear;
+}
+.gbos-nav.is-hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+/* Left: brand lockup */
+.gbos-brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: inherit;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.gbos-brand__mark {
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  border: 1px solid var(--gbos-border-strong);
+  font-family: var(--gbos-mono);
+  font-size: 11px; font-weight: 600;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
+}
+.gbos-brand__text { opacity: 0.9; }
+.gbos-brand__sub { color: var(--gbos-ink-dim); letter-spacing: 0.18em; }
+
+/* Center: volume pill switcher */
+.gbos-vols {
+  display: flex; gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--gbos-border);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.02);
+}
+.gbos-vols__btn {
+  appearance: none; border: 0;
+  background: transparent; color: var(--gbos-ink-dim);
+  font: 600 10px/1 var(--gbos-mono);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 200ms var(--gbos-ease), background 200ms var(--gbos-ease);
+}
+.gbos-vols__btn:hover { color: var(--gbos-ink); }
+.gbos-vols__btn[aria-current="page"] {
+  background: var(--gbos-ink);
+  color: var(--gbos-bg-solid);
+}
+
+/* Right: actions */
+.gbos-actions { display: flex; align-items: center; gap: 6px; justify-self: end; }
+.gbos-btn {
+  appearance: none; border: 1px solid var(--gbos-border);
+  background: transparent; color: var(--gbos-ink);
+  font: 600 10px/1 var(--gbos-mono);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 9px 14px;
+  border-radius: 2px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none;
+  transition: background 160ms, border-color 160ms, color 160ms;
+}
+.gbos-btn:hover { background: rgba(255,255,255,0.06); border-color: var(--gbos-border-strong); }
+.gbos-btn--primary {
+  border-color: var(--gbos-accent);
+  color: var(--gbos-accent);
+}
+.gbos-btn--primary:hover {
+  background: var(--gbos-accent);
+  color: var(--gbos-bg-solid);
+}
+.gbos-btn__kbd {
+  font-family: var(--gbos-mono);
+  font-size: 9px; padding: 2px 5px;
+  border: 1px solid var(--gbos-border-strong);
+  border-radius: 2px; color: var(--gbos-ink-dim);
+  margin-left: 6px;
+}
+.gbos-btn:hover .gbos-btn__kbd { color: var(--gbos-ink); border-color: var(--gbos-ink); }
+.gbos-btn--primary:hover .gbos-btn__kbd {
+  color: var(--gbos-bg-solid); border-color: var(--gbos-bg-solid);
+}
+
+.gbos-icon {
+  width: 14px; height: 14px; stroke: currentColor;
+  stroke-width: 1.25; fill: none;
+}
+
+/* Progress bar under nav */
+.gbos-progress {
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 1px; background: transparent;
+}
+.gbos-progress__fill {
+  height: 100%; width: 0%;
+  background: var(--gbos-accent);
+  transition: width 120ms linear;
+}
+
+/* ─── RIGHT-SIDE DRAWER — ÍNDICE ──────────────────────────── */
+
+.gbos-scrim {
+  position: fixed; inset: 0;
+  z-index: 8500;
+  background: rgba(0,0,0,0.55);
+  opacity: 0; pointer-events: none;
+  transition: opacity 320ms var(--gbos-ease);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.gbos-scrim.is-open { opacity: 1; pointer-events: auto; }
+
+.gbos-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(440px, 92vw);
+  z-index: 8600;
+  background: var(--gbos-bg-solid);
+  border-left: 1px solid var(--gbos-border-strong);
+  color: var(--gbos-ink);
+  transform: translateX(100%);
+  transition: transform 420ms var(--gbos-ease);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.gbos-drawer.is-open { transform: translateX(0); }
+
+.gbos-drawer__head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding: 32px 28px 20px;
+  border-bottom: 1px solid var(--gbos-border);
+}
+.gbos-drawer__eyebrow {
+  font: 600 10px/1.2 var(--gbos-mono);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gbos-accent);
+  margin-bottom: 8px;
+}
+.gbos-drawer__title {
+  font: 300 24px/1.1 var(--gbos-sans);
+  letter-spacing: -0.01em;
+}
+.gbos-drawer__close {
+  appearance: none; background: transparent; border: 0;
+  color: var(--gbos-ink-dim); cursor: pointer;
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border: 1px solid var(--gbos-border);
+  border-radius: 2px;
+  transition: color 160ms, border-color 160ms, background 160ms;
+}
+.gbos-drawer__close:hover {
+  color: var(--gbos-ink);
+  border-color: var(--gbos-border-strong);
+  background: rgba(255,255,255,0.04);
+}
+
+.gbos-drawer__list {
+  list-style: none; margin: 0; padding: 8px 0;
+  overflow-y: auto; flex: 1;
+}
+.gbos-drawer__list::-webkit-scrollbar { width: 6px; }
+.gbos-drawer__list::-webkit-scrollbar-thumb {
+  background: var(--gbos-border-strong); border-radius: 3px;
+}
+
+.gbos-drawer__item {
+  display: grid;
+  grid-template-columns: 56px 1fr 14px;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 28px;
+  color: var(--gbos-ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 180ms var(--gbos-ease), padding-left 220ms var(--gbos-ease);
+  position: relative;
+}
+.gbos-drawer__item::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--gbos-accent);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 220ms var(--gbos-ease);
+}
+.gbos-drawer__item:hover {
+  background: rgba(255,255,255,0.03);
+  padding-left: 36px;
+}
+.gbos-drawer__item:hover::before,
+.gbos-drawer__item.is-active::before { transform: scaleY(1); }
+.gbos-drawer__item.is-active { background: rgba(255,255,255,0.04); }
+
+.gbos-drawer__code {
+  font: 600 10px/1.4 var(--gbos-mono);
+  letter-spacing: 0.08em;
+  color: var(--gbos-accent);
+}
+.gbos-drawer__label {
+  font: 400 13px/1.35 var(--gbos-sans);
+  letter-spacing: 0.005em;
+}
+.gbos-drawer__arrow {
+  opacity: 0; color: var(--gbos-ink-dim);
+  transition: opacity 200ms var(--gbos-ease), transform 200ms var(--gbos-ease);
+}
+.gbos-drawer__item:hover .gbos-drawer__arrow {
+  opacity: 1; transform: translateX(2px);
+}
+
+.gbos-drawer__foot {
+  padding: 16px 28px 22px;
+  border-top: 1px solid var(--gbos-border);
+  display: flex; justify-content: space-between; align-items: center;
+  font: 600 9px/1.4 var(--gbos-mono);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gbos-ink-dimmer);
+}
+.gbos-drawer__foot-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gbos-accent);
+  animation: gbos-pulse 2200ms ease-in-out infinite;
+}
+@keyframes gbos-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* ─── FAB (mobile floating index button) ──────────────────── */
+
+.gbos-fab {
+  position: fixed;
+  right: 16px; bottom: 16px;
+  z-index: 7800;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--gbos-ink);
+  color: var(--gbos-bg-solid);
+  border: 0;
+  display: none;                   /* shown only on small screens */
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08);
+  transition: transform 220ms var(--gbos-ease);
+}
+.gbos-fab:active { transform: scale(0.94); }
+
+/* ─── TOAST (keyboard hint on load) ───────────────────────── */
+
+.gbos-toast {
+  position: fixed;
+  left: 50%; bottom: 22px;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 9100;
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px 16px;
+  background: rgba(10,10,10,0.92);
+  border: 1px solid var(--gbos-border-strong);
+  border-radius: 2px;
+  color: var(--gbos-ink);
+  font: 600 10px/1 var(--gbos-mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 300ms, transform 420ms var(--gbos-ease);
+}
+.gbos-toast.is-in { opacity: 1; transform: translateX(-50%) translateY(0); }
+.gbos-toast__kbd {
+  padding: 3px 7px;
+  border: 1px solid var(--gbos-border-strong);
+  border-radius: 2px;
+  color: var(--gbos-ink-dim);
+}
+
+/* ─── MOBILE: SCALE A4 TO FIT VIEWPORT ────────────────────── */
+
+/* The raw volumes use .page { width: 210mm; padding: 20mm; }.
+   210mm @ 96dpi ≈ 793.7px. On narrow viewports we scale via
+   transform and reserve the scaled layout height with a wrapper.
+   The wrappers are added at runtime by chrome.js to every .page.  */
+
+.gbos-page-frame {
+  display: block;
+  width: 100%;
+  margin: 0 auto 12px;
+}
+
+@media (max-width: 840px) {
+  :root { --gbos-nav-h: 48px; }
+
+  .gbos-nav { grid-template-columns: auto 1fr auto; padding: 0 12px; gap: 8px; }
+  .gbos-brand__sub { display: none; }
+  .gbos-vols__btn { padding: 7px 9px; font-size: 9px; letter-spacing: 0.14em; }
+  .gbos-actions .gbos-btn__label { display: none; }
+  .gbos-actions .gbos-btn { padding: 9px 10px; }
+  .gbos-btn__kbd { display: none; }
+  .gbos-fab { display: grid; }
+
+  body { overflow-x: hidden; }
+  /* Center and scale the A4 pages. JS sets --gbos-scale per-frame. */
+  .gbos-page-frame {
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    border-bottom: 1px solid var(--gbos-border);
+    background: #030303;
+  }
+  .gbos-page-frame > .page,
+  .gbos-page-frame > .chroma-page,
+  .gbos-page-frame > .diagram-fullpage {
+    transform-origin: top left;
+    transform: scale(var(--gbos-scale, 1));
+    margin-left: calc((100vw - 210mm * var(--gbos-scale, 1)) / 2);
+  }
+  /* Extra small — tighten the nav further */
+  @media (max-width: 380px) {
+    .gbos-brand__text { display: none; }
+    .gbos-vols__btn { padding: 6px 7px; }
+  }
+}
+
+/* ─── PRINT ──────────────────────────────────────────────── */
+@media print {
+  body { padding-top: 0 !important; }
+  .gbos-nav, .gbos-drawer, .gbos-scrim, .gbos-fab, .gbos-toast { display: none !important; }
+  .gbos-page-frame { display: block; margin: 0; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gbos-nav, .gbos-drawer, .gbos-scrim, .gbos-fab, .gbos-toast,
+  .gbos-drawer__item, .gbos-drawer__arrow {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
